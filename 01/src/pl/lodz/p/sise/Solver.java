@@ -16,11 +16,5 @@ public class Solver {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
-		
 	}
 }

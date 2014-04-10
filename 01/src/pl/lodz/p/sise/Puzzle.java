@@ -28,7 +28,7 @@ public class Puzzle {
 		this.plansza = a;
 	}
 	
-	public String getStringRepresentationi() {
+	public String getStringRepresentation() {
 		String ret="";
 		String a,b,c,d;	a=b=c=d="";
 		for (int i=0; i<16; i+=4) {
@@ -73,28 +73,30 @@ public class Puzzle {
 					int temp = plansza[index];
 					plansza[index] = plansza[index-4];
 					plansza[index-4]=temp;
+					break;
 				}
 				case G: {
 					int temp = plansza[index];
-					plansza[index] = plansza[index-4];
-					plansza[index-4]=temp;
+					plansza[index] = plansza[index+4];
+					plansza[index+4]=temp;
+					break;
 				}
 				case L: {
 					int temp = plansza[index];
-					plansza[index] = plansza[index-4];
-					plansza[index-4]=temp;
+					plansza[index] = plansza[index+1];
+					plansza[index+1]=temp;
+					break;
 				}
 				case P: {
 					int temp = plansza[index];
-					plansza[index] = plansza[index-4];
-					plansza[index-4]=temp;
+					plansza[index] = plansza[index-1];
+					plansza[index-1]=temp;
+					break;
 				}
 			}
 			return true;
 		}
 		else
-			return false;
-			
-		
+			return false;		
 	}
 }
