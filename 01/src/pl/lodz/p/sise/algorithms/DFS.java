@@ -3,6 +3,7 @@ package pl.lodz.p.sise.algorithms;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import pl.lodz.p.sise.Puzzle;
@@ -15,8 +16,7 @@ public class DFS {
 
 	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
 	private Stack<Puzzle> stos;
-	private HashSet<Puzzle> visited;
-	private ArrayList<Ruch> result;
+	private Set<Puzzle> visited;
 	private Puzzle puzzle;
 
 	public DFS() {
@@ -36,8 +36,9 @@ public class DFS {
 	}
 
 	public List<Ruch> search() {
+		ArrayList<Ruch> result = new ArrayList<Ruch>();
 		while (!stos.empty()) {
-			puzzle = stos.peek();
+			puzzle = stos.peek().copy();
 			System.out.println(puzzle);
 			if (puzzle.isSolved())
 				return result;
