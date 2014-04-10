@@ -15,10 +15,14 @@ public class Visited extends HashSet<Puzzle> {
 	}
 	
 	/**
-	 * Nadpisana metoda.
+	 * Nadpisana metoda, która nie sprawdza hashCode, i nie porównuje obiektu,
+	 * tylko porównuje zawartość układanki (kolejność klocków).
+	 * Null się powinien wywalić.
 	 */
 	@Override
 	public boolean contains(Object obj) {
+		if (obj==null)
+			throw new NullPointerException();
 		Iterator<Puzzle> it = this.iterator();
 		while (it.hasNext()) {
 			if (it.next().equals(obj))
