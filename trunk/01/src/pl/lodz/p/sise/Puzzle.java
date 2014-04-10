@@ -123,4 +123,18 @@ public class Puzzle {
 		}
 		return p;
 	}
+	
+	@Override 
+	public boolean equals (Object object) {
+		boolean result = false;
+	    if (object == null || object.getClass() != getClass()) {
+	        result = false;
+	    } else {
+	        Puzzle puzzle = (Puzzle) object;
+	        if (Arrays.equals(this.plansza, puzzle.plansza)) {
+	            result = true;
+	        }
+	    }
+	    return result;
+	}
 }

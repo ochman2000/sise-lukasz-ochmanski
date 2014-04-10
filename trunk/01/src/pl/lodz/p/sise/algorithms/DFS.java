@@ -8,6 +8,7 @@ import java.util.Stack;
 
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
+import pl.lodz.p.sise.Visited;
 import pl.lodz.p.sise.exceptions.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exceptions.IllegalPuzzleException;
 import pl.lodz.p.sise.exceptions.PuzzleFormatException;
@@ -31,7 +32,7 @@ public class DFS {
 		}
 		stos = new Stack<Puzzle>();
 		stos.push(puzzle);
-		visited = new HashSet<Puzzle>();
+		visited = new Visited();
 		visited.add(puzzle);
 	}
 
@@ -42,30 +43,26 @@ public class DFS {
 			System.out.println(puzzle);
 			if (puzzle.isSolved())
 				return result;
-			if (puzzle.move(porządek[0]) == true) {
-				if (!visited.contains(puzzle)) {
-					stos.push(puzzle);
-					result.add(porządek[0]);
-					visited.add(puzzle);
-				}
-			} else if (puzzle.move(porządek[1]) == true) {
-				if (!visited.contains(puzzle)) {
-					stos.push(puzzle);
-					result.add(porządek[1]);
-					visited.add(puzzle);
-				}
-			} else if (puzzle.move(porządek[2]) == true) {
-				if (!visited.contains(puzzle)) {
-					stos.push(puzzle);
-					result.add(porządek[2]);
-					visited.add(puzzle);
-				}
-			} else if (puzzle.move(porządek[3]) == true) {
-				if (!visited.contains(puzzle)) {
-					stos.push(puzzle);
-					result.add(porządek[3]);
-					visited.add(puzzle);
-				}
+			if (puzzle.move(porządek[0]) == true && !visited.contains(puzzle)) {
+				stos.push(puzzle);
+				result.add(porządek[0]);
+				visited.add(puzzle);
+
+			} else if (puzzle.move(porządek[1]) == true
+					&& !visited.contains(puzzle)) {
+				stos.push(puzzle);
+				result.add(porządek[1]);
+				visited.add(puzzle);
+			} else if (puzzle.move(porządek[2]) == true
+					&& !visited.contains(puzzle)) {
+				stos.push(puzzle);
+				result.add(porządek[2]);
+				visited.add(puzzle);
+			} else if (puzzle.move(porządek[3]) == true
+					&& !visited.contains(puzzle)) {
+				stos.push(puzzle);
+				result.add(porządek[3]);
+				visited.add(puzzle);
 			} else {
 				stos.pop();
 			}
