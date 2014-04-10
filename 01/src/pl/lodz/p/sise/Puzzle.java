@@ -65,46 +65,45 @@ public class Puzzle {
 		return -1;
 	}
 	
-	public boolean move(Ruch kierunek) {
-		if(this.isAllowed(kierunek)) {
-			int index = getEmptyPuzzle();
+	public Puzzle move(Ruch kierunek) {
+		Puzzle p = copy();
+		if(p.isAllowed(kierunek)) {
+			int index = p.getEmptyPuzzle();
 			switch (kierunek) {
 				case D: {
-					int temp = plansza[index];
-					plansza[index] = plansza[index-4];
-					plansza[index-4]=temp;
+					int temp = p.plansza[index];
+					p.plansza[index] = p.plansza[index-4];
+					p.plansza[index-4]=temp;
 					break;
 				}
 				case G: {
-					int temp = plansza[index];
-					plansza[index] = plansza[index+4];
-					plansza[index+4]=temp;
+					int temp = p.plansza[index];
+					p.plansza[index] = p.plansza[index+4];
+					p.plansza[index+4]=temp;
 					break;
 				}
 				case L: {
-					int temp = plansza[index];
-					plansza[index] = plansza[index+1];
-					plansza[index+1]=temp;
+					int temp = p.plansza[index];
+					p.plansza[index] = p.plansza[index+1];
+					p.plansza[index+1]=temp;
 					break;
 				}
 				case P: {
-					int temp = plansza[index];
-					plansza[index] = plansza[index-1];
-					plansza[index-1]=temp;
+					int temp = p.plansza[index];
+					p.plansza[index] = p.plansza[index-1];
+					p.plansza[index-1]=temp;
 					break;
 				}
 			}
-			return true;
+			return p;
 		}
 		else
-			return false;	
+			return null;	
 	}
 	
 	public boolean isSolved() {
 		int[] solution = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0};
-		String a = Arrays.toString(solution);
-		String b = Arrays.toString(this.plansza);
-		return a.equals(b);	
+		return Arrays.equals(solution, this.plansza);	
 	}
 	
 	public Puzzle copy() {

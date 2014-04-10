@@ -14,6 +14,9 @@ public class Visited extends HashSet<Puzzle> {
 		super();
 	}
 	
+	/**
+	 * Nadpisana metoda.
+	 */
 	@Override
 	public boolean contains(Object obj) {
 		Iterator<Puzzle> it = this.iterator();

@@ -1,7 +1,6 @@
 package pl.lodz.p.sise.algorithms;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
@@ -24,10 +23,8 @@ public class DFS {
 		int[] a = { 1, 0, 3, 4, 14, 2, 5, 7, 11, 9, 6, 8, 10, 13, 15, 12 };
 		try {
 			this.puzzle = new Puzzle(a);
-		} catch (IllegalPuzzleException | DuplicatelPuzzleException
-				| PuzzleFormatException e) {
-			System.err.println(e.getMessage()
-					+ "\nDziałanie programu przerwane.");
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
+			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
 		stos = new Stack<Puzzle>();
@@ -40,33 +37,37 @@ public class DFS {
 		ArrayList<Ruch> result = new ArrayList<Ruch>();
 		while (!stos.empty()) {
 			puzzle = stos.peek().copy();
-			System.out.println(puzzle);
+			System.out.println(puzzle.getStringRepresentation());
 			if (puzzle.isSolved())
 				return result;
-			if (puzzle.move(porządek[0]) == true && !visited.contains(puzzle)) {
-				stos.push(puzzle);
+			Puzzle przesunięcie0 = puzzle.move(porządek[0]);
+			Puzzle przesunięcie1 = puzzle.move(porządek[1]);
+			Puzzle przesunięcie2 = puzzle.move(porządek[2]);
+			Puzzle przesunięcie3 = puzzle.move(porządek[3]);
+			if (puzzle.isAllowed(porządek[0]) && !visited.contains(przesunięcie0)) {
+				stos.push(przesunięcie0);
 				result.add(porządek[0]);
-				visited.add(puzzle);
-
-			} else if (puzzle.move(porządek[1]) == true
-					&& !visited.contains(puzzle)) {
-				stos.push(puzzle);
+				visited.add(przesunięcie0);
+			} else if (puzzle.isAllowed(porządek[1]) && !visited.contains(przesunięcie1)) {
+				puzzle = puzzle.move(porządek[1]);
+				stos.push(przesunięcie1);
 				result.add(porządek[1]);
-				visited.add(puzzle);
-			} else if (puzzle.move(porządek[2]) == true
-					&& !visited.contains(puzzle)) {
-				stos.push(puzzle);
+				visited.add(przesunięcie1);
+			} else if (puzzle.isAllowed(porządek[2]) && !visited.contains(przesunięcie2)) {
+				puzzle = puzzle.move(porządek[2]);
+				stos.push(przesunięcie2);
 				result.add(porządek[2]);
-				visited.add(puzzle);
-			} else if (puzzle.move(porządek[3]) == true
-					&& !visited.contains(puzzle)) {
-				stos.push(puzzle);
+				visited.add(przesunięcie2);
+			} else if (puzzle.isAllowed(porządek[3]) && !visited.contains(przesunięcie3)) {
+				puzzle = puzzle.move(porządek[3]);
+				stos.push(przesunięcie3);
 				result.add(porządek[3]);
-				visited.add(puzzle);
+				visited.add(przesunięcie3);
 			} else {
 				stos.pop();
+				result.remove(result.size()-1);
 			}
 		}
-		return result;
+		return null;
 	}
 }
