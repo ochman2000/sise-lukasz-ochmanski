@@ -12,28 +12,19 @@ public class Puzzle {
 	private final int LICZBA_KLOCKOW = 16;
 	private int[] plansza = new int[LICZBA_KLOCKOW];
 	
-	public Puzzle(int[] a) {
+	public Puzzle(int[] a) throws IllegalPuzzleException,
+			DuplicatelPuzzleException, PuzzleFormatException {
 		
 		Set<Integer> s = new HashSet<Integer>();
 		for (int klocek : a) {
-			try {
-				if (klocek<0 || klocek>=LICZBA_KLOCKOW)
-					throw new IllegalPuzzleException(klocek);
-			} catch (IllegalPuzzleException e) {
-				System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
-				System.exit(1);
-			}
+			if (klocek < 0 || klocek >= LICZBA_KLOCKOW)
+				throw new IllegalPuzzleException(klocek);
 			s.add(klocek);
 		}
-		try {
-			if	(s.size()<a.length)
-				throw new DuplicatelPuzzleException(a.length-s.size());
-			if (s.size()!=LICZBA_KLOCKOW)
-				throw new PuzzleFormatException(s.size());
-		} catch (PuzzleFormatException|DuplicatelPuzzleException e) {
-			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
-			System.exit(1);
-		}
+		if (s.size() < a.length)
+			throw new DuplicatelPuzzleException(a.length - s.size());
+		if (s.size() != LICZBA_KLOCKOW)
+			throw new PuzzleFormatException(s.size());
 		this.plansza = a;
 	}
 	
