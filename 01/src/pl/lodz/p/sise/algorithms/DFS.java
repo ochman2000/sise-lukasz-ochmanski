@@ -14,17 +14,20 @@ import pl.lodz.p.sise.exceptions.PuzzleFormatException;
 
 public class DFS {
 
+	public static boolean DEBUG = true;
 	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
 	private Stack<Puzzle> stos;
 	private Set<Puzzle> visited;
 	private Puzzle puzzle;
 
 	public DFS() {
-		int[] a = { 1, 0, 3, 4, 14, 2, 5, 7, 11, 9, 6, 8, 10, 13, 15, 12 };
+		int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 13, 14, 15, 12 };
 		try {
 			this.puzzle = new Puzzle(a);
-		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
-			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()
+					+ "\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
 		stos = new Stack<Puzzle>();
@@ -35,37 +38,48 @@ public class DFS {
 
 	public List<Ruch> search() {
 		ArrayList<Ruch> result = new ArrayList<Ruch>();
+		int i = 0;
+		long start = System.currentTimeMillis();
 		while (!stos.empty()) {
 			puzzle = stos.peek().copy();
-			System.out.println(puzzle.getStringRepresentation());
+			if (DEBUG) {
+				System.out.println("Iteracje: "+ i++ + "\t Stos: "+ stos.size()
+				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
+				+ "\n=========================================================");
+				System.out.println(puzzle.getStringRepresentation());
+			}
 			if (puzzle.isSolved())
 				return result;
 			Puzzle przesunięcie0 = puzzle.move(porządek[0]);
 			Puzzle przesunięcie1 = puzzle.move(porządek[1]);
 			Puzzle przesunięcie2 = puzzle.move(porządek[2]);
 			Puzzle przesunięcie3 = puzzle.move(porządek[3]);
-			if (puzzle.isAllowed(porządek[0]) && !visited.contains(przesunięcie0)) {
+			if (puzzle.isAllowed(porządek[0])
+					&& !visited.contains(przesunięcie0)) {
 				stos.push(przesunięcie0);
 				result.add(porządek[0]);
 				visited.add(przesunięcie0);
-			} else if (puzzle.isAllowed(porządek[1]) && !visited.contains(przesunięcie1)) {
+			} else if (puzzle.isAllowed(porządek[1])
+					&& !visited.contains(przesunięcie1)) {
 				puzzle = puzzle.move(porządek[1]);
 				stos.push(przesunięcie1);
 				result.add(porządek[1]);
 				visited.add(przesunięcie1);
-			} else if (puzzle.isAllowed(porządek[2]) && !visited.contains(przesunięcie2)) {
+			} else if (puzzle.isAllowed(porządek[2])
+					&& !visited.contains(przesunięcie2)) {
 				puzzle = puzzle.move(porządek[2]);
 				stos.push(przesunięcie2);
 				result.add(porządek[2]);
 				visited.add(przesunięcie2);
-			} else if (puzzle.isAllowed(porządek[3]) && !visited.contains(przesunięcie3)) {
+			} else if (puzzle.isAllowed(porządek[3])
+					&& !visited.contains(przesunięcie3)) {
 				puzzle = puzzle.move(porządek[3]);
 				stos.push(przesunięcie3);
 				result.add(porządek[3]);
 				visited.add(przesunięcie3);
 			} else {
 				stos.pop();
-				result.remove(result.size()-1);
+				result.remove(result.size() - 1);
 			}
 		}
 		return null;
