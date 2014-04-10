@@ -54,25 +54,21 @@ public class DFS {
 			Puzzle przesunięcie1 = puzzle.move(porządek[1]);
 			Puzzle przesunięcie2 = puzzle.move(porządek[2]);
 			Puzzle przesunięcie3 = puzzle.move(porządek[3]);
-			if (puzzle.isAllowed(porządek[0])
-					&& !visited.contains(przesunięcie0)) {
+			if (puzzle.isAllowed(porządek[0]) && !visited.contains(przesunięcie0)) {
 				stos.push(przesunięcie0);
 				result.add(porządek[0]);
 				visited.add(przesunięcie0);
-			} else if (puzzle.isAllowed(porządek[1])
-					&& !visited.contains(przesunięcie1)) {
+			} else if (puzzle.isAllowed(porządek[1]) && !visited.contains(przesunięcie1)) {
 				puzzle = puzzle.move(porządek[1]);
 				stos.push(przesunięcie1);
 				result.add(porządek[1]);
 				visited.add(przesunięcie1);
-			} else if (puzzle.isAllowed(porządek[2])
-					&& !visited.contains(przesunięcie2)) {
+			} else if (puzzle.isAllowed(porządek[2]) && !visited.contains(przesunięcie2)) {
 				puzzle = puzzle.move(porządek[2]);
 				stos.push(przesunięcie2);
 				result.add(porządek[2]);
 				visited.add(przesunięcie2);
-			} else if (puzzle.isAllowed(porządek[3])
-					&& !visited.contains(przesunięcie3)) {
+			} else if (puzzle.isAllowed(porządek[3]) && !visited.contains(przesunięcie3)) {
 				puzzle = puzzle.move(porządek[3]);
 				stos.push(przesunięcie3);
 				result.add(porządek[3]);
