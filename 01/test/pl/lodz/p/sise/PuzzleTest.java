@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import pl.lodz.p.sise.exceptions.DuplicatelPuzzleException;
+import pl.lodz.p.sise.exceptions.IllegalPuzzleException;
+import pl.lodz.p.sise.exceptions.PuzzleFormatException;
+
 public class PuzzleTest {
 
 	@Test
@@ -15,7 +19,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
-		boolean condition = p.isAllowed(Ruch.D)==false;
+		boolean condition = p.isAllowed(Ruch.D)==false
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==false;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -27,6 +35,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==false
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -38,6 +51,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==false
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -49,6 +67,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==false
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==false
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -60,6 +83,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==false;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -71,6 +99,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -82,6 +115,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -93,6 +131,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==false
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -104,6 +147,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==false;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -115,6 +163,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -126,6 +179,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -137,6 +195,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==true
+				&& p.isAllowed(Ruch.L)==false
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -148,6 +211,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==false
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==false;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -159,6 +227,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==false
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -170,6 +243,11 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==false
+				&& p.isAllowed(Ruch.L)==true
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
 	@Test
@@ -181,17 +259,45 @@ public class PuzzleTest {
 		System.out.println("Góra: "+p.isAllowed(Ruch.G));
 		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
 		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		boolean condition = p.isAllowed(Ruch.D)==true
+				&& p.isAllowed(Ruch.G)==false
+				&& p.isAllowed(Ruch.L)==false
+				&& p.isAllowed(Ruch.P)==true;
+		assertTrue(condition);
 	}
 	
-	@Test
+	@Test(expected = DuplicatelPuzzleException.class)
 	public void test17() {
 		int[] a = {1,2,3,4,5,6,7,8,9,10,0,11,12,13,14,15,0};
-		Puzzle p = new Puzzle(a);
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+		new Puzzle(a);
+		assertTrue(true);
+	}
+	
+	@Test(expected = DuplicatelPuzzleException.class)
+	public void test18() {
+		int[] a = {1,2,3,4,5,6,7,8,9,10,0,11,0};
+		new Puzzle(a);
+		assertTrue(true);
+	}
+	
+	@Test(expected = PuzzleFormatException.class)
+	public void test19() {
+		int[] a = {1,2,3,4,5,6,7,8,9,10,0};
+		new Puzzle(a);
+		assertTrue(true);
+	}
+	
+	@Test(expected = IllegalPuzzleException.class)
+	public void test20() {
+		int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
+		new Puzzle(a);
+		assertTrue(true);
+	}
+	
+	@Test(expected = IllegalPuzzleException.class)
+	public void test21() {
+		int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,28};
+		new Puzzle(a);
 	}
 
 }
