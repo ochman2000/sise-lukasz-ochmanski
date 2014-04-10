@@ -97,6 +97,13 @@ public class Puzzle {
 			return true;
 		}
 		else
-			return false;		
+			return false;	
+	}
+	
+	public boolean isSolved() {
+		int[] solution = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0};
+		String a = Arrays.toString(solution);
+		String b = Arrays.toString(this.plansza);
+		return a.equals(b);	
 	}
 }
