@@ -106,4 +106,21 @@ public class Puzzle {
 		String b = Arrays.toString(this.plansza);
 		return a.equals(b);	
 	}
+	
+	public Puzzle copy() {
+		int[] a  = new int[16];
+		for (int i=0; i<16; i++){
+			a[i]=this.plansza[i];
+		}
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()
+					+ "\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+		return p;
+	}
 }
