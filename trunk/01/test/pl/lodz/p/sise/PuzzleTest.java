@@ -2,6 +2,8 @@ package pl.lodz.p.sise;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import pl.lodz.p.sise.exceptions.DuplicatelPuzzleException;
@@ -21,11 +23,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+////		System.out.println(p.getStringRepresentation());
+////		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+////		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+////		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+////		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==false
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -44,11 +46,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+////		System.out.println(p.getStringRepresentation());
+////		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+////		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+////		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+////		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==false
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -67,11 +69,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==false
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -90,11 +92,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==false
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==false
@@ -113,11 +115,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -136,11 +138,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -159,11 +161,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -182,11 +184,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==false
@@ -205,11 +207,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -228,11 +230,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -251,11 +253,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==true
@@ -274,11 +276,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==true
 				&& p.isAllowed(Ruch.L)==false
@@ -297,11 +299,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==false
 				&& p.isAllowed(Ruch.L)==true
@@ -320,11 +322,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==false
 				&& p.isAllowed(Ruch.L)==true
@@ -343,11 +345,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==false
 				&& p.isAllowed(Ruch.L)==true
@@ -366,11 +368,11 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentationi());
-		System.out.println("Dół: "+p.isAllowed(Ruch.D));
-		System.out.println("Góra: "+p.isAllowed(Ruch.G));
-		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
-		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
+//		System.out.println(p.getStringRepresentation());
+//		System.out.println("Dół: "+p.isAllowed(Ruch.D));
+//		System.out.println("Góra: "+p.isAllowed(Ruch.G));
+//		System.out.println("Lewo: "+p.isAllowed(Ruch.L));
+//		System.out.println("Prawo: "+p.isAllowed(Ruch.P));
 		boolean condition = p.isAllowed(Ruch.D)==true
 				&& p.isAllowed(Ruch.G)==false
 				&& p.isAllowed(Ruch.L)==false
@@ -389,7 +391,6 @@ public class PuzzleTest {
 	public void test17() throws IllegalPuzzleException, DuplicatelPuzzleException, PuzzleFormatException {
 		int[] a = {1,2,3,4,5,6,7,8,9,10,0,11,12,13,14,15,0};
 		new Puzzle(a);
-		assertTrue(true);
 	}
 	
 	/**
@@ -404,7 +405,6 @@ public class PuzzleTest {
 	public void test18() throws IllegalPuzzleException, DuplicatelPuzzleException, PuzzleFormatException {
 		int[] a = {1,2,3,4,5,6,7,8,9,10,0,11,0};
 		new Puzzle(a);
-		assertTrue(true);
 	}
 	
 	/**
@@ -418,7 +418,6 @@ public class PuzzleTest {
 	public void test19() throws IllegalPuzzleException, DuplicatelPuzzleException, PuzzleFormatException {
 		int[] a = {1,2,3,4,5,6,7,8,9,10,0};
 		new Puzzle(a);
-		assertTrue(true);
 	}
 	
 	/**
@@ -443,8 +442,116 @@ public class PuzzleTest {
 	 */
 	@Test(expected = IllegalPuzzleException.class)
 	public void test21() throws IllegalPuzzleException, DuplicatelPuzzleException, PuzzleFormatException {
-		int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
+		int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 		new Puzzle(a);
-		assertTrue(true);
 	}
+	
+	@Test
+	public void test30() {
+		int[] a = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		p.move(Ruch.G);
+//		System.out.println(p.getStringRepresentation());
+		int[] b = {4,1,2,3,0,5,6,7,8,9,10,11,12,13,14,15};
+		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
+	}
+	
+	@Test
+	public void test31() {
+		int[] a = {4,1,2,3,0,5,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		p.move(Ruch.D);
+//		System.out.println(p.getStringRepresentation());
+		int[] b = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
+	}
+	
+	@Test
+	public void test32() {
+		int[] a = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		p.move(Ruch.L);
+//		System.out.println(p.getStringRepresentation());
+		int[] b = {1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
+	}
+	
+	@Test
+	public void test33() {
+		int[] a = {1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		p.move(Ruch.P);
+//		System.out.println(p.getStringRepresentation());
+		int[] b = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
+	}
+	
+	@Test
+	public void test34() {
+		int[] a = {1,2,3,4,5,0,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		p.move(Ruch.G);
+//		System.out.println(p.getStringRepresentation());
+		int[] b = {1,2,3,4,5,9,6,7,8,0,10,11,12,13,14,15};
+		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
+	}
+	
+	@Test
+	public void test35() {
+		int[] a = {1,2,3,4,5,0,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		p.move(Ruch.D);
+//		System.out.println(p.getStringRepresentation());
+		int[] b = {1,0,3,4,5,2,6,7,8,9,10,11,12,13,14,15};
+		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
+	}
+	
 }
