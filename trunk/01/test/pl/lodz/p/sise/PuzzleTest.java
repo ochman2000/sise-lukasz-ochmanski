@@ -571,7 +571,7 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentation());
+//		System.out.println(p.getStringRepresentation());
 		int h = p.getManhattanDistance();
 		assertTrue(""+h, 4==h);
 	}
@@ -626,7 +626,7 @@ public class PuzzleTest {
 	
 	@Test
 	public void test40() {
-		int[] a = {1,2,3,4,5,6,7,8,9,11,10,12,13,0,14,15};
+		int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,0,14,15};
 		Puzzle p = null;
 		try {
 			p = new Puzzle(a);
@@ -635,7 +635,7 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-//		System.out.println(p.getStringRepresentation());
+		System.out.println(p.getStringRepresentation());
 		int h = p.getTotalManhattanDistances();
 		assertTrue(""+h, 4==h);
 	}
