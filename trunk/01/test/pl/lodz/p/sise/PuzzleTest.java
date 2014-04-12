@@ -458,7 +458,8 @@ public class PuzzleTest {
 			System.exit(1);
 		}
 //		System.out.println(p.getStringRepresentation());
-		p.move(Ruch.G);
+		p = p.move(Ruch.G);
+		a = p.getUkładKlocków();
 //		System.out.println(p.getStringRepresentation());
 		int[] b = {4,1,2,3,0,5,6,7,8,9,10,11,12,13,14,15};
 		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
@@ -476,7 +477,8 @@ public class PuzzleTest {
 			System.exit(1);
 		}
 //		System.out.println(p.getStringRepresentation());
-		p.move(Ruch.D);
+		p = p.move(Ruch.D);
+		a = p.getUkładKlocków();
 //		System.out.println(p.getStringRepresentation());
 		int[] b = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
@@ -494,7 +496,8 @@ public class PuzzleTest {
 			System.exit(1);
 		}
 //		System.out.println(p.getStringRepresentation());
-		p.move(Ruch.L);
+		p = p.move(Ruch.L);
+		a = p.getUkładKlocków();
 //		System.out.println(p.getStringRepresentation());
 		int[] b = {1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
@@ -512,7 +515,8 @@ public class PuzzleTest {
 			System.exit(1);
 		}
 //		System.out.println(p.getStringRepresentation());
-		p.move(Ruch.P);
+		p = p.move(Ruch.P);
+		a = p.getUkładKlocków();
 //		System.out.println(p.getStringRepresentation());
 		int[] b = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
@@ -530,7 +534,8 @@ public class PuzzleTest {
 			System.exit(1);
 		}
 //		System.out.println(p.getStringRepresentation());
-		p.move(Ruch.G);
+		p = p.move(Ruch.G);
+		a = p.getUkładKlocków();
 //		System.out.println(p.getStringRepresentation());
 		int[] b = {1,2,3,4,5,9,6,7,8,0,10,11,12,13,14,15};
 		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
@@ -548,10 +553,92 @@ public class PuzzleTest {
 			System.exit(1);
 		}
 //		System.out.println(p.getStringRepresentation());
-		p.move(Ruch.D);
+		p = p.move(Ruch.D);
+		a = p.getUkładKlocków();
 //		System.out.println(p.getStringRepresentation());
 		int[] b = {1,0,3,4,5,2,6,7,8,9,10,11,12,13,14,15};
 		assertTrue(Arrays.toString(a).equals(Arrays.toString(b)));
 	}
+	
+	@Test
+	public void test36() {
+		int[] a = {1,2,3,4,5,0,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+		System.out.println(p.getStringRepresentation());
+		int h = p.getManhattanDistance();
+		assertTrue(""+h, 4==h);
+	}
+	
+	@Test
+	public void test37() {
+		int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		int h = p.getManhattanDistance();
+		assertTrue(""+h, 0==h);
+	}
+	
+	@Test
+	public void test38() {
+		int[] a = {1,2,3,4,5,0,6,7,8,9,10,11,12,13,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		int h = p.getHammingDistance();
+		assertTrue(""+h, 11==h);
+	}
+	
+	@Test
+	public void test39() {
+		int[] a = {1,2,3,4,5,6,7,8,9,11,10,12,13,14,0,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		int h = p.getHammingDistance();
+		assertTrue(""+h, 4==h);
+	}
+	
+	@Test
+	public void test40() {
+		int[] a = {1,2,3,4,5,6,7,8,9,11,10,12,13,0,14,15};
+		Puzzle p = null;
+		try {
+			p = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
+			System.exit(1);
+		}
+//		System.out.println(p.getStringRepresentation());
+		int h = p.getTotalManhattanDistances();
+		assertTrue(""+h, 4==h);
+	}
+	
 	
 }
