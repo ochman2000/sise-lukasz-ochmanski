@@ -9,6 +9,9 @@ import pl.lodz.p.sise.exceptions.IllegalPuzzleException;
 import pl.lodz.p.sise.exceptions.PuzzleFormatException;
 
 public class Puzzle {
+	/**
+	 * Jak liczba klocków jest inna niż 4,8,16,25 to będzie problem!
+	 */
 	private final int LICZBA_KLOCKOW = 16;
 	private int[] plansza = new int[LICZBA_KLOCKOW];
 	
@@ -66,20 +69,21 @@ public class Puzzle {
 	}
 	
 	public Puzzle move(Ruch kierunek) {
+		int kolumny = (int) Math.sqrt(LICZBA_KLOCKOW);
 		Puzzle p = copy();
 		if(p.isAllowed(kierunek)) {
 			int index = p.getEmptyPuzzle();
 			switch (kierunek) {
 				case D: {
 					int temp = p.plansza[index];
-					p.plansza[index] = p.plansza[index-4];
-					p.plansza[index-4]=temp;
+					p.plansza[index] = p.plansza[index-kolumny];
+					p.plansza[index-kolumny]=temp;
 					break;
 				}
 				case G: {
 					int temp = p.plansza[index];
-					p.plansza[index] = p.plansza[index+4];
-					p.plansza[index+4]=temp;
+					p.plansza[index] = p.plansza[index+kolumny];
+					p.plansza[index+kolumny]=temp;
 					break;
 				}
 				case L: {
@@ -107,8 +111,8 @@ public class Puzzle {
 	}
 	
 	public Puzzle copy() {
-		int[] a  = new int[16];
-		for (int i=0; i<16; i++){
+		int[] a  = new int[LICZBA_KLOCKOW];
+		for (int i=0; i<LICZBA_KLOCKOW; i++){
 			a[i]=this.plansza[i];
 		}
 		Puzzle p = null;
@@ -123,6 +127,11 @@ public class Puzzle {
 		return p;
 	}
 	
+	
+	public int[] getUkładKlocków() {
+		return plansza;
+	}
+
 	@Override 
 	public boolean equals (Object object) {
 		boolean result = false;
@@ -135,5 +144,53 @@ public class Puzzle {
 	        }
 	    }
 	    return result;
+	}
+	
+	/**
+	 * Zlicza ilość klocków, które nie są na swoim miejsu.
+	 * @return
+	 */
+	public int getHammingDistance() {
+		int hamming =0;
+		for (int i=0; i<LICZBA_KLOCKOW-1; i++) {
+			if (this.plansza[i]!=i+1)
+				hamming++;
+		}
+		if (this.plansza[LICZBA_KLOCKOW-1]!=0)
+			hamming++;
+		return hamming;
+	}
+	
+	/**
+	 * Zlicz odległość taksówkową od pustego klocka do jego docelowej pozycji.
+	 * Odległość taksówkowa jest równa sumie współrzędnych w układzie kartezjańskim.
+	 * @return
+	 */
+	public int getManhattanDistance(){
+		return getManhattanDistance(getEmptyPuzzle(), LICZBA_KLOCKOW-1);
+	}
+	private int getManhattanDistance(int index, int destination) {
+		int x = getColumn(destination)-getColumn(index);
+		int y = getRow(destination)-getRow(index);
+		return x+y;
+	}
+	
+	/**
+	 * Zlicza sumę odległości taksówkowych dla wszystkich klocków.
+	 */
+	public int getTotalManhattanDistances() {
+		int sum=0;
+		for (int i=0; i<LICZBA_KLOCKOW; i++) {
+			sum += getManhattanDistance(i, this.plansza[i]);
+		}
+		return sum;
+	}
+	
+	private int getRow(int y) {
+		return y / (int)Math.sqrt(LICZBA_KLOCKOW);
+	}
+	
+	private int getColumn(int x) {
+		return x % (int)Math.sqrt(LICZBA_KLOCKOW);
 	}
 }
