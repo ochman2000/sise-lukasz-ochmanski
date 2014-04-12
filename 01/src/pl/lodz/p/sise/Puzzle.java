@@ -170,8 +170,8 @@ public class Puzzle {
 		return getManhattanDistance(getEmptyPuzzle(), LICZBA_KLOCKOW-1);
 	}
 	private int getManhattanDistance(int index, int destination) {
-		int x = getColumn(destination)-getColumn(index);
-		int y = getRow(destination)-getRow(index);
+		int x = Math.abs(getColumn(destination)-getColumn(index));
+		int y = Math.abs(getRow(destination)-getRow(index));
 		return x+y;
 	}
 	
@@ -181,7 +181,12 @@ public class Puzzle {
 	public int getTotalManhattanDistances() {
 		int sum=0;
 		for (int i=0; i<LICZBA_KLOCKOW; i++) {
-			sum += getManhattanDistance(i, this.plansza[i]);
+			int destination;
+			if (this.plansza[i]==0)
+				destination = 15;
+			else
+				destination = this.plansza[i]-1;
+			sum += getManhattanDistance(i, destination);
 		}
 		return sum;
 	}
