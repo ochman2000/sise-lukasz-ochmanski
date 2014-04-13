@@ -635,7 +635,7 @@ public class PuzzleTest {
 			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
-		System.out.println(p.getStringRepresentation());
+//		System.out.println(p.getStringRepresentation());
 		int h = p.getTotalManhattanDistances();
 		assertTrue(""+h, 4==h);
 	}
