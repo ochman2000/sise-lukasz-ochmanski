@@ -21,6 +21,6 @@ public class Dijkstra {
 			System.exit(1);
 		}
 		
-		graph =  		
+//		graph =  		
 	}
 }
