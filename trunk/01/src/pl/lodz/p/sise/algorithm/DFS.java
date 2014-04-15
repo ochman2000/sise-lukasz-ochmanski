@@ -1,4 +1,4 @@
-package pl.lodz.p.sise.algorithms;
+package pl.lodz.p.sise.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.Stack;
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 import pl.lodz.p.sise.Visited;
-import pl.lodz.p.sise.exceptions.DuplicatelPuzzleException;
-import pl.lodz.p.sise.exceptions.IllegalPuzzleException;
-import pl.lodz.p.sise.exceptions.PuzzleFormatException;
+import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
+import pl.lodz.p.sise.exception.IllegalPuzzleException;
+import pl.lodz.p.sise.exception.PuzzleFormatException;
 
 public class DFS {
 

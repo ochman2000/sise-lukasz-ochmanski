@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import pl.lodz.p.sise.exceptions.DuplicatelPuzzleException;
-import pl.lodz.p.sise.exceptions.IllegalPuzzleException;
-import pl.lodz.p.sise.exceptions.PuzzleFormatException;
+import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
+import pl.lodz.p.sise.exception.IllegalPuzzleException;
+import pl.lodz.p.sise.exception.PuzzleFormatException;
 
 public class Puzzle {
 	/**
