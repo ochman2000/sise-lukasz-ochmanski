@@ -1,4 +1,4 @@
-package pl.lodz.p.sise.exceptions;
+package pl.lodz.p.sise.exception;
 
 public class IllegalPuzzleException extends Exception {
 	

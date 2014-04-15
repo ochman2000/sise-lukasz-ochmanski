@@ -1,4 +1,4 @@
-package pl.lodz.p.sise.algorithms;
+package pl.lodz.p.sise.algorithm;
 
 public class AGwiazdka {
 
