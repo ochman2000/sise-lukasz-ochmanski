@@ -21,7 +21,7 @@ import pl.lodz.p.sise.structure.Predecessor;
 public class Dijkstra {
 
 	private Graph graph;
-	
+	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
 
 	public Dijkstra() {
 		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 13, 14, 15, 12 };
@@ -70,13 +70,22 @@ public class Dijkstra {
 			
 			//WYBIERZ NAJKRÓTSZĄ ŚCIEŻKĘ Z FRINGE'A
 			currentNode = fringe.getLowestCostPath();
+			int dist = currentNode.getValue().getDistance();
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
-			
-			
-			
+
+			for (int i = 0; i<Ruch.values().length; i++) {
+				Puzzle przesunięcie = currentNode.getKey().move(porządek[i]);
+				if (currentNode.getKey().isAllowed(porządek[i])	&& !visited.contains(przesunięcie)) {
+					int staraOdległość = fringe.get(przesunięcie).getDistance();
+					int nowaOdległość = dist + 1;
+					if (nowaOdległość < staraOdległość) {
+						fringe.put(przesunięcie, new Predecessor(nowaOdległość, currentNode.getKey()));
+						result.add(porządek[i]);
+						visited.add(przesunięcie);
+					}
+				}
+			}
 		}
-		
 		return null;
 	}
-	
 }

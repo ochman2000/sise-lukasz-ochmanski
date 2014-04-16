@@ -27,4 +27,8 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 		return ret;
 	}
 	
+	public Predecessor get(Puzzle key) {
+		return this.get(key);
+	}
+	
 }
