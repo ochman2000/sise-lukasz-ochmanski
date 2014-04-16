@@ -20,5 +20,9 @@ public class Graph {
 	public List<Edge> getEdges() {
 		return edges;
 	}
+	
+	public int numberOfNodes() {
+		return this.getVertexes().size();
+	}
 
 }
