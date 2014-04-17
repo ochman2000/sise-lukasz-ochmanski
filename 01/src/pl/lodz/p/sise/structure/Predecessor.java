@@ -1,15 +1,18 @@
 package pl.lodz.p.sise.structure;
 
 import pl.lodz.p.sise.Puzzle;
+import pl.lodz.p.sise.Ruch;
 
 public class Predecessor {
 
 	private int shortestDistance;
 	private Puzzle vertex;
+	private Ruch kierunek;
 	
-	public Predecessor(int distance, Puzzle vertex) {
+	public Predecessor(int distance, Puzzle vertex, Ruch kierunek) {
 		this.setDistance(distance);
 		this.setVertex(vertex);
+		this.setKierunek(kierunek);
 	}
 
 	public int getDistance() {
@@ -26,5 +29,13 @@ public class Predecessor {
 
 	public void setVertex(Puzzle vertex) {
 		this.vertex = vertex;
+	}
+
+	public Ruch getKierunek() {
+		return kierunek;
+	}
+
+	public void setKierunek(Ruch kierunek) {
+		this.kierunek = kierunek;
 	}
 }

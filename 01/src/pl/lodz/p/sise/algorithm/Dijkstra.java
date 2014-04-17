@@ -1,19 +1,13 @@
 package pl.lodz.p.sise.algorithm;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
-import pl.lodz.p.sise.Visited;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
-import pl.lodz.p.sise.structure.Edge;
 import pl.lodz.p.sise.structure.Fringe;
 import pl.lodz.p.sise.structure.Graph;
 import pl.lodz.p.sise.structure.Predecessor;
@@ -47,32 +41,34 @@ public class Dijkstra {
 		Fringe fringe = new Fringe(); 	//PREDECESSORS WITH THE DISTANCE
 		List<Ruch> result = new ArrayList<Ruch>();
 		
-		//DEFINIUJEMY MIEJSCE STARTU
-		fringe.put(b, new Predecessor(1, a));
-		Entry<Puzzle, Predecessor> currentNode = fringe.getLowestCostPath();
+		fringe.put(b, 1, a, null); 	//TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
+		int waga=1; 				//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
 		
 		while (true) {
-			if (currentNode.getKey().isSolved())
+			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
+			Puzzle currentNode = fringe.getLowestCostPath();
+			if (currentNode.isSolved())
 				return result;
-			
-			//WYBIERZ NAJKRÓTSZĄ ŚCIEŻKĘ Z FRINGE'A
-			currentNode = fringe.getLowestCostPath();
-			int dist = currentNode.getValue().getDistance();
+			//ZNAJDŹ ODLEGŁOŚĆ TEGO WĘZŁA DO PUNKTU POCZĄTKOWEGO
+			int pokonanyDystans = fringe.get(currentNode).getDistance();
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
-			
-//			for (int i = 0; i<Ruch.values().length; i++) {
-//				Puzzle przesunięcie = currentNode.getKey().move(porządek[i]);
-//				if (currentNode.getKey().isAllowed(porządek[i])	&& !visited.contains(przesunięcie)) {
-//					Predecessor p = fringe.get(przesunięcie);
-//					int staraOdległość = p==null ? Integer.MAX_VALUE : p.getDistance();
-//					int nowaOdległość = dist + 1;
-//					if (nowaOdległość < staraOdległość) {
-//						fringe.put(przesunięcie, new Predecessor(nowaOdległość, currentNode.getKey()));
-//						result.add(porządek[i]);
-//						visited.add(przesunięcie);
-//					}
-//				}
-//			}
+			List<Ruch> sąsiedzi = graph.getNeighboors(currentNode);
+			//NASTEPNIE PRZELICZ ODLEGŁOŚCI DLA KAŻDEGO SĄSIADA I DODAJ DO FRINGE'A
+			for (Ruch kierunek : sąsiedzi) {
+				Puzzle węzeł = currentNode.move(kierunek);
+				Predecessor p = fringe.get(węzeł);
+				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NIESKOŃCZONOŚĆ
+				int staraOdległość = p==null ? Integer.MAX_VALUE : p.getDistance();
+				int nowaOdległość = waga + pokonanyDystans;
+				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
+				if (nowaOdległość < staraOdległość) {
+					fringe.put(węzeł, nowaOdległość, currentNode, kierunek);
+				}
+			}
+			//ODZNACZ WĘZEŁ JAKO ODWIEDZONY, ŻEBY NIE LICZYĆ PONOWNIE ODLEGŁOŚCI
+			graph.setVisited(currentNode);
+			//ZAPAMIĘTAJ PRZEBYTĄ ŚCIEŻKĄ
+			result.add(fringe.get(currentNode).getKierunek());
 		}
 	}
 }

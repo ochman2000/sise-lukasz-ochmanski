@@ -42,20 +42,20 @@ public class Graph {
 	 */
 	public List<Ruch> getNeighboors(Puzzle puzzle) {
 		ArrayList<Ruch> sąsiedzi = new ArrayList<>();
-		Puzzle przesunięcie0 = puzzle.move(porządek[0]);
-		if (puzzle.isAllowed(porządek[0]) && !wasNodeVisited(przesunięcie0)) {
+//		Puzzle przesunięcie0 = puzzle.move(porządek[0]);
+		if (puzzle.isAllowed(porządek[0])) {// && !wasNodeVisited(przesunięcie0)) {
 			sąsiedzi.add(porządek[0]);
 		}
-		Puzzle przesunięcie1 = puzzle.move(porządek[1]);
-		if (puzzle.isAllowed(porządek[1]) && !wasNodeVisited(przesunięcie1)) {
+//		Puzzle przesunięcie1 = puzzle.move(porządek[1]);
+		if (puzzle.isAllowed(porządek[1])) {// && !wasNodeVisited(przesunięcie1)) {
 			sąsiedzi.add(porządek[1]);
 		}
-		Puzzle przesunięcie2 = puzzle.move(porządek[2]);
-		if (puzzle.isAllowed(porządek[2]) && !wasNodeVisited(przesunięcie2)) {
+//		Puzzle przesunięcie2 = puzzle.move(porządek[2]);
+		if (puzzle.isAllowed(porządek[2])) {// && !wasNodeVisited(przesunięcie2)) {
 			sąsiedzi.add(porządek[2]);
 		}
-		Puzzle przesunięcie3 = puzzle.move(porządek[3]);
-		if (puzzle.isAllowed(porządek[3]) && !wasNodeVisited(przesunięcie3)) {
+//		Puzzle przesunięcie3 = puzzle.move(porządek[3]);
+		if (puzzle.isAllowed(porządek[3])) {// && !wasNodeVisited(przesunięcie3)) {
 			sąsiedzi.add(porządek[3]);
 		}
 		return sąsiedzi;
