@@ -21,7 +21,6 @@ import pl.lodz.p.sise.structure.Predecessor;
 public class Dijkstra {
 	Puzzle a,b,c,d,e;
 	private Graph graph;
-	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
 
 	public Dijkstra() {
 		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 13, 14, 15, 12 };
@@ -41,22 +40,12 @@ public class Dijkstra {
 			System.exit(1);
 		}
 		
-		List<Puzzle> vertices = new ArrayList<Puzzle>();
-		List<Edge> edges = new ArrayList<Edge>();
-		edges.add(new Edge("ab", a, b, 1));
-		edges.add(new Edge("bc", b, c, 1));
-		edges.add(new Edge("bd", b, d, 1));
-		edges.add(new Edge("de", d, e, 1));
-		
-		graph = new Graph(vertices, edges);
-		
-		
+		graph = new Graph(a);
 	}
 	
 	public List<Ruch> search() {
 		Fringe fringe = new Fringe(); 	//PREDECESSORS WITH THE DISTANCE
 		List<Ruch> result = new ArrayList<Ruch>();
-		Visited visited = new Visited();
 		
 		//DEFINIUJEMY MIEJSCE STARTU
 		fringe.put(b, new Predecessor(1, a));
@@ -70,20 +59,20 @@ public class Dijkstra {
 			currentNode = fringe.getLowestCostPath();
 			int dist = currentNode.getValue().getDistance();
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
-
-			for (int i = 0; i<Ruch.values().length; i++) {
-				Puzzle przesunięcie = currentNode.getKey().move(porządek[i]);
-				if (currentNode.getKey().isAllowed(porządek[i])	&& !visited.contains(przesunięcie)) {
-					Predecessor p = fringe.get(przesunięcie);
-					int staraOdległość = p==null ? Integer.MAX_VALUE : p.getDistance();
-					int nowaOdległość = dist + 1;
-					if (nowaOdległość < staraOdległość) {
-						fringe.put(przesunięcie, new Predecessor(nowaOdległość, currentNode.getKey()));
-						result.add(porządek[i]);
-						visited.add(przesunięcie);
-					}
-				}
-			}
+			
+//			for (int i = 0; i<Ruch.values().length; i++) {
+//				Puzzle przesunięcie = currentNode.getKey().move(porządek[i]);
+//				if (currentNode.getKey().isAllowed(porządek[i])	&& !visited.contains(przesunięcie)) {
+//					Predecessor p = fringe.get(przesunięcie);
+//					int staraOdległość = p==null ? Integer.MAX_VALUE : p.getDistance();
+//					int nowaOdległość = dist + 1;
+//					if (nowaOdległość < staraOdległość) {
+//						fringe.put(przesunięcie, new Predecessor(nowaOdległość, currentNode.getKey()));
+//						result.add(porządek[i]);
+//						visited.add(przesunięcie);
+//					}
+//				}
+//			}
 		}
 	}
 }
