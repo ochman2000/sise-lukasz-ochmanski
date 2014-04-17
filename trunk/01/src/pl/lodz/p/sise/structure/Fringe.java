@@ -31,6 +31,8 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 				ret = e.getKey();
 			}	
 		}
+		if (ret!=null)
+			visited.add(ret);
 		return ret;
 	}
 	
