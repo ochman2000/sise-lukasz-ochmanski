@@ -13,6 +13,7 @@ import pl.lodz.p.sise.structure.Graph;
 import pl.lodz.p.sise.structure.Predecessor;
 
 public class Dijkstra {
+	public static boolean DEBUG = true;
 	Puzzle a,b,c,d,e;
 	private Graph graph;
 
@@ -40,6 +41,8 @@ public class Dijkstra {
 	public List<Ruch> search() {
 		Fringe fringe = new Fringe(); 	//PREDECESSORS WITH THE DISTANCE
 		List<Ruch> result = new ArrayList<Ruch>();
+		int i = 0;
+		long start = System.currentTimeMillis();
 		
 		fringe.put(b, 1, a, null); 	//TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
 		int waga=1; 				//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
@@ -47,6 +50,12 @@ public class Dijkstra {
 		while (true) {
 			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
 			Puzzle currentNode = fringe.getLowestCostPath();
+			if (DEBUG) {
+				System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
+				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
+				+ "\n=========================================================");
+				System.out.println(currentNode.getStringRepresentation());
+			}
 			if (currentNode.isSolved())
 				return result;
 			//ZNAJDŹ ODLEGŁOŚĆ TEGO WĘZŁA DO PUNKTU POCZĄTKOWEGO
