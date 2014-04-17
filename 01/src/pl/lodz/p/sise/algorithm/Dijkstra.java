@@ -50,12 +50,7 @@ public class Dijkstra {
 		while (true) {
 			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
 			Puzzle currentNode = fringe.getLowestCostPath();
-			if (DEBUG) {
-				System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
-				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
-				+ "\n=========================================================");
-				System.out.println(currentNode.getStringRepresentation());
-			}
+			
 			if (currentNode.isSolved())
 				return result;
 			//ZNAJDŹ ODLEGŁOŚĆ TEGO WĘZŁA DO PUNKTU POCZĄTKOWEGO
@@ -72,12 +67,19 @@ public class Dijkstra {
 				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
 				if (nowaOdległość < staraOdległość) {
 					fringe.put(węzeł, nowaOdległość, currentNode, kierunek);
+					//ZAPAMIĘTAJ PRZEBYTĄ ŚCIEŻKĄ
+					result.add(kierunek);
+					if (DEBUG) {
+						System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
+//						+ "\t Najkrótsza droga: "+nowaOdległość
+						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
+						+ "\n=========================================================");
+						System.out.println(węzeł.getStringRepresentation());
+					}
 				}
 			}
 			//ODZNACZ WĘZEŁ JAKO ODWIEDZONY, ŻEBY NIE LICZYĆ PONOWNIE ODLEGŁOŚCI
 			graph.setVisited(currentNode);
-			//ZAPAMIĘTAJ PRZEBYTĄ ŚCIEŻKĄ
-			result.add(fringe.get(currentNode).getKierunek());
 		}
 	}
 }
