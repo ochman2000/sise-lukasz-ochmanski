@@ -19,7 +19,7 @@ import pl.lodz.p.sise.structure.Graph;
 import pl.lodz.p.sise.structure.Predecessor;
 
 public class Dijkstra {
-
+	Puzzle a,b,c,d,e;
 	private Graph graph;
 	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
 
@@ -29,7 +29,7 @@ public class Dijkstra {
 		int[] t_c = { 1, 2, 3, 4, 5, 6, 0, 8, 9, 10, 7, 11, 13, 14, 15, 12 };
 		int[] t_d = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12 };
 		int[] t_e = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0 };
-		Puzzle a,b,c,d,e; a=b=c=d=e=null;
+
 		try {
 			a = new Puzzle(t_a);
 			b = new Puzzle(t_b);
@@ -57,14 +57,12 @@ public class Dijkstra {
 		Fringe fringe = new Fringe(); 	//PREDECESSORS WITH THE DISTANCE
 		List<Ruch> result = new ArrayList<Ruch>();
 		Visited visited = new Visited();
-		Entry<Puzzle, Predecessor> currentNode = null;
 		
 		//DEFINIUJEMY MIEJSCE STARTU
-		Puzzle start = graph.getVertexes().get(0);
-		Puzzle b = graph.getVertexes().get(1);
-		fringe.put(b, new Predecessor(1, start));
+		fringe.put(b, new Predecessor(1, a));
+		Entry<Puzzle, Predecessor> currentNode = fringe.getLowestCostPath();
 		
-		while (visited.size() < graph.numberOfNodes()) {
+		while (true) {
 			if (currentNode.getKey().isSolved())
 				return result;
 			
@@ -76,7 +74,8 @@ public class Dijkstra {
 			for (int i = 0; i<Ruch.values().length; i++) {
 				Puzzle przesunięcie = currentNode.getKey().move(porządek[i]);
 				if (currentNode.getKey().isAllowed(porządek[i])	&& !visited.contains(przesunięcie)) {
-					int staraOdległość = fringe.get(przesunięcie).getDistance();
+					Predecessor p = fringe.get(przesunięcie);
+					int staraOdległość = p==null ? Integer.MAX_VALUE : p.getDistance();
 					int nowaOdległość = dist + 1;
 					if (nowaOdległość < staraOdległość) {
 						fringe.put(przesunięcie, new Predecessor(nowaOdległość, currentNode.getKey()));
@@ -86,6 +85,5 @@ public class Dijkstra {
 				}
 			}
 		}
-		return null;
 	}
 }

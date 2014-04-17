@@ -2,6 +2,7 @@ package pl.lodz.p.sise;
 
 import pl.lodz.p.sise.algorithm.BFS;
 import pl.lodz.p.sise.algorithm.DFS;
+import pl.lodz.p.sise.algorithm.Dijkstra;
 
 public class Solver {
 
@@ -20,6 +21,14 @@ public class Solver {
 		System.out.println();
 		BFS bfs = new BFS();
 		System.out.println(bfs.search());
+		
+		System.out.println("=========================================================");
+		System.out.println("DIJKSTRA SEARCH:");
+		System.out.println("=========================================================");
+		System.out.println();
+		Dijkstra dj = new Dijkstra();
+		System.out.println(dj.search());
+		
 		
 	}
 }
