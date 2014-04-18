@@ -33,13 +33,17 @@ public class Puzzle {
 	
 	public String getStringRepresentation() {
 		String ret="";
-		String a,b,c,d;	a=b=c=d="";
-		for (int i=0; i<16; i+=4) {
-			a = (plansza[i]<10)   ? "  "+plansza[i] : " "+plansza[i];
-			b = (plansza[i+1]<10) ? "  "+plansza[i+1] : " "+plansza[i+1];
-			c = (plansza[i+2]<10) ? "  "+plansza[i+2] : " "+plansza[i+2];
-			d = (plansza[i+3]<10) ? "  "+plansza[i+3] : " "+plansza[i+3];
-			ret = ret+a+b+c+d+"\n";
+//		for (int i=0; i<16; i+=4) {
+//			String row="";
+//			for (int j=0; j<4; j++) {
+//				int x = plansza[i+j];
+//				row += (x<10) ? " "+x+" " : x+" ";
+//			}
+//			ret = ret+row+"\n";
+//		}
+		for (int i=0; i<LICZBA_KLOCKOW; i++) {
+			if (i%4==0 && i!=0) ret+="\n";
+			ret += (plansza[i]<10) ? " "+plansza[i]+" " : plansza[i]+" ";
 		}
 		return ret;
 	}

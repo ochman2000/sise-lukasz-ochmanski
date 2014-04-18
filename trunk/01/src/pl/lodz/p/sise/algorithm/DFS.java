@@ -44,7 +44,7 @@ public class DFS {
 				System.out.println("Iteracje: "+ i++ + "\t Stos: "+ stos.size()
 				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 				+ "\n=========================================================");
-				System.out.println(puzzle.getStringRepresentation());
+				System.out.println(puzzle.getStringRepresentation()+"\n");
 			}
 			if (puzzle.isSolved())
 				return result;

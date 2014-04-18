@@ -43,7 +43,7 @@ public class BFS {
 				System.out.println("Iteracje: "+ i++ + "\t Kolejka: "+ kolejka.size()
 				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 				+ "\n=========================================================");
-				System.out.println(currentNode.getStringRepresentation());
+				System.out.println(currentNode.getStringRepresentation()+"\n");
 			}
 			if (currentNode.isSolved())
 				return result;
