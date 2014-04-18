@@ -1,23 +1,24 @@
 package pl.lodz.p.sise.structure;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
-import pl.lodz.p.sise.Visited;
 
 public class Fringe extends HashMap<Puzzle, Predecessor> {
 
-	private Visited visited;
+	private Set<Puzzle> visited;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4814714233235085597L;
 	
 	public Fringe() {
-		visited = new Visited();
+		visited = new HashSet<Puzzle>();
 	}
 
 	public Puzzle getLowestCostPath() {
@@ -58,6 +59,8 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 	 * Ostatnio wykonano ruch d.
 	 */
 	public void put(Puzzle a, int b, Puzzle c, Ruch d) {
+		if (a==null)
+			throw new NullPointerException("Próbujesz wstawić pustą układankę.");
 		this.put(a, new Predecessor(b, c, d));
 	}
 

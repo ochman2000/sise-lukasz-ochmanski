@@ -1,13 +1,13 @@
 package pl.lodz.p.sise.algorithm;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
-import pl.lodz.p.sise.Visited;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
@@ -15,7 +15,7 @@ import pl.lodz.p.sise.exception.PuzzleFormatException;
 public class BFS {
 	public static boolean DEBUG = true;
 	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
-	private LinkedList<Puzzle> kolejka;
+	private List<Puzzle> kolejka;
 	private Set<Puzzle> visited;
 	private Puzzle puzzle;
 
@@ -29,7 +29,7 @@ public class BFS {
 		}
 		kolejka = new LinkedList<Puzzle>();
 		kolejka.add(puzzle);
-		visited = new Visited();
+		visited = new HashSet<Puzzle>();
 		visited.add(puzzle);
 	}
 
@@ -72,7 +72,7 @@ public class BFS {
 				result.add(porządek[3]);
 				visited.add(przesunięcie3);
 			} else {
-				currentNode = kolejka.remove();
+				currentNode = kolejka.remove(0);
 				result.remove(result.size() - 1);
 			}
 		}

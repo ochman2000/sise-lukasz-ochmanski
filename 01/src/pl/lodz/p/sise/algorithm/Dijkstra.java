@@ -71,7 +71,7 @@ public class Dijkstra {
 					result.add(kierunek);
 					if (DEBUG) {
 						System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
-//						+ "\t Najkrótsza droga: "+nowaOdległość
+						+ "\t Najkrótsza droga: "+nowaOdległość
 						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 						+ "\n=========================================================");
 						System.out.println(węzeł.getStringRepresentation());

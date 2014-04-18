@@ -1,13 +1,13 @@
 package pl.lodz.p.sise.algorithm;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
-import pl.lodz.p.sise.Visited;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
@@ -30,7 +30,7 @@ public class DFS {
 		}
 		stos = new Stack<Puzzle>();
 		stos.push(puzzle);
-		visited = new Visited();
+		visited = new HashSet<Puzzle>();
 		visited.add(puzzle);
 	}
 

@@ -27,7 +27,7 @@ public class Puzzle {
 		if (s.size() < a.length)
 			throw new DuplicatelPuzzleException(a.length - s.size());
 		if (s.size() != LICZBA_KLOCKOW)
-			throw new PuzzleFormatException(s.size());
+			throw new PuzzleFormatException(s.size(), LICZBA_KLOCKOW);
 		this.plansza = a;
 	}
 	
@@ -131,9 +131,13 @@ public class Puzzle {
 	public int[] getUkładKlocków() {
 		return plansza;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+		return equals((Puzzle) object);
+	}
 
-	@Override 
-	public boolean equals (Object object) {
+	public boolean equals(Puzzle object) {
 		boolean result = false;
 	    if (object == null || object.getClass() != getClass()) {
 	        result = false;
@@ -197,5 +201,24 @@ public class Puzzle {
 	
 	private int getColumn(int x) {
 		return x % (int)Math.sqrt(LICZBA_KLOCKOW);
+	}
+	
+	/**
+	 * Maksymalna liczba binów, do których trafią układanki to:
+	 * 1*8^0 + 2*8^1 + 3*8^2 + 4*8^3 + 5*8^4 + 6*8^5 + 7*8^6 + 8*8^7 +
+	 * 9*8^0 + 10*8^1 + 11*8^2 + 12*8^3 + 13*8^4 + 14*8^5 + 15*8^6 + 16*8^7
+	 * =56 837 098 z 10 461 394 944 000 możliwych kombinacji.
+	 * Niestety nie wiem jak policzyć, jakie jest prawdopodobieństwo wystąpienia kolizji,
+	 * ale raczej na pewno nie jest możliwe, aby wpadły wszystkie do tego samego bina.
+	 * Na pewno pierwsze osiem klocków nie wpadnie w to samo miejsce.
+	 * Jednak suma pierwszych ośmiu i drugich ośmiu może dać czasem taki sam numer.
+	 */
+	public int hashCode() {
+		int hashCode = 0;
+		for (int i=0; i<LICZBA_KLOCKOW; i++) {
+			int power = i%8;
+			hashCode+=(this.plansza[i]+1)*Math.pow(8, power);
+		}		
+		return hashCode;
 	}
 }
