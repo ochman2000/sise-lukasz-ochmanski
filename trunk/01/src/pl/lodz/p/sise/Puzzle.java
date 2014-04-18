@@ -33,8 +33,9 @@ public class Puzzle {
 	
 	public String getStringRepresentation() {
 		String ret="";
+		int sideLen = (int) Math.sqrt(LICZBA_KLOCKOW);
 		for (int i=0; i<LICZBA_KLOCKOW; i++) {
-			if (i%4==0 && i!=0) ret+="\n";
+			if (i%sideLen==0 && i!=0) ret+="\n";
 			ret += (plansza[i]<10) ? " "+plansza[i]+" " : plansza[i]+" ";
 		}
 		return ret;
