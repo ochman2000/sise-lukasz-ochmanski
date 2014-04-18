@@ -1,20 +1,20 @@
 package pl.lodz.p.sise.structure;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
-import pl.lodz.p.sise.Visited;
 
 public class Graph {
 //	private final List<Puzzle> vertexes;
 //	private final List<Edge> edges;
-	private Visited visited;
+	private HashSet<Puzzle> visited;
 	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
 
 	public Graph(Puzzle startNode) {
-		this.visited = new Visited();
+		this.visited = new HashSet<Puzzle>();
 		visited.add(startNode);
 	}
 
