@@ -33,14 +33,6 @@ public class Puzzle {
 	
 	public String getStringRepresentation() {
 		String ret="";
-//		for (int i=0; i<16; i+=4) {
-//			String row="";
-//			for (int j=0; j<4; j++) {
-//				int x = plansza[i+j];
-//				row += (x<10) ? " "+x+" " : x+" ";
-//			}
-//			ret = ret+row+"\n";
-//		}
 		for (int i=0; i<LICZBA_KLOCKOW; i++) {
 			if (i%4==0 && i!=0) ret+="\n";
 			ret += (plansza[i]<10) ? " "+plansza[i]+" " : plansza[i]+" ";
