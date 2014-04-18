@@ -67,14 +67,14 @@ public class Dijkstra {
 				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
 				if (nowaOdległość < staraOdległość) {
 					fringe.put(węzeł, nowaOdległość, currentNode, kierunek);
-					//ZAPAMIĘTAJ PRZEBYTĄ ŚCIEŻKĄ
+					//ZAPAMIĘTAJ PRZEBYTĄ ŚCIEŻKĘ
 					result.add(kierunek);
 					if (DEBUG) {
 						System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
 						+ "\t Najkrótsza droga: "+nowaOdległość
 						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 						+ "\n=========================================================");
-						System.out.println(węzeł.getStringRepresentation());
+						System.out.println(węzeł.getStringRepresentation()+"\n");
 					}
 				}
 			}
