@@ -10,7 +10,7 @@ import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
 
-public class Puzzle {
+public class Puzzle implements Comparable<Puzzle> {
 	/**
 	 * Jak liczba klocków jest inna niż 4,8,16,25 to będzie problem!
 	 */
@@ -292,4 +292,18 @@ public class Puzzle {
 	public void setMinDistance(int minDistance) {
 		this.minDistance = minDistance;
 	}
+
+	@Override
+	public int compareTo(Puzzle o) {
+		if (o.getMinDistance()<this.getMinDistance()) {
+			return -1;
+		}
+		else if (o.getMinDistance()>this.getMinDistance()) {
+			return 1;
+		}
+		else
+			return 0;
+	}
+
+	
 }
