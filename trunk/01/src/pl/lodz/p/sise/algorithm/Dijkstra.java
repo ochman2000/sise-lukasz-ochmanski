@@ -10,7 +10,6 @@ import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
 import pl.lodz.p.sise.structure.Fringe;
-import pl.lodz.p.sise.structure.Predecessor;
 
 public class Dijkstra {
 	public static boolean DEBUG = true;
@@ -42,7 +41,7 @@ public class Dijkstra {
 		long start = System.currentTimeMillis();
 		
 		a.setMinDistance(0);
-		fringe.put(a, 0, null, null); 	//WSKAŻ MIEJSCE STARTU. TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
+		fringe.put(a); 	//WSKAŻ MIEJSCE STARTU. TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
 		int waga=1; 				//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
 		
 		while (true) {
@@ -52,13 +51,13 @@ public class Dijkstra {
 			if (currentNode.isSolved())
 				return backTrack(fringe, currentNode);
 			//ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
-			int pokonanyDystans = fringe.get(currentNode).getDistance();
+			int pokonanyDystans = fringe.get(currentNode).getMinDistance();
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
 			List<Ruch> sąsiedzi = currentNode.getNeighboors();
 			//NASTEPNIE PRZELICZ ODLEGŁOŚCI DLA KAŻDEGO SĄSIADA I DODAJ DO FRINGE'A
 			for (Ruch kierunek : sąsiedzi) {
 				Puzzle węzeł = currentNode.move(kierunek);
-				Predecessor p = fringe.get(węzeł);
+				Puzzle p = fringe.get(węzeł);
 				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NIESKOŃCZONOŚĆ
 				int staraOdległość = p==null ? Integer.MAX_VALUE : węzeł.getMinDistance();
 				int nowaOdległość = waga + pokonanyDystans;
@@ -67,7 +66,7 @@ public class Dijkstra {
 					węzeł.setPrevious(currentNode);
 					węzeł.setMinDistance(nowaOdległość);
 					węzeł.setKierunek(kierunek);
-					fringe.put(węzeł, nowaOdległość, currentNode, kierunek);
+					fringe.put(węzeł);
 //					if (DEBUG) {
 //						System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
 //						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
@@ -84,7 +83,7 @@ public class Dijkstra {
 
 	private List<Ruch> backTrack(Fringe fringe, Puzzle currentNode) {
 		LinkedList<Ruch> ruchy = new LinkedList<Ruch>();
-		Predecessor last = fringe.get(currentNode);
+		Puzzle last = fringe.get(currentNode);
 		while (last!=null) {
 			if (DEBUG) {
 				System.out.println(last
@@ -93,8 +92,7 @@ public class Dijkstra {
 			Ruch kierunek = last.getKierunek();
 			if (kierunek!=null)
 				ruchy.addFirst(kierunek);
-			Puzzle p = last.getVertex();
-			last = fringe.get(p);
+			last = last.getPrevious();
 		}
 		return ruchy;
 	}
