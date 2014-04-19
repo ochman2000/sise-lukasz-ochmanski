@@ -1,7 +1,9 @@
 package pl.lodz.p.sise;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
@@ -14,6 +16,10 @@ public class Puzzle {
 	 */
 	private final int LICZBA_KLOCKOW = 16;
 	private int[] plansza = new int[LICZBA_KLOCKOW];
+	private boolean visited;
+	private Puzzle previous;
+	private Ruch kierunek;
+	private int minDistance;
 	
 	public Puzzle(int[] a) throws IllegalPuzzleException,
 			DuplicatelPuzzleException, PuzzleFormatException {
@@ -40,9 +46,16 @@ public class Puzzle {
 		}
 		return ret;
 	}
-	
+
+	public String toStringDetailed() {
+		String s = Arrays.toString(this.getUkładKlocków());
+		s+= this.getPrevious()==null ? "[brak poprzednika]" : this.getPrevious().toString();
+		s +=" odległość: "+ this.getMinDistance()
+			+" ruch: "+this.getKierunek();
+		return s;
+	}
 	public String toString() {
-		return Arrays.toString(this.plansza);
+		return Arrays.toString(this.getUkładKlocków());
 	}
 	
 	public boolean isAllowed(Ruch kierunek) {
@@ -140,7 +153,7 @@ public class Puzzle {
 	        result = false;
 	    } else {
 	        Puzzle puzzle = (Puzzle) object;
-	        if (Arrays.equals(this.plansza, puzzle.plansza)) {
+	        if (Arrays.equals(getUkładKlocków(), puzzle.plansza)) {
 	            result = true;
 	        }
 	    }
@@ -223,5 +236,60 @@ public class Puzzle {
 			hashCode+=(this.plansza[i]+1)*Math.pow(8, power);
 		}		
 		return hashCode;
+	}
+	
+	public List<Ruch> getNeighboors() {
+		Ruch[] porządek = Ruch.values();
+		return getNeighboors(porządek);
+	}
+	
+	public List<Ruch> getNeighboors(Ruch[] order) {
+		ArrayList<Ruch> sąsiedzi = new ArrayList<>();
+		for (Ruch ruch : order) {
+			if (this.isAllowed(ruch))
+				sąsiedzi.add(ruch);
+		}
+		return sąsiedzi;
+	}
+	
+	/**
+	 * Zaznacza, że dany węzeł był już odwiedzony.
+	 * @param node
+	 */
+	public void setVisited() {
+		visited = true;
+	}
+	
+	/**
+	 * Sprawdza, czy podany węzeł był już odwiedzony.
+	 * @param node
+	 * @return
+	 */
+	public boolean wasVisited() {
+		return visited;
+	}
+	
+	public void setPrevious(Puzzle node) {
+		this.previous = node;
+	}
+
+	public Puzzle getPrevious() {
+		return previous;
+	}
+
+	public Ruch getKierunek() {
+		return kierunek;
+	}
+
+	public void setKierunek(Ruch kierunek) {
+		this.kierunek = kierunek;
+	}
+
+	public int getMinDistance() {
+		return minDistance;
+	}
+
+	public void setMinDistance(int minDistance) {
+		this.minDistance = minDistance;
 	}
 }
