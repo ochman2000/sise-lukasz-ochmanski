@@ -65,7 +65,7 @@ public class Graph {
 	 * Zaznacza, że dany węzeł był już odwiedzony.
 	 * @param node
 	 */
-	public void setVisited(Puzzle node) {
+	public void setExamined(Puzzle node) {
 		visited.add(node);
 	}
 	

@@ -9,18 +9,32 @@ import java.util.Set;
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 
+/**
+ * Tak klasa dziedziczy po HashMapie, choć tak naprawdę powinno tu być
+ * Fibbonacci Heap, żeby można natychmiast znajdywać najmniejszą wartość.
+ * @author Lukasz
+ *
+ */
 public class Fringe extends HashMap<Puzzle, Predecessor> {
 
-	private Set<Puzzle> visited;
+	private Set<Puzzle> examined;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4814714233235085597L;
 	
 	public Fringe() {
-		visited = new HashSet<Puzzle>();
+		examined = new HashSet<Puzzle>();
 	}
 
+	/**
+	 * Funkcja zwraca węzeł, o najmniejszej wartości, który nie był jeszcze badany.
+	 * Aby sprawić, żeby algorytm był deterministyczny, muszę zdecydować co robić w przypadku,
+	 * gdy pojawią się dwa tak samo odległe wierzchołki. Jeśli jednak iterator pokonuje
+	 * strukturę danych w ustalony sposób, powinno działać. Poza tym, nie będę tego teraz zmieniał,
+	 * bo za chwile może wrzucę tu Fibbonacci Heap i mój wysiłek pójdzie na marne.
+	 * @return
+	 */
 	public Puzzle getLowestCostPath() {
 		Puzzle ret = null;
 		int shortestDistance = Integer.MAX_VALUE;
@@ -28,27 +42,29 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 		while (it.hasNext()) {
 			Entry<Puzzle, Predecessor> e = it.next();
 			int vertexDistance = e.getValue().getDistance();
-			if (vertexDistance<shortestDistance && !visited.contains(e.getKey())) {
+			if (vertexDistance<shortestDistance && !examined.contains(e.getKey())) {
 				ret = e.getKey();
 			}	
 		}
 		if (ret!=null)
-			visited.add(ret);
+			examined.add(ret);
 		return ret;
 	}
 	
-	public Predecessor get(Object key) {
-		for (Iterator<Entry<Puzzle, Predecessor>> iterator = this.entrySet().iterator(); iterator.hasNext();) {
-			Entry<Puzzle, Predecessor> e = iterator.next();
-			if (e.getKey().equals(key))
-				return e.getValue();
-		}
-		return null;
+	/**
+	 * Funkcja zwraca poprzednika, czyli wierzchołek przez który należało przejść,
+	 * aby uzyskać dodatkowo zwróconą wartość: "odległość". Odległość jest to najkrótszą
+	 * dotychczas osiągniętą drogą dla danego argumentu. Ponadto zwrócony obiekt zawiera
+	 * informację, jaki ruch należało wykonać, aby tu dotrzeć: Lewo, Prawo, Góra, Dół.
+	 * 
+	 */
+	public Predecessor get(Puzzle key) {
+		return super.get(key);
 	}
 	
 	/**
 	 * Wstawia nowy element.
-	 * @param a - węzeł do którego szuka się najkrótszej drogi
+	 * @param a - obecnie przeszukiwany węzeł
 	 * @param b - dotychczas uzyskana najkrótsza droga do a
 	 * @param c - węzeł, przez który trzeba było przejść, aby dostać się do a.
 	 * @param d - ruch, jaki doprowadził do tego węzła

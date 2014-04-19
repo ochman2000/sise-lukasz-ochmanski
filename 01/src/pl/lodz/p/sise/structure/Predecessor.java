@@ -23,6 +23,14 @@ public class Predecessor {
 		this.shortestDistance = shortestDistance;
 	}
 
+	/**
+	 * Zwraca obiekt reprezentujący poprzedni wierzchołek.
+	 * Czyli węzeł, przez który tutaj doszliśmy.
+	 * Funkcja jest szczególnie potrzebna podczas odnajdywania najkrótszej ścieżki.
+	 * Gdy zostanie znalezione rozwiązanie należy prześledzić wszystkich poprzedników,
+	 * i zatrzymać się na źródle.
+	 * 
+	 */
 	public Puzzle getVertex() {
 		return vertex;
 	}
@@ -37,5 +45,12 @@ public class Predecessor {
 
 	public void setKierunek(Ruch kierunek) {
 		this.kierunek = kierunek;
+	}
+	
+	public String toString() {
+		String s = this.getVertex()==null ? "[brak poprzednika]" : this.getVertex().toString();
+		s +=" odległość: "+ this.getDistance()
+			+" ruch: "+this.getKierunek();
+		return s;
 	}
 }

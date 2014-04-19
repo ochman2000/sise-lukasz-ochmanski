@@ -1,6 +1,7 @@
 package pl.lodz.p.sise.algorithm;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import pl.lodz.p.sise.Puzzle;
@@ -44,7 +45,7 @@ public class Dijkstra {
 		int i = 0;
 		long start = System.currentTimeMillis();
 		
-		fringe.put(b, 1, a, null); 	//TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
+		fringe.put(a, 0, null, null); 	//WSKAŻ MIEJSCE STARTU. TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
 		int waga=1; 				//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
 		
 		while (true) {
@@ -52,8 +53,8 @@ public class Dijkstra {
 			Puzzle currentNode = fringe.getLowestCostPath();
 			
 			if (currentNode.isSolved())
-				return result;
-			//ZNAJDŹ ODLEGŁOŚĆ TEGO WĘZŁA DO PUNKTU POCZĄTKOWEGO
+				return backTrack(fringe, currentNode);
+			//ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
 			int pokonanyDystans = fringe.get(currentNode).getDistance();
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
 			List<Ruch> sąsiedzi = graph.getNeighboors(currentNode);
@@ -67,19 +68,34 @@ public class Dijkstra {
 				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
 				if (nowaOdległość < staraOdległość) {
 					fringe.put(węzeł, nowaOdległość, currentNode, kierunek);
-					//ZAPAMIĘTAJ PRZEBYTĄ ŚCIEŻKĘ
-					result.add(kierunek);
-					if (DEBUG) {
-						System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
-						+ "\t Najkrótsza droga: "+nowaOdległość
-						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
-						+ "\n=========================================================");
-						System.out.println(węzeł.getStringRepresentation()+"\n");
-					}
+//					if (DEBUG) {
+//						System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
+//						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
+//						+ "\t\t Wartość heurystyczna: "+nowaOdległość
+//						+ "\n=========================================================");
+//						System.out.println(węzeł.getStringRepresentation()+"\n");
+//					}
 				}
 			}
-			//ODZNACZ WĘZEŁ JAKO ODWIEDZONY, ŻEBY NIE LICZYĆ PONOWNIE ODLEGŁOŚCI
-			graph.setVisited(currentNode);
+			//NA KONIEC ODZNACZ WĘZEŁ JAKO PRZEBADANY, ŻEBY NIE LICZYĆ PONOWNIE ODLEGŁOŚCI
+			graph.setExamined(currentNode);
 		}
+	}
+
+	private List<Ruch> backTrack(Fringe fringe, Puzzle currentNode) {
+		LinkedList<Ruch> ruchy = new LinkedList<Ruch>();
+		Predecessor last = fringe.get(currentNode);
+		while (last!=null) {
+			if (DEBUG) {
+				System.out.println(last
+				+ "\n=========================================================");
+			}
+			Ruch kierunek = last.getKierunek();
+			if (kierunek!=null)
+				ruchy.addFirst(kierunek);
+			Puzzle p = last.getVertex();
+			last = fringe.get(p);
+		}
+		return ruchy;
 	}
 }
