@@ -42,18 +42,18 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 		while (it.hasNext()) {
 			Entry<Puzzle, Predecessor> e = it.next();
 			int vertexDistance = e.getValue().getDistance();
-			if (vertexDistance<shortestDistance && !examined.contains(e.getKey())) {
+			if (vertexDistance<shortestDistance && !e.getKey().wasVisited()) {
 				ret = e.getKey();
 			}	
 		}
 		if (ret!=null)
-			examined.add(ret);
+			ret.setVisited();
 		return ret;
 	}
 	
 	/**
 	 * Funkcja zwraca poprzednika, czyli wierzchołek przez który należało przejść,
-	 * aby uzyskać dodatkowo zwróconą wartość: "odległość". Odległość jest to najkrótszą
+	 * aby uzyskać wartość: "odległość". Odległość jest to najkrótszą
 	 * dotychczas osiągniętą drogą dla danego argumentu. Ponadto zwrócony obiekt zawiera
 	 * informację, jaki ruch należało wykonać, aby tu dotrzeć: Lewo, Prawo, Góra, Dół.
 	 * 
