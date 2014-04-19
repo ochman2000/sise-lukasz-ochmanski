@@ -202,15 +202,21 @@ public class Puzzle {
 	
 	/**
 	 * Maksymalna liczba binów, do których trafią układanki to:
-	 * 1*8^0 + 2*8^1 + 3*8^2 + 4*8^3 + 5*8^4 + 6*8^5 + 7*8^6 + 8*8^7 +
-	 * 9*8^0 + 10*8^1 + 11*8^2 + 12*8^3 + 13*8^4 + 14*8^5 + 15*8^6 + 16*8^7
-	 * =56 837 098 z 10 461 394 944 000 możliwych kombinacji.
+	 * 1*8^0 + 3*8^1 + 5*8^2 + 7*8^3 +  9*8^4 + 11*8^5 + 13*8^6 + 15*8^7 +
+	 * 2*8^0 + 4*8^1 + 6*8^2 + 8*8^3 + 10*8^4 + 12*8^5 + 14*8^6 + 16*8^7
+	 * =72 929 531 z 10 461 394 944 000 możliwych kombinacji.
 	 * Niestety nie wiem jak policzyć, jakie jest prawdopodobieństwo wystąpienia kolizji,
 	 * ale raczej na pewno nie jest możliwe, aby wpadły wszystkie do tego samego bina.
 	 * Na pewno pierwsze osiem klocków nie wpadnie w to samo miejsce.
+	 * Drugie osiem równiez nie może wpaść do tego samego bina.
 	 * Jednak suma pierwszych ośmiu i drugich ośmiu może dać czasem taki sam numer.
 	 */
+	@SuppressWarnings("unused")
 	public int hashCode() {
+		if (LICZBA_KLOCKOW>16) {
+			throw new UnsupportedClassVersionError("Jeśli chcesz, aby program działał"
+					+ "poprawnie musisz napisać nową funkcję hashCode.");
+		}
 		int hashCode = 0;
 		for (int i=0; i<LICZBA_KLOCKOW; i++) {
 			int power = i%8;
