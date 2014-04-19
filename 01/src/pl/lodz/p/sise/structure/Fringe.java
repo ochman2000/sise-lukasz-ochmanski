@@ -1,13 +1,10 @@
 package pl.lodz.p.sise.structure;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import pl.lodz.p.sise.Puzzle;
-import pl.lodz.p.sise.Ruch;
 
 /**
  * Tak klasa dziedziczy po HashMapie, choć tak naprawdę powinno tu być
@@ -15,16 +12,14 @@ import pl.lodz.p.sise.Ruch;
  * @author Lukasz
  *
  */
-public class Fringe extends HashMap<Puzzle, Predecessor> {
+public class Fringe extends HashMap<Puzzle, Puzzle> {
 
-	private Set<Puzzle> examined;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4814714233235085597L;
 	
 	public Fringe() {
-		examined = new HashSet<Puzzle>();
 	}
 
 	/**
@@ -38,10 +33,10 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 	public Puzzle getLowestCostPath() {
 		Puzzle ret = null;
 		int shortestDistance = Integer.MAX_VALUE;
-		Iterator<Entry<Puzzle, Predecessor>> it = this.entrySet().iterator();
+		Iterator<Entry<Puzzle, Puzzle>> it = this.entrySet().iterator();
 		while (it.hasNext()) {
-			Entry<Puzzle, Predecessor> e = it.next();
-			int vertexDistance = e.getValue().getDistance();
+			Entry<Puzzle, Puzzle> e = it.next();
+			int vertexDistance = e.getValue().getMinDistance();
 			if (vertexDistance<shortestDistance && !e.getKey().wasVisited()) {
 				ret = e.getKey();
 			}	
@@ -58,7 +53,7 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 	 * informację, jaki ruch należało wykonać, aby tu dotrzeć: Lewo, Prawo, Góra, Dół.
 	 * 
 	 */
-	public Predecessor get(Puzzle key) {
+	public Puzzle get(Puzzle key) {
 		return super.get(key);
 	}
 	
@@ -74,10 +69,10 @@ public class Fringe extends HashMap<Puzzle, Predecessor> {
 	 * Najkrótsza ścieżka do b przechodzi przez a i wynosi 1.
 	 * Ostatnio wykonano ruch d.
 	 */
-	public void put(Puzzle a, int b, Puzzle c, Ruch d) {
+	public void put(Puzzle a) {
 		if (a==null)
 			throw new NullPointerException("Próbujesz wstawić pustą układankę.");
-		this.put(a, new Predecessor(b, c, d));
+		this.put(a, a);
 	}
 
 }
