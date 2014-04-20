@@ -8,6 +8,8 @@ import pl.lodz.p.sise.Ruch;
 
 public class Statistics {
 
+	private boolean success = true;
+	private String failMessage;
 	private Puzzle startPoint;
 	private List<Ruch> moves;
 	private int iterations;
@@ -44,6 +46,9 @@ public class Statistics {
 	public String getTime() {
 		return ""+((double)time)/1000;
 	}
+	/**
+	 * @param time - Czas w milisekundach
+	 */
 	public void setTime(long time) {
 		this.time = time;
 	}
@@ -85,9 +90,20 @@ public class Statistics {
 	
 	public String toString() {
 		String heurystyka = "";
+		String failMessage = "";
+		String poziomTrudnosci = "";
+		String znalezionaSciezka = "Nie znaleziono rozwiązania.\n";
+		if (isSuccess()) {
+			poziomTrudnosci = "Poziom trudności: \t\t"+getMoves().size()+"\n";
+			znalezionaSciezka = "Najkrótsza znaleziona ścieżka: \t"+getMoves().size()+"\n"+getMoves()+"\n";
+		}
+		else {
+			failMessage =  getFailMessage();
+		}
 		if (getHeurystyka()!=null)
 			heurystyka="Rodzaj użytej heurystyki: \t"+getHeurystyka()+"\n";
 		String s = "=========================================================\n"
+				+  failMessage+"\n"
 				+ "Algorytm: \t\t\t"+getAlgorytm()+"\n"
 				+  heurystyka 
 				+ "Czas wykonania: \t\t"+getTime()+" sekund\n"
@@ -95,12 +111,24 @@ public class Statistics {
 				+ "Użyte jednostki pamięci: \t"+getMaxMemoryUsed()+"\n"
 				+ "Użyta struktura danych: \t"+getStructureType()+"\n"
 				+ "Obowiązująca jednostka pamięci: "+getMemoryUnits()+"\n"
-				+ "Poziom trudności: \t\t"+getMoves().size()+"\n"
+				+  poziomTrudnosci
 				+ "Układ początkowy:\n"+getStartPoint().getStringRepresentation()+"\n\n"
-				+ "Najkrótsza znaleziona ścieżka: \t"+getMoves().size()+"\n"+getMoves()+"\n"
+				+  znalezionaSciezka
 //				+ "Wizualizacja: "
 //				+"=========================================================\n"
 				;
 		return s;	
+	}
+	public boolean isSuccess() {
+		return success;
+	}
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+	public String getFailMessage() {
+		return failMessage;
+	}
+	public void setFailMessage(String failMessage) {
+		this.failMessage = failMessage;
 	}
 }

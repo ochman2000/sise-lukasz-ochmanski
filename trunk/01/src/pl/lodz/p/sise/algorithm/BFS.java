@@ -16,8 +16,10 @@ import pl.lodz.p.sise.exception.TimeoutException;
 import pl.lodz.p.sise.structure.Statistics;
 
 public class BFS {
-	private static final int TIMEOUT = 120;
+	private static final int TIMEOUT = 30;
 	public static boolean DEBUG = false;
+	int maxSize=0;
+	int iteracje = 0;
 	private Statistics statistics;
 	private Ruch[] porządek;
 	private List<Puzzle> kolejka;
@@ -39,23 +41,32 @@ public class BFS {
 		try {
 			this.setStatistics(search(puzzle));
 		} catch (TimeoutException | NoSolutionException e) {
-			System.err.println(e.getMessage());
+			Statistics stats = new Statistics();
+			stats.setSuccess(false);
+			stats.setFailMessage(e.getMessage());
+			stats.setStartPoint(puzzle);
+			stats.setAlgorytm("Breadth First Search");
+			stats.setIterations(iteracje);
+			stats.setTime(TIMEOUT*1000);
+			stats.setMaxMemoryUsed(maxSize);
+			stats.setStructureType("LinkedList");
+			stats.setMemoryUnits("Węzeł");
+			this.setStatistics(stats);
+//			System.err.println(e.getMessage());
 		}
 	}
 
 	public Statistics search(Puzzle puzzle) throws TimeoutException, NoSolutionException {
 		Statistics stats = new Statistics();
 		stats.setStartPoint(puzzle);
-		int maxSize=0;
 		Puzzle currentNode = puzzle.copy();
 		List<Ruch> result = new ArrayList<Ruch>();
-		int i = 0;
 		long start = System.currentTimeMillis();
 		while (!kolejka.isEmpty()) {
 			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
 				throw new TimeoutException(TIMEOUT);
 			if (DEBUG) {
-				System.out.println("Iteracje: "+ i + "\t Kolejka: "+ kolejka.size()
+				System.out.println("Iteracje: "+ iteracje + "\t Kolejka: "+ kolejka.size()
 				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 				+ "\n=========================================================");
 				System.out.println(currentNode.getStringRepresentation()+"\n");
@@ -63,7 +74,7 @@ public class BFS {
 			if (currentNode.isSolved()) {
 				stats.setAlgorytm("Breadth First Search");
 //				stats.setHeurystyka("Brak");
-				stats.setIterations(i);
+				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
 				stats.setMaxMemoryUsed(maxSize);
 				stats.setStructureType("LinkedList");
@@ -99,7 +110,7 @@ public class BFS {
 				currentNode = kolejka.remove(0);
 				result.remove(result.size() - 1);
 			}
-			i++;
+			iteracje++;
 			if (kolejka.size()>maxSize)
 				maxSize=kolejka.size();
 		}
