@@ -74,7 +74,6 @@ public class DFS {
 			}
 			if (puzzle.isSolved()) {
 				stats.setAlgorytm("Depth First Search");
-//				stats.setHeurystyka("Brak");
 				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
 				stats.setMaxMemoryUsed(maxSize);

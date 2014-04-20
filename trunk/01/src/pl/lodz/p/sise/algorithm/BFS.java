@@ -73,7 +73,6 @@ public class BFS {
 			}
 			if (currentNode.isSolved()) {
 				stats.setAlgorytm("Breadth First Search");
-//				stats.setHeurystyka("Brak");
 				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
 				stats.setMaxMemoryUsed(maxSize);

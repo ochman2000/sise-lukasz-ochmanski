@@ -98,19 +98,19 @@ public class Statistics {
 			znalezionaSciezka = "Najkrótsza znaleziona ścieżka: \t"+getMoves().size()+"\n"+getMoves()+"\n";
 		}
 		else {
-			failMessage =  getFailMessage();
+			failMessage =  getFailMessage()+"\n";
 		}
 		if (getHeurystyka()!=null)
 			heurystyka="Rodzaj użytej heurystyki: \t"+getHeurystyka()+"\n";
 		String s = "=========================================================\n"
-				+  failMessage+"\n"
+				+  failMessage
 				+ "Algorytm: \t\t\t"+getAlgorytm()+"\n"
 				+  heurystyka 
 				+ "Czas wykonania: \t\t"+getTime()+" sekund\n"
 				+ "Liczba operacji: \t\t"+getIterations()+"\n"
 				+ "Użyte jednostki pamięci: \t"+getMaxMemoryUsed()+"\n"
-				+ "Użyta struktura danych: \t"+getStructureType()+"\n"
 				+ "Obowiązująca jednostka pamięci: "+getMemoryUnits()+"\n"
+				+ "Użyta struktura danych: \t"+getStructureType()+"\n"
 				+  poziomTrudnosci
 				+ "Układ początkowy:\n"+getStartPoint().getStringRepresentation()+"\n\n"
 				+  znalezionaSciezka
