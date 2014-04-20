@@ -17,8 +17,10 @@ import pl.lodz.p.sise.structure.Statistics;
 
 public class DFS {
 
-	private static final int TIMEOUT = 120;
+	private static final int TIMEOUT = 30;
 	public static boolean DEBUG = false;
+	private int maxSize=0;
+	private int iteracje = 0;
 	private Ruch[] porządek;
 	private Stack<Puzzle> stos;
 	private Set<Puzzle> visited;
@@ -40,23 +42,32 @@ public class DFS {
 		try {
 			this.setStatistics(this.search(puzzle));
 		} catch (TimeoutException | NoSolutionException e) {
-			System.err.println(e.getMessage());
+			Statistics stats = new Statistics();
+			stats.setSuccess(false);
+			stats.setFailMessage(e.getMessage());
+			stats.setStartPoint(puzzle);
+			stats.setAlgorytm("Depth First Search");
+			stats.setIterations(iteracje);
+			stats.setTime(TIMEOUT*1000);
+			stats.setMaxMemoryUsed(maxSize);
+			stats.setStructureType("Stack");
+			stats.setMemoryUnits("Węzeł");
+			this.setStatistics(stats);
+//			System.err.println(e.getMessage());
 		}
 	}
 
 	public Statistics search(Puzzle puzzle) throws TimeoutException, NoSolutionException {
 		Statistics stats = new Statistics();
 		stats.setStartPoint(puzzle);
-		int maxSize=0;
 		List<Ruch> result = new ArrayList<Ruch>();
-		int i = 0;
 		long start = System.currentTimeMillis();
 		while (!stos.empty()) {
 			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
 				throw new TimeoutException(TIMEOUT);
 			puzzle = stos.peek().copy();
 			if (DEBUG) {
-				System.out.println("Iteracje: "+ i + "\t Stos: "+ stos.size()
+				System.out.println("Iteracje: "+ iteracje + "\t Stos: "+ stos.size()
 				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 				+ "\n=========================================================");
 				System.out.println(puzzle.getStringRepresentation()+"\n");
@@ -64,7 +75,7 @@ public class DFS {
 			if (puzzle.isSolved()) {
 				stats.setAlgorytm("Depth First Search");
 //				stats.setHeurystyka("Brak");
-				stats.setIterations(i);
+				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
 				stats.setMaxMemoryUsed(maxSize);
 				stats.setStructureType("Stack");
@@ -96,7 +107,7 @@ public class DFS {
 				stos.pop();
 				result.remove(result.size() - 1);
 			}
-			i++;
+			iteracje++;
 			if (stos.size()>maxSize)
 				maxSize=stos.size();
 		}

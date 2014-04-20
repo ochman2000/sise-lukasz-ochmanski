@@ -16,6 +16,8 @@ import pl.lodz.p.sise.structure.Statistics;
 public class Dijkstra {
 	private static final int TIMEOUT = 120;
 	public static boolean DEBUG = true;
+	int iteracje = 0;
+	private int maxSize=0;
 	Puzzle a,b,c,d,e;
 	private Puzzle puzzle;
 	private Statistics statistics;
@@ -30,6 +32,18 @@ public class Dijkstra {
 		try {
 			this.setStatistics(this.search(puzzle));
 		} catch (NoSolutionException | TimeoutException e) {
+			Statistics stats = new Statistics();
+			stats.setSuccess(false);
+			stats.setFailMessage(e.getMessage());
+			stats.setStartPoint(puzzle);
+			stats.setAlgorytm("Breadth First Search");
+			stats.setHeurystyka("Każda krawędź ma wagę 1");
+			stats.setIterations(iteracje);
+			stats.setTime(TIMEOUT*1000);
+			stats.setMaxMemoryUsed(maxSize);
+			stats.setStructureType("LinkedList");
+			stats.setMemoryUnits("Węzeł");
+			this.setStatistics(stats);
 			System.err.println(e.getMessage());
 		}
 	}
@@ -37,7 +51,6 @@ public class Dijkstra {
 	public Statistics search(Puzzle puzzle) throws NoSolutionException, TimeoutException {
 		Statistics stats = new Statistics();
 		Fringe fringe = new Fringe();
-		int i = 0;
 		long start = System.currentTimeMillis();
 		
 		puzzle.setMinDistance(0);
@@ -52,9 +65,10 @@ public class Dijkstra {
 			if (currentNode==null)
 				throw new NoSolutionException();
 			if (currentNode.isSolved()) {
+				stats.setSuccess(true);
 				stats.setAlgorytm("Shortest Path Dijkstra");
 				stats.setHeurystyka("Każda krawędź ma wagę 1");
-				stats.setIterations(i);
+				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
 				stats.setMaxMemoryUsed(fringe.size());
 				stats.setStructureType("HashMap");
@@ -80,14 +94,15 @@ public class Dijkstra {
 					węzeł.setKierunek(kierunek);
 					fringe.put(węzeł);
 //					if (DEBUG) {
-//						System.out.println("Iteracje: "+ i++ + "\t Fringe: "+ fringe.size()
+//						System.out.println("Iteracje: "+ iteracje + "\t Fringe: "+ fringe.size()
 //						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 //						+ "\t\t Wartość heurystyczna: "+nowaOdległość
 //						+ "\n=========================================================");
 //						System.out.println(węzeł.getStringRepresentation()+"\n");
 //					}
 				}
-				i++;
+				iteracje++;
+				maxSize=fringe.size();
 			}
 		}
 		return stats;
