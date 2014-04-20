@@ -1,6 +1,8 @@
 package pl.lodz.p.sise;
 
 import pl.lodz.p.sise.algorithm.AGwiazdka1;
+import pl.lodz.p.sise.algorithm.AGwiazdka2;
+import pl.lodz.p.sise.algorithm.AGwiazdka3;
 import pl.lodz.p.sise.algorithm.BFS;
 import pl.lodz.p.sise.algorithm.DFS;
 import pl.lodz.p.sise.algorithm.Dijkstra;
@@ -21,6 +23,14 @@ public class Solver {
 		System.out.println("A* Odległość taksówkowa...");
 		AGwiazdka1 ag1 = new AGwiazdka1(t_a);
 		System.out.println(ag1.getStatistics());
+		
+		System.out.println("A* Odległość Hamminga...");
+		AGwiazdka2 ag2 = new AGwiazdka2(t_a);
+		System.out.println(ag2.getStatistics());
+		
+		System.out.println("A* Suma odległości taksówkowych...");
+		AGwiazdka3 ag3 = new AGwiazdka3(t_a);
+		System.out.println(ag3.getStatistics());
 
 		System.out.println("DFS...");
 		DFS dfs = new DFS(t_a);
