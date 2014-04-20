@@ -15,26 +15,27 @@ import pl.lodz.p.sise.exception.PuzzleFormatException;
 public class DFS {
 
 	public static boolean DEBUG = true;
-	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
+	private Ruch[] porządek;
 	private Stack<Puzzle> stos;
 	private Set<Puzzle> visited;
 	private Puzzle puzzle;
 
-	public DFS() {
-		int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 13, 14, 15, 12 };
+	public DFS(int[] a) {
 		try {
 			this.puzzle = new Puzzle(a);
 		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
 			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
+		porządek = Ruch.values();
 		stos = new Stack<Puzzle>();
 		stos.push(puzzle);
 		visited = new HashSet<Puzzle>();
 		visited.add(puzzle);
+		this.search(puzzle);
 	}
 
-	public List<Ruch> search() {
+	public List<Ruch> search(Puzzle puzzle) {
 		ArrayList<Ruch> result = new ArrayList<Ruch>();
 		int i = 0;
 		long start = System.currentTimeMillis();

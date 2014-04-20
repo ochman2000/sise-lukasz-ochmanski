@@ -1,6 +1,5 @@
 package pl.lodz.p.sise.algorithm;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,48 +9,59 @@ import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.NoSolutionException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
+import pl.lodz.p.sise.exception.TimeoutException;
 import pl.lodz.p.sise.structure.Fringe;
+import pl.lodz.p.sise.structure.Statistics;
 
 public class Dijkstra {
+	private static final int TIMEOUT = 120;
 	public static boolean DEBUG = true;
 	Puzzle a,b,c,d,e;
+	private Puzzle puzzle;
+	private Statistics statistics;
 
-	public Dijkstra() {
-		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 13, 14, 15, 12 };
-		int[] t_b = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 13, 14, 15, 12 };
-		int[] t_c = { 1, 2, 3, 4, 5, 6, 0, 8, 9, 10, 7, 11, 13, 14, 15, 12 };
-		int[] t_d = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12 };
-		int[] t_e = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0 };
-
+	public Dijkstra(int[] a) {
 		try {
-			a = new Puzzle(t_a);
-			b = new Puzzle(t_b);
-			c = new Puzzle(t_c);
-			d = new Puzzle(t_d);
-			e = new Puzzle(t_e);
-		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException ex) {
-			System.err.println(ex.getMessage() + "\nDziałanie programu przerwane.");
+			this.puzzle = new Puzzle(a);
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
+			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
 			System.exit(1);
+		}
+		try {
+			this.setStatistics(this.search(puzzle));
+		} catch (NoSolutionException | TimeoutException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 	
-	public List<Ruch> search() throws NoSolutionException {
-		Fringe fringe = new Fringe(); 	//PREDECESSORS WITH THE DISTANCE
-		List<Ruch> result = new ArrayList<Ruch>();
+	public Statistics search(Puzzle puzzle) throws NoSolutionException, TimeoutException {
+		Statistics stats = new Statistics();
+		Fringe fringe = new Fringe();
 		int i = 0;
 		long start = System.currentTimeMillis();
 		
-		a.setMinDistance(0);
-		fringe.put(a); 	//WSKAŻ MIEJSCE STARTU. TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
-		int waga=1; 				//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
-		
+		puzzle.setMinDistance(0);
+		fringe.put(puzzle); 	//WSKAŻ MIEJSCE STARTU
+		int waga=1; 			//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
+		stats.setStartPoint(puzzle);
 		while (!fringe.isEmpty()) {
+			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
+				throw new TimeoutException(TIMEOUT);
 			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
 			Puzzle currentNode = fringe.getLowestCostPath();
 			if (currentNode==null)
 				throw new NoSolutionException();
-			if (currentNode.isSolved())
-				return backTrack(fringe, currentNode);
+			if (currentNode.isSolved()) {
+				stats.setAlgorytm("Shortest Path Dijkstra");
+				stats.setHeurystyka("Każda krawędź ma wagę 1");
+				stats.setIterations(i);
+				stats.setTime((System.currentTimeMillis() - start));
+				stats.setMaxMemoryUsed(fringe.size());
+				stats.setStructureType("HashMap");
+				stats.setMemoryUnits("Węzeł");
+				stats.setMoves(backTrack(fringe, currentNode));
+				return stats;
+			}
 			//ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
 			int pokonanyDystans = currentNode.getMinDistance();
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
@@ -77,9 +87,10 @@ public class Dijkstra {
 //						System.out.println(węzeł.getStringRepresentation()+"\n");
 //					}
 				}
+				i++;
 			}
 		}
-		return result;
+		return stats;
 	}
 
 	private List<Ruch> backTrack(Fringe fringe, Puzzle currentNode) {
@@ -95,5 +106,13 @@ public class Dijkstra {
 			last = last.getPrevious();
 		}
 		return ruchy;
+	}
+
+	public Statistics getStatistics() {
+		return statistics;
+	}
+
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
 	}
 }

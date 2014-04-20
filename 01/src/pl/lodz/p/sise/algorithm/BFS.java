@@ -14,26 +14,27 @@ import pl.lodz.p.sise.exception.PuzzleFormatException;
 
 public class BFS {
 	public static boolean DEBUG = true;
-	private Ruch[] porządek = { Ruch.L, Ruch.P, Ruch.G, Ruch.D };
+	private Ruch[] porządek;
 	private List<Puzzle> kolejka;
 	private Set<Puzzle> visited;
 	private Puzzle puzzle;
 
-	public BFS() {
-		int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 13, 14, 15, 12 };
+	public BFS(int[] a) {
 		try {
 			this.puzzle = new Puzzle(a);
 		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
 			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
+		porządek = Ruch.values();
 		kolejka = new LinkedList<Puzzle>();
 		kolejka.add(puzzle);
 		visited = new HashSet<Puzzle>();
 		visited.add(puzzle);
+		search(puzzle);
 	}
 
-	public List<Ruch> search() {
+	public List<Ruch> search(Puzzle puzzle) {
 		Puzzle currentNode = puzzle.copy();
 		ArrayList<Ruch> result = new ArrayList<Ruch>();
 		int i = 0;
