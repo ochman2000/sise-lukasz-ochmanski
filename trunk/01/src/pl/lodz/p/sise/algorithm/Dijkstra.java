@@ -8,6 +8,7 @@ import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
+import pl.lodz.p.sise.exception.NoSolutionException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
 import pl.lodz.p.sise.structure.Fringe;
 
@@ -34,7 +35,7 @@ public class Dijkstra {
 		}
 	}
 	
-	public List<Ruch> search() {
+	public List<Ruch> search() throws NoSolutionException {
 		Fringe fringe = new Fringe(); 	//PREDECESSORS WITH THE DISTANCE
 		List<Ruch> result = new ArrayList<Ruch>();
 		int i = 0;
@@ -44,14 +45,15 @@ public class Dijkstra {
 		fringe.put(a); 	//WSKAŻ MIEJSCE STARTU. TO TRZEBA POTEM ZAMIENIĆ NA PRAWDZIWY ELEMENT GRAFU
 		int waga=1; 				//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
 		
-		while (true) {
+		while (!fringe.isEmpty()) {
 			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
 			Puzzle currentNode = fringe.getLowestCostPath();
-			
+			if (currentNode==null)
+				throw new NoSolutionException();
 			if (currentNode.isSolved())
 				return backTrack(fringe, currentNode);
 			//ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
-			int pokonanyDystans = fringe.get(currentNode).getMinDistance();
+			int pokonanyDystans = currentNode.getMinDistance();
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
 			List<Ruch> sąsiedzi = currentNode.getNeighboors();
 			//NASTEPNIE PRZELICZ ODLEGŁOŚCI DLA KAŻDEGO SĄSIADA I DODAJ DO FRINGE'A
@@ -76,22 +78,20 @@ public class Dijkstra {
 //					}
 				}
 			}
-			//NA KONIEC ODZNACZ WĘZEŁ JAKO PRZEBADANY, ŻEBY NIE LICZYĆ PONOWNIE ODLEGŁOŚCI
-			currentNode.setVisited();
 		}
+		return result;
 	}
 
 	private List<Ruch> backTrack(Fringe fringe, Puzzle currentNode) {
 		LinkedList<Ruch> ruchy = new LinkedList<Ruch>();
+//		LinkedList<Puzzle> path = new LinkedList<Puzzle>();
 		Puzzle last = fringe.get(currentNode);
 		while (last!=null) {
-			if (DEBUG) {
-				System.out.println(last
-				+ "\n=========================================================");
-			}
 			Ruch kierunek = last.getKierunek();
-			if (kierunek!=null)
+			if (kierunek!=null) {
 				ruchy.addFirst(kierunek);
+//				path.addFirst(last);
+			}
 			last = last.getPrevious();
 		}
 		return ruchy;

@@ -38,6 +38,7 @@ public class Fringe extends HashMap<Puzzle, Puzzle> {
 			Entry<Puzzle, Puzzle> e = it.next();
 			int vertexDistance = e.getValue().getMinDistance();
 			if (vertexDistance<shortestDistance && !e.getKey().wasVisited()) {
+				shortestDistance=vertexDistance;
 				ret = e.getKey();
 			}	
 		}
@@ -74,5 +75,4 @@ public class Fringe extends HashMap<Puzzle, Puzzle> {
 			throw new NullPointerException("Próbujesz wstawić pustą układankę.");
 		this.put(a, a);
 	}
-
 }
