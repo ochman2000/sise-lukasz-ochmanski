@@ -13,7 +13,7 @@ import pl.lodz.p.sise.exception.TimeoutException;
 import pl.lodz.p.sise.structure.Fringe;
 import pl.lodz.p.sise.structure.Statistics;
 
-public class Dijkstra {
+public class AGwiazdka1 {
 	private static final int TIMEOUT = 120;
 	public static boolean DEBUG = false;
 	int iteracje = 0;
@@ -22,7 +22,7 @@ public class Dijkstra {
 	private Puzzle puzzle;
 	private Statistics statistics;
 
-	public Dijkstra(int[] a) {
+	public AGwiazdka1(int[] a) {
 		try {
 			this.puzzle = new Puzzle(a);
 		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
@@ -36,8 +36,8 @@ public class Dijkstra {
 			stats.setSuccess(false);
 			stats.setFailMessage(e.getMessage());
 			stats.setStartPoint(puzzle);
-			stats.setAlgorytm("Breadth First Search");
-			stats.setHeurystyka("Każda krawędź ma wagę 1");
+			stats.setAlgorytm("Shortest Path A*");
+			stats.setHeurystyka("Odległość taksówkowa");
 			stats.setIterations(iteracje);
 			stats.setTime(TIMEOUT*1000);
 			stats.setMaxMemoryUsed(maxSize);
@@ -55,7 +55,6 @@ public class Dijkstra {
 		
 		puzzle.setMinDistance(0);
 		fringe.put(puzzle); 	//WSKAŻ MIEJSCE STARTU
-		int waga=1; 			//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
 		stats.setStartPoint(puzzle);
 		while (!fringe.isEmpty()) {
 			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
@@ -66,8 +65,8 @@ public class Dijkstra {
 				throw new NoSolutionException();
 			if (currentNode.isSolved()) {
 				stats.setSuccess(true);
-				stats.setAlgorytm("Shortest Path Dijkstra");
-				stats.setHeurystyka("Każda krawędź ma wagę 1");
+				stats.setAlgorytm("Shortest Path A*");
+				stats.setHeurystyka("Odległość taksówkowa");
 				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
 				stats.setMaxMemoryUsed(fringe.size());
@@ -86,7 +85,7 @@ public class Dijkstra {
 				Puzzle p = fringe.get(węzeł);
 				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NIESKOŃCZONOŚĆ
 				int staraOdległość = p==null ? Integer.MAX_VALUE : węzeł.getMinDistance();
-				int nowaOdległość = waga + pokonanyDystans;
+				int nowaOdległość = węzeł.getManhattanDistance() + pokonanyDystans;
 				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
 				if (nowaOdległość < staraOdległość) {
 					węzeł.setPrevious(currentNode);
