@@ -10,10 +10,15 @@ import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
+import pl.lodz.p.sise.exception.NoSolutionException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
+import pl.lodz.p.sise.exception.TimeoutException;
+import pl.lodz.p.sise.structure.Statistics;
 
 public class BFS {
-	public static boolean DEBUG = true;
+	private static final int TIMEOUT = 120;
+	public static boolean DEBUG = false;
+	private Statistics statistics;
 	private Ruch[] porządek;
 	private List<Puzzle> kolejka;
 	private Set<Puzzle> visited;
@@ -31,23 +36,41 @@ public class BFS {
 		kolejka.add(puzzle);
 		visited = new HashSet<Puzzle>();
 		visited.add(puzzle);
-		search(puzzle);
+		try {
+			this.setStatistics(search(puzzle));
+		} catch (TimeoutException | NoSolutionException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
-	public List<Ruch> search(Puzzle puzzle) {
+	public Statistics search(Puzzle puzzle) throws TimeoutException, NoSolutionException {
+		Statistics stats = new Statistics();
+		stats.setStartPoint(puzzle);
+		int maxSize=0;
 		Puzzle currentNode = puzzle.copy();
-		ArrayList<Ruch> result = new ArrayList<Ruch>();
+		List<Ruch> result = new ArrayList<Ruch>();
 		int i = 0;
 		long start = System.currentTimeMillis();
 		while (!kolejka.isEmpty()) {
+			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
+				throw new TimeoutException(TIMEOUT);
 			if (DEBUG) {
-				System.out.println("Iteracje: "+ i++ + "\t Kolejka: "+ kolejka.size()
+				System.out.println("Iteracje: "+ i + "\t Kolejka: "+ kolejka.size()
 				+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
 				+ "\n=========================================================");
 				System.out.println(currentNode.getStringRepresentation()+"\n");
 			}
-			if (currentNode.isSolved())
-				return result;
+			if (currentNode.isSolved()) {
+				stats.setAlgorytm("Breadth First Search");
+//				stats.setHeurystyka("Brak");
+				stats.setIterations(i);
+				stats.setTime((System.currentTimeMillis() - start));
+				stats.setMaxMemoryUsed(maxSize);
+				stats.setStructureType("LinkedList");
+				stats.setMemoryUnits("Węzeł");
+				stats.setMoves(result);
+				return stats;
+			}
 			Puzzle przesunięcie0 = currentNode.move(porządek[0]);
 			Puzzle przesunięcie1 = currentNode.move(porządek[1]);
 			Puzzle przesunięcie2 = currentNode.move(porządek[2]);
@@ -76,7 +99,18 @@ public class BFS {
 				currentNode = kolejka.remove(0);
 				result.remove(result.size() - 1);
 			}
+			i++;
+			if (kolejka.size()>maxSize)
+				maxSize=kolejka.size();
 		}
-		return null;
+		throw new NoSolutionException();
+	}
+
+	public Statistics getStatistics() {
+		return statistics;
+	}
+
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
 	}
 }

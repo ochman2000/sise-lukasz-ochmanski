@@ -84,9 +84,12 @@ public class Statistics {
 	}
 	
 	public String toString() {
-		String s = "\n=========================================================\n"
+		String heurystyka = "";
+		if (getHeurystyka()!=null)
+			heurystyka="Rodzaj użytej heurystyki: \t"+getHeurystyka()+"\n";
+		String s = "=========================================================\n"
 				+ "Algorytm: \t\t\t"+getAlgorytm()+"\n"
-				+ "Rodzaj użytej heurystyki: \t"+getHeurystyka()+"\n"
+				+  heurystyka 
 				+ "Czas wykonania: \t\t"+getTime()+" sekund\n"
 				+ "Liczba operacji: \t\t"+getIterations()+"\n"
 				+ "Użyte jednostki pamięci: \t"+getMaxMemoryUsed()+"\n"
@@ -96,8 +99,8 @@ public class Statistics {
 				+ "Układ początkowy:\n"+getStartPoint().getStringRepresentation()+"\n\n"
 				+ "Najkrótsza znaleziona ścieżka: \t"+getMoves().size()+"\n"+getMoves()+"\n"
 //				+ "Wizualizacja: "
-				+"=========================================================\n";
-		return s;
-				
+//				+"=========================================================\n"
+				;
+		return s;	
 	}
 }
