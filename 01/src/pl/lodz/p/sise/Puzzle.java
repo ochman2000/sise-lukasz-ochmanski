@@ -305,5 +305,4 @@ public class Puzzle implements Comparable<Puzzle> {
 			return 0;
 	}
 
-	
 }

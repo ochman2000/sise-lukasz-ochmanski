@@ -3,6 +3,7 @@ package pl.lodz.p.sise;
 import pl.lodz.p.sise.algorithm.BFS;
 import pl.lodz.p.sise.algorithm.DFS;
 import pl.lodz.p.sise.algorithm.Dijkstra;
+import pl.lodz.p.sise.exception.NoSolutionException;
 
 public class Solver {
 
@@ -27,7 +28,11 @@ public class Solver {
 		System.out.println("=========================================================");
 		System.out.println();
 		Dijkstra dj = new Dijkstra();
-		System.out.println(dj.search());
+		try {
+			System.out.println(dj.search());
+		} catch (NoSolutionException e) {
+			System.err.println(e.getMessage());
+		}
 		
 		
 	}
