@@ -23,7 +23,7 @@ public class PuzzleGenerator {
 		generator.generateABatchOfPuzzles(4, 2, "sample/level02.txt");
 		generator.generateABatchOfPuzzles(10, 3, "sample/level03.txt");
 		generator.generateABatchOfPuzzles(24, 4, "sample/level04.txt");
-		generator.generateABatchOfPuzzles(54, 5, "sample/level05.txt"); //+10
+		generator.generateABatchOfPuzzles(54, 5, "sample/level05.txt"); //+9
 		generator.generateABatchOfPuzzles(107, 6, "sample/level06.txt");
 		generator.generateABatchOfPuzzles(100, 7, "sample/level07.txt");
 		generator.generateABatchOfPuzzles(100, 8, "sample/level08.txt");
@@ -44,7 +44,7 @@ public class PuzzleGenerator {
 		Set<Puzzle> visited = new HashSet<Puzzle>();
 		while (i < level) {
 			Puzzle b = losuj(a);
-			if (!visited.contains(b)) {
+			if (!visited.contains(b) && !b.isSolved()) {
 				visited.add(b);
 				a = b;
 				i++;

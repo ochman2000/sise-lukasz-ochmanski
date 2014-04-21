@@ -1,0 +1,4 @@
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 12, 13, 14, 11, 15]	Breadth First Search	null	10	11	0.301 MB (309,240 bytes)	0.002	2	null	[G, L]	
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 13, 14, 15, 12]	Breadth First Search	null	5	6	0.364 MB (373,376 bytes)	0.0	2	null	[L, G]	
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]	Breadth First Search	null	1829904	1829905	0.367 MB (376,216 bytes)	30.0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30sekund	null	
+[1, 2, 3, 4, 5, 6, 7, 0, 9, 10, 11, 8, 13, 14, 15, 12]	Breadth First Search	null	8	9	0.367 MB (376,136 bytes)	0.0	2	null	[G, G]	
