@@ -1,6 +1,5 @@
 package pl.lodz.p.sise.algorithm;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,9 +34,7 @@ public class BFS {
 		}
 		porządek = Ruch.values();
 		kolejka = new LinkedList<Puzzle>();
-		kolejka.add(puzzle);
 		visited = new HashSet<Puzzle>();
-		visited.add(puzzle);
 		try {
 			this.setStatistics(search(puzzle));
 		} catch (TimeoutException | NoSolutionException e) {
@@ -57,12 +54,15 @@ public class BFS {
 	}
 
 	public Statistics search(Puzzle puzzle) throws TimeoutException, NoSolutionException {
+		List<Puzzle> result = new LinkedList<Puzzle>();
 		Statistics stats = new Statistics();
 		stats.setStartPoint(puzzle);
-		Puzzle currentNode = puzzle.copy();
-		List<Ruch> result = new ArrayList<Ruch>();
+		kolejka.add(puzzle);
+		visited.add(puzzle);
+		result.add(puzzle);
 		long start = System.currentTimeMillis();
 		while (!kolejka.isEmpty()) {
+			Puzzle currentNode = kolejka.remove(0);
 			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
 				throw new TimeoutException(TIMEOUT);
 			if (DEBUG) {
@@ -71,47 +71,85 @@ public class BFS {
 				+ "\n=========================================================");
 				System.out.println(currentNode.getStringRepresentation()+"\n");
 			}
-			if (currentNode.isSolved()) {
-				stats.setAlgorytm("Breadth First Search");
-				stats.setIterations(iteracje);
-				stats.setTime((System.currentTimeMillis() - start));
-				stats.setMaxMemoryUsed(maxSize);
-				stats.setStructureType("LinkedList");
-				stats.setMemoryUnits("Węzeł");
-				stats.setMoves(result);
-				return stats;
-			}
 			Puzzle przesunięcie0 = currentNode.move(porządek[0]);
-			Puzzle przesunięcie1 = currentNode.move(porządek[1]);
-			Puzzle przesunięcie2 = currentNode.move(porządek[2]);
-			Puzzle przesunięcie3 = currentNode.move(porządek[3]);
 			if (currentNode.isAllowed(porządek[0]) && !visited.contains(przesunięcie0)) {
-				currentNode = currentNode.move(porządek[0]);
+				przesunięcie0.setPrevious(currentNode);
+				przesunięcie0.setKierunek(porządek[0]);
 				kolejka.add(przesunięcie0);
-				result.add(porządek[0]);
+				result.add(przesunięcie0);
 				visited.add(przesunięcie0);
-			} else if (currentNode.isAllowed(porządek[1]) && !visited.contains(przesunięcie1)) {
-				currentNode = currentNode.move(porządek[1]);
-				kolejka.add(przesunięcie1);
-				result.add(porządek[1]);
-				visited.add(przesunięcie1);
-			} else if (currentNode.isAllowed(porządek[2]) && !visited.contains(przesunięcie2)) {
-				currentNode = currentNode.move(porządek[2]);
-				kolejka.add(przesunięcie2);
-				result.add(porządek[2]);
-				visited.add(przesunięcie2);
-			} else if (currentNode.isAllowed(porządek[3]) && !visited.contains(przesunięcie3)) {
-				currentNode = currentNode.move(porządek[3]);
-				kolejka.add(przesunięcie3);
-				result.add(porządek[3]);
-				visited.add(przesunięcie3);
-			} else {
-				currentNode = kolejka.remove(0);
-				result.remove(result.size() - 1);
+				iteracje++;
+				if (przesunięcie0.isSolved()) {
+					stats.setAlgorytm("Breadth First Search");
+					stats.setIterations(iteracje);
+					stats.setTime((System.currentTimeMillis() - start));
+					stats.setMaxMemoryUsed(maxSize);
+					stats.setStructureType("LinkedList");
+					stats.setMemoryUnits("Węzeł");
+					stats.setMoves(backTrack(result));
+					return stats;
+				}
 			}
-			iteracje++;
-			if (kolejka.size()>maxSize)
-				maxSize=kolejka.size();
+			Puzzle przesunięcie1 = currentNode.move(porządek[1]);
+			if (currentNode.isAllowed(porządek[1]) && !visited.contains(przesunięcie1)) {
+				przesunięcie1.setPrevious(currentNode);
+				przesunięcie1.setKierunek(porządek[1]);
+				kolejka.add(przesunięcie1);
+				result.add(przesunięcie1);
+				visited.add(przesunięcie1);
+				iteracje++;
+				if (przesunięcie1.isSolved()) {
+					stats.setAlgorytm("Breadth First Search");
+					stats.setIterations(iteracje);
+					stats.setTime((System.currentTimeMillis() - start));
+					stats.setMaxMemoryUsed(maxSize);
+					stats.setStructureType("LinkedList");
+					stats.setMemoryUnits("Węzeł");
+					stats.setMoves(backTrack(result));
+					return stats;
+				}
+			}
+
+			Puzzle przesunięcie2 = currentNode.move(porządek[2]);
+			if (currentNode.isAllowed(porządek[2]) && !visited.contains(przesunięcie2)) {
+				przesunięcie2.setPrevious(currentNode);
+				przesunięcie2.setKierunek(porządek[2]);
+				kolejka.add(przesunięcie2);
+				result.add(przesunięcie2);
+				visited.add(przesunięcie2);
+				iteracje++;
+				if (przesunięcie2.isSolved()) {
+					stats.setAlgorytm("Breadth First Search");
+					stats.setIterations(iteracje);
+					stats.setTime((System.currentTimeMillis() - start));
+					stats.setMaxMemoryUsed(maxSize);
+					stats.setStructureType("LinkedList");
+					stats.setMemoryUnits("Węzeł");
+					stats.setMoves(backTrack(result));
+					return stats;
+				}
+			}
+			Puzzle przesunięcie3 = currentNode.move(porządek[3]);
+			if (currentNode.isAllowed(porządek[3]) && !visited.contains(przesunięcie3)) {
+				przesunięcie3.setPrevious(currentNode);
+				przesunięcie3.setKierunek(porządek[3]);
+				kolejka.add(przesunięcie3);
+				result.add(przesunięcie3);
+				visited.add(przesunięcie3);
+				iteracje++;
+				if (przesunięcie3.isSolved()) {
+					stats.setAlgorytm("Breadth First Search");
+					stats.setIterations(iteracje);
+					stats.setTime((System.currentTimeMillis() - start));
+					stats.setMaxMemoryUsed(maxSize);
+					stats.setStructureType("LinkedList");
+					stats.setMemoryUnits("Węzeł");
+					stats.setMoves(backTrack(result));
+					return stats;
+				}
+			}
+			if (result.size()>maxSize)
+				maxSize=result.size();
 		}
 		throw new NoSolutionException();
 	}
@@ -122,5 +160,18 @@ public class BFS {
 
 	public void setStatistics(Statistics statistics) {
 		this.statistics = statistics;
+	}
+	
+	private List<Ruch> backTrack(List<Puzzle> result) {
+		LinkedList<Ruch> ruchy = new LinkedList<Ruch>();
+		Puzzle last = result.get(result.size()-1);
+		while (last!=null) {
+			Ruch kierunek = last.getKierunek();
+			if (kierunek!=null) {
+				ruchy.addFirst(kierunek);
+			}
+			last = last.getPrevious();
+		}
+		return ruchy;
 	}
 }

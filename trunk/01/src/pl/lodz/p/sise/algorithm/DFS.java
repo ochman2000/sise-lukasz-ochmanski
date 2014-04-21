@@ -2,6 +2,7 @@ package pl.lodz.p.sise.algorithm;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
@@ -13,6 +14,7 @@ import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.NoSolutionException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
 import pl.lodz.p.sise.exception.TimeoutException;
+import pl.lodz.p.sise.structure.Fringe;
 import pl.lodz.p.sise.structure.Statistics;
 
 public class DFS {
@@ -118,5 +120,20 @@ public class DFS {
 
 	public void setStatistics(Statistics statistics) {
 		this.statistics = statistics;
+	}
+	
+	private List<Ruch> backTrack(Fringe fringe, Puzzle currentNode) {
+		LinkedList<Ruch> ruchy = new LinkedList<Ruch>();
+//		LinkedList<Puzzle> path = new LinkedList<Puzzle>();
+		Puzzle last = fringe.get(currentNode);
+		while (last!=null) {
+			Ruch kierunek = last.getKierunek();
+			if (kierunek!=null) {
+				ruchy.addFirst(kierunek);
+//				path.addFirst(last);
+			}
+			last = last.getPrevious();
+		}
+		return ruchy;
 	}
 }
