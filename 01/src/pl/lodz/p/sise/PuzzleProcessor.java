@@ -112,10 +112,10 @@ public class PuzzleProcessor {
 		}
 		if (level == 10) {
 			processor.processFile("bfs", "level10.txt");
-			processor.processFile("dijkstra", "level10.txt");
-			processor.processFile("a1", "level10.txt");
-			processor.processFile("a2", "level10.txt");
-			processor.processFile("a3", "level10.txt");
+//			processor.processFile("dijkstra", "level10.txt");
+//			processor.processFile("a1", "level10.txt");
+//			processor.processFile("a2", "level10.txt");
+//			processor.processFile("a3", "level10.txt");
 //			processor.processFile("dfs", "level10.txt");
 		}
 	}
@@ -145,7 +145,8 @@ public class PuzzleProcessor {
 						+stats.getNumberOfSteps()+"\t"
 						+stats.getFailMessage()+"\t"
 						+stats.getMoves()+"\t");
-				System.out.println(++iteracje+"\t"+stats.getStartPoint() +"\t"+stats.getMoves());
+				System.out.println(//++iteracje+"\t"+
+						stats.getStartPoint() +"\t"+stats.getMoves());
 			}			
 		} catch (IOException e) {
 			e.printStackTrace();

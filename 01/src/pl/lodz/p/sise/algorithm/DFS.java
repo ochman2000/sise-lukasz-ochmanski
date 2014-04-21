@@ -53,7 +53,7 @@ public class DFS {
 			stats.setStructureType("Stack and HashSet");
 			stats.setMemoryUnits("Węzeł");
 			this.setStatistics(stats);
-//			System.err.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
