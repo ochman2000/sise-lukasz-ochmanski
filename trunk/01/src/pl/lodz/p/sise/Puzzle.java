@@ -238,12 +238,22 @@ public class Puzzle implements Comparable<Puzzle> {
 		return hashCode;
 	}
 	
+	/**
+	 * Zwraca listę dozwolonych ruchów.
+	 * @return
+	 */
 	public List<Ruch> getNeighboors() {
 		Ruch[] porządek = Ruch.values();
 		return getNeighboors(porządek);
 	}
 	
-	public List<Ruch> getNeighboors(Ruch[] order) {
+	/**
+	 * Zwraca listę dozwolonych ruchów, wśród podanych.
+	 * Iteracja odbywa się w kolejności, w której występują w tablicy.
+	 * @param order
+	 * @return
+	 */
+	private List<Ruch> getNeighboors(Ruch[] order) {
 		ArrayList<Ruch> sąsiedzi = new ArrayList<>();
 		for (Ruch ruch : order) {
 			if (this.isAllowed(ruch))
