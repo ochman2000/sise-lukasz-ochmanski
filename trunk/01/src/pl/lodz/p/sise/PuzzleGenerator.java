@@ -19,12 +19,12 @@ public class PuzzleGenerator {
 
 	public static void main(String[] args) {
 		PuzzleGenerator generator = new PuzzleGenerator();
-		generator.generateABatchOfPuzzles(100, 1, "sample/level01.txt");
-		generator.generateABatchOfPuzzles(100, 2, "sample/level02.txt");
-		generator.generateABatchOfPuzzles(100, 3, "sample/level03.txt");
-		generator.generateABatchOfPuzzles(100, 4, "sample/level04.txt");
-		generator.generateABatchOfPuzzles(100, 5, "sample/level05.txt");
-		generator.generateABatchOfPuzzles(100, 6, "sample/level06.txt");
+		generator.generateABatchOfPuzzles(2, 1, "sample/level01.txt");
+		generator.generateABatchOfPuzzles(4, 2, "sample/level02.txt");
+		generator.generateABatchOfPuzzles(10, 3, "sample/level03.txt");
+		generator.generateABatchOfPuzzles(24, 4, "sample/level04.txt");
+		generator.generateABatchOfPuzzles(54, 5, "sample/level05.txt");
+		generator.generateABatchOfPuzzles(107, 6, "sample/level06.txt");
 		generator.generateABatchOfPuzzles(100, 7, "sample/level07.txt");
 		generator.generateABatchOfPuzzles(100, 8, "sample/level08.txt");
 		generator.generateABatchOfPuzzles(100, 9, "sample/level09.txt");
@@ -62,21 +62,21 @@ public class PuzzleGenerator {
 	public void generateABatchOfPuzzles(int amount, int level, String filename) {
 		Set<Puzzle> visited = new HashSet<Puzzle>();
 		PrintWriter out = null;
-		while (visited.size() < amount) {
-			Puzzle a = this.generate(level);
-			if (!visited.contains(a)) {
-				visited.add(a);
-				boolean append = true;
-				Path file = Paths.get(filename);
-				try {
-					Files.deleteIfExists(file);
-					out = new PrintWriter(new BufferedWriter(new FileWriter(
-							filename, append)));
+		Path file = Paths.get(filename);
+		try {
+			Files.deleteIfExists(file);
+			boolean append = true;
+			out = new PrintWriter(new BufferedWriter(new FileWriter(
+					filename, append)));
+			while (visited.size() < amount) {
+				Puzzle a = this.generate(level);
+				if (!visited.contains(a)) {
+					visited.add(a);
 					out.println(a.toString());
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		System.out.println("Układanki zapisano do pliku: " + filename);
 		out.close();
