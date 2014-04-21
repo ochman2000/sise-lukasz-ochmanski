@@ -1,5 +1,6 @@
 package pl.lodz.p.sise.structure;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,18 @@ public class Statistics {
 	public void setStartPoint(Puzzle startPoint) {
 		this.startPoint = startPoint;
 	}
+	public String getMemoryUsageFromVM() {
+		long MEGABYTE = 1024L * 1024L;
+		long KILOBYTE = 1024L;
+		Runtime runtime = Runtime.getRuntime();
+	    // Run the garbage collector
+	    runtime.gc();
+	    // Calculate the used memory
+	    long memory = runtime.totalMemory() - runtime.freeMemory();
+	    String decimal = customFormat("###,###,###,###", memory);
+	    return (""+memory/MEGABYTE+"."+memory/KILOBYTE+" MB ("
+	    		+decimal+" bytes)");
+	}
 	public List<Puzzle> getSteps() {
 		ArrayList<Puzzle> steps = new ArrayList<>();
 		List<Ruch> ruchy = this.getMoves();
@@ -116,6 +129,7 @@ public class Statistics {
 				+ "Liczba operacji: \t\t"+getIterations()+"\n"
 				+ "Użyte jednostki pamięci: \t"+getMaxMemoryUsed()+"\n"
 				+ "Obowiązująca jednostka pamięci: "+getMemoryUnits()+"\n"
+				+ "Rozmiar w pamięci: \t\t"+getMemoryUsageFromVM()+"\n"
 				+ "Użyta struktura danych: \t"+getStructureType()+"\n"
 				+  poziomTrudnosci
 				+ "Układ początkowy:\n"+getStartPoint().getStringRepresentation()+"\n\n"
@@ -143,4 +157,8 @@ public class Statistics {
 	public void setDifficultyLevel(int difficultyLevel) {
 		this.difficultyLevel = difficultyLevel;
 	}
+	static public String customFormat(String pattern, double value ) {
+	      DecimalFormat myFormatter = new DecimalFormat(pattern);
+	      return myFormatter.format(value);
+	   }
 }
