@@ -47,6 +47,7 @@ public class Statistics {
 	}
 	public String getTime() {
 		return ""+((double)time)/1000;
+//		return ""+time;
 	}
 	/**
 	 * @param time - Czas w milisekundach
