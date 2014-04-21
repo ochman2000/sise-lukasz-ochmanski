@@ -162,4 +162,10 @@ public class Statistics {
 	      DecimalFormat myFormatter = new DecimalFormat(pattern);
 	      return myFormatter.format(value);
 	   }
+	public int getNumberOfSteps() {
+		if (getMoves()!=null) {
+			return getMoves().size();
+		}
+		return 0;
+	}
 }

@@ -1,0 +1,2 @@
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12]	Breadth First Search	null	2	3	0.301 MB (309,032 bytes)	0.001	1	null	[G]	
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15]	Breadth First Search	null	1	2	0.364 MB (373,720 bytes)	0.0	1	null	[L]	

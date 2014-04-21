@@ -141,7 +141,7 @@ public class PuzzleProcessor {
 						+stats.getMaxMemoryUsed()+"\t"
 						+stats.getMemoryUsageFromVM()+"\t"
 						+stats.getTime()+"\t"
-						+stats.getMoves().size()+"\t"
+						+stats.getNumberOfSteps()+"\t"
 						+stats.getFailMessage()+"\t"
 						+stats.getMoves()+"\t");
 				System.out.println(++iteracje+"\t"+stats.getStartPoint() +"\t"+stats.getMoves());
