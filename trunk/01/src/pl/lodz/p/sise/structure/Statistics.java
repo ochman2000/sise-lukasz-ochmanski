@@ -11,6 +11,7 @@ public class Statistics {
 	private boolean success = true;
 	private String failMessage;
 	private Puzzle startPoint;
+	private int difficultyLevel;
 	private List<Ruch> moves;
 	private int iterations;
 	private long time;
@@ -94,8 +95,13 @@ public class Statistics {
 		String poziomTrudnosci = "";
 		String znalezionaSciezka = "Nie znaleziono rozwiązania.\n";
 		if (isSuccess()) {
-			poziomTrudnosci = "Poziom trudności: \t\t"+getMoves().size()+"\n";
-			znalezionaSciezka = "Najkrótsza znaleziona ścieżka: \t"+getMoves().size()+"\n"+getMoves()+"\n";
+			if (getDifficultyLevel()!=0)
+				poziomTrudnosci = "Poziom trudności: \t\t"+getDifficultyLevel()+"\n";
+			if (getMoves().size()<100)
+				znalezionaSciezka = "Najkrótsza znaleziona ścieżka: \t"+getMoves().size()+"\n"+getMoves()+"\n";
+			else
+				znalezionaSciezka = "Znaleziona ścieżka jest za długa aby ją wyświetlić. "
+				+getMoves().size();
 		}
 		else {
 			failMessage =  getFailMessage()+"\n";
@@ -130,5 +136,11 @@ public class Statistics {
 	}
 	public void setFailMessage(String failMessage) {
 		this.failMessage = failMessage;
+	}
+	public int getDifficultyLevel() {
+		return difficultyLevel;
+	}
+	public void setDifficultyLevel(int difficultyLevel) {
+		this.difficultyLevel = difficultyLevel;
 	}
 }
