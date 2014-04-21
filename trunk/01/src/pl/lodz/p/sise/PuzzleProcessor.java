@@ -24,15 +24,16 @@ public class PuzzleProcessor {
 	
 	public static void main(String[] args) {
 		PuzzleProcessor processor = new PuzzleProcessor();
-//		processor.processBatch(1);
+		processor.processBatch(1);
 		processor.processBatch(2);
-//		processor.processBatch(3);
-//		processor.processBatch(4);
-//		processor.processBatch(5);
-//		processor.processBatch(6);
-//		processor.processBatch(7);
-//		processor.processBatch(9);
-//		processor.processBatch(10);
+		processor.processBatch(3);
+		processor.processBatch(4);
+		processor.processBatch(5);
+		processor.processBatch(6);
+		processor.processBatch(7);
+		processor.processBatch(8);
+		processor.processBatch(9);
+		processor.processBatch(10);
 	}
 	
 	public void processBatch(int level) {
