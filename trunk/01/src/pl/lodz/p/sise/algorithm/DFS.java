@@ -50,7 +50,7 @@ public class DFS {
 			stats.setIterations(iteracje);
 			stats.setTime(TIMEOUT*1000);
 			stats.setMaxMemoryUsed(maxSize);
-			stats.setStructureType("Stack");
+			stats.setStructureType("Stack and HashSet");
 			stats.setMemoryUnits("Węzeł");
 			this.setStatistics(stats);
 //			System.err.println(e.getMessage());
@@ -77,7 +77,7 @@ public class DFS {
 				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
 				stats.setMaxMemoryUsed(maxSize);
-				stats.setStructureType("Stack");
+				stats.setStructureType("Stack and HashSet");
 				stats.setMemoryUnits("Węzeł");
 				stats.setMoves(result);
 				return stats;
@@ -107,8 +107,8 @@ public class DFS {
 				result.remove(result.size() - 1);
 			}
 			iteracje++;
-			if (stos.size()>maxSize)
-				maxSize=stos.size();
+			if (visited.size()>maxSize)
+				maxSize=visited.size();
 		}
 		throw new NoSolutionException();
 	}

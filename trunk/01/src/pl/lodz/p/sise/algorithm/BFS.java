@@ -21,7 +21,6 @@ public class BFS {
 	int iteracje = 0;
 	private Statistics statistics;
 	private List<Puzzle> kolejka;
-	private Set<Puzzle> visited;
 	private Puzzle puzzle;
 
 	public BFS(int[] a) {
@@ -32,7 +31,6 @@ public class BFS {
 			System.exit(1);
 		}
 		kolejka = new LinkedList<Puzzle>();
-		visited = new HashSet<Puzzle>();
 		try {
 			this.setStatistics(search(puzzle));
 		} catch (TimeoutException | NoSolutionException e) {
@@ -44,7 +42,7 @@ public class BFS {
 			stats.setIterations(iteracje);
 			stats.setTime(TIMEOUT*1000);
 			stats.setMaxMemoryUsed(maxSize);
-			stats.setStructureType("LinkedList");
+			stats.setStructureType("LinkedList and HashSet");
 			stats.setMemoryUnits("Węzeł");
 			this.setStatistics(stats);
 //			System.err.println(e.getMessage());
@@ -52,11 +50,10 @@ public class BFS {
 	}
 
 	public Statistics search(Puzzle puzzle) throws TimeoutException, NoSolutionException {
-		List<Puzzle> result = new LinkedList<Puzzle>();
+		Set<Puzzle> result = new HashSet<Puzzle>();
 		Statistics stats = new Statistics();
 		stats.setStartPoint(puzzle);
 		kolejka.add(puzzle);
-		visited.add(puzzle);
 		result.add(puzzle);
 		long start = System.currentTimeMillis();
 		while (!kolejka.isEmpty()) {
@@ -71,12 +68,11 @@ public class BFS {
 			}
 			for (Ruch kierunek : Ruch.values()) {
 				Puzzle przesunięcie0 = currentNode.move(kierunek);
-				if (currentNode.isAllowed(kierunek) && !visited.contains(przesunięcie0)) {
+				if (currentNode.isAllowed(kierunek) && !result.contains(przesunięcie0)) {
 					przesunięcie0.setPrevious(currentNode);
 					przesunięcie0.setKierunek(kierunek);
 					kolejka.add(przesunięcie0);
 					result.add(przesunięcie0);
-					visited.add(przesunięcie0);
 					iteracje++;
 					if (result.size()>maxSize)
 						maxSize=result.size();
@@ -85,9 +81,9 @@ public class BFS {
 						stats.setIterations(iteracje);
 						stats.setTime((System.currentTimeMillis() - start));
 						stats.setMaxMemoryUsed(maxSize);
-						stats.setStructureType("LinkedList");
+						stats.setStructureType("LinkedList and HashSet");
 						stats.setMemoryUnits("Węzeł");
-						stats.setMoves(backTrack(result));
+						stats.setMoves(backTrack(result, przesunięcie0));
 						return stats;
 					}
 				}
@@ -104,9 +100,8 @@ public class BFS {
 		this.statistics = statistics;
 	}
 	
-	private List<Ruch> backTrack(List<Puzzle> result) {
+	private List<Ruch> backTrack(Set<Puzzle> result, Puzzle last) {
 		LinkedList<Ruch> ruchy = new LinkedList<Ruch>();
-		Puzzle last = result.get(result.size()-1);
 		while (last!=null) {
 			Ruch kierunek = last.getKierunek();
 			if (kierunek!=null) {
