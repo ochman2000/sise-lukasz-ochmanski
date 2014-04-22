@@ -40,83 +40,83 @@ public class PuzzleProcessor {
 		PuzzleProcessor processor = new PuzzleProcessor();
 		if (level == 1) {
 			processor.processFile("bfs", "level01.txt");
-//			processor.processFile("dijkstra", "level01.txt");
-//			processor.processFile("a1", "level01.txt");
-//			processor.processFile("a2", "level01.txt");
-//			processor.processFile("a3", "level01.txt");
-//			processor.processFile("dfs", "level01.txt");
+			processor.processFile("dijkstra", "level01.txt");
+			processor.processFile("a1", "level01.txt");
+			processor.processFile("a2", "level01.txt");
+			processor.processFile("a3", "level01.txt");
+			processor.processFile("dfs", "level01.txt");
 		}
 		if (level == 2) {
 			processor.processFile("bfs", "level02.txt");
-//			processor.processFile("dijkstra", "level02.txt");
-//			processor.processFile("a1", "level02.txt");
-//			processor.processFile("a2", "level02.txt");
-//			processor.processFile("a3", "level02.txt");
-//			processor.processFile("dfs", "level02.txt");
+			processor.processFile("dijkstra", "level02.txt");
+			processor.processFile("a1", "level02.txt");
+			processor.processFile("a2", "level02.txt");
+			processor.processFile("a3", "level02.txt");
+			processor.processFile("dfs", "level02.txt");
 		}
 		if (level == 3) {
 			processor.processFile("bfs", "level03.txt");
-//			processor.processFile("dijkstra", "level03.txt");
-//			processor.processFile("a1", "level03.txt");
-//			processor.processFile("a2", "level03.txt");
-//			processor.processFile("a3", "level03.txt");
-//			processor.processFile("dfs", "level03.txt");
+			processor.processFile("dijkstra", "level03.txt");
+			processor.processFile("a1", "level03.txt");
+			processor.processFile("a2", "level03.txt");
+			processor.processFile("a3", "level03.txt");
+			processor.processFile("dfs", "level03.txt");
 		}
 		if (level == 4) {
 			processor.processFile("bfs", "level04.txt");
-//			processor.processFile("dijkstra", "level04.txt");
-//			processor.processFile("a1", "level04.txt");
-//			processor.processFile("a2", "level04.txt");
-//			processor.processFile("a3", "level04.txt");
-//			processor.processFile("dfs", "level04.txt");
+			processor.processFile("dijkstra", "level04.txt");
+			processor.processFile("a1", "level04.txt");
+			processor.processFile("a2", "level04.txt");
+			processor.processFile("a3", "level04.txt");
+			processor.processFile("dfs", "level04.txt");
 		}
 		if (level == 5) {
 			processor.processFile("bfs", "level05.txt");
-//			processor.processFile("dijkstra", "level05.txt");
-//			processor.processFile("a1", "level05.txt");
-//			processor.processFile("a2", "level05.txt");
-//			processor.processFile("a3", "level05.txt");
-//			processor.processFile("dfs", "level05.txt");
+			processor.processFile("dijkstra", "level05.txt");
+			processor.processFile("a1", "level05.txt");
+			processor.processFile("a2", "level05.txt");
+			processor.processFile("a3", "level05.txt");
+			processor.processFile("dfs", "level05.txt");
 		}
 		if (level == 6) {
 			processor.processFile("bfs", "level06.txt");
-//			processor.processFile("dijkstra", "level06.txt");
-//			processor.processFile("a1", "level06.txt");
-//			processor.processFile("a2", "level06.txt");
-//			processor.processFile("a3", "level06.txt");
-//			processor.processFile("dfs", "level06.txt");
+			processor.processFile("dijkstra", "level06.txt");
+			processor.processFile("a1", "level06.txt");
+			processor.processFile("a2", "level06.txt");
+			processor.processFile("a3", "level06.txt");
+			processor.processFile("dfs", "level06.txt");
 		}
 		if (level == 7) {
 			processor.processFile("bfs", "level07.txt");
-//			processor.processFile("dijkstra", "level07.txt");
-//			processor.processFile("a1", "level07.txt");
-//			processor.processFile("a2", "level07.txt");
-//			processor.processFile("a3", "level07.txt");
-//			processor.processFile("dfs", "level07.txt");
+			processor.processFile("dijkstra", "level07.txt");
+			processor.processFile("a1", "level07.txt");
+			processor.processFile("a2", "level07.txt");
+			processor.processFile("a3", "level07.txt");
+			processor.processFile("dfs", "level07.txt");
 		}
 		if (level == 8) {
 			processor.processFile("bfs", "level08.txt");
-//			processor.processFile("dijkstra", "level08.txt");
-//			processor.processFile("a1", "level08.txt");
-//			processor.processFile("a2", "level08.txt");
-//			processor.processFile("a3", "level08.txt");
-//			processor.processFile("dfs", "level08.txt");
+			processor.processFile("dijkstra", "level08.txt");
+			processor.processFile("a1", "level08.txt");
+			processor.processFile("a2", "level08.txt");
+			processor.processFile("a3", "level08.txt");
+			processor.processFile("dfs", "level08.txt");
 		}
 		if (level == 9) {
 			processor.processFile("bfs", "level09.txt");
-//			processor.processFile("dijkstra", "level09.txt");
-//			processor.processFile("a1", "level09.txt");
-//			processor.processFile("a2", "level09.txt");
-//			processor.processFile("a3", "level09.txt");
-//			processor.processFile("dfs", "level09.txt");
+			processor.processFile("dijkstra", "level09.txt");
+			processor.processFile("a1", "level09.txt");
+			processor.processFile("a2", "level09.txt");
+			processor.processFile("a3", "level09.txt");
+			processor.processFile("dfs", "level09.txt");
 		}
 		if (level == 10) {
 			processor.processFile("bfs", "level10.txt");
-//			processor.processFile("dijkstra", "level10.txt");
-//			processor.processFile("a1", "level10.txt");
-//			processor.processFile("a2", "level10.txt");
-//			processor.processFile("a3", "level10.txt");
-//			processor.processFile("dfs", "level10.txt");
+			processor.processFile("dijkstra", "level10.txt");
+			processor.processFile("a1", "level10.txt");
+			processor.processFile("a2", "level10.txt");
+			processor.processFile("a3", "level10.txt");
+			processor.processFile("dfs", "level10.txt");
 		}
 	}
 	
@@ -145,8 +145,7 @@ public class PuzzleProcessor {
 						+stats.getNumberOfSteps()+"\t"
 						+stats.getFailMessage()+"\t"
 						+stats.getMoves()+"\t");
-				System.out.println(//++iteracje+"\t"+
-						stats.getStartPoint() +"\t"+stats.getMoves());
+				System.out.println(++iteracje+"\t"+stats.getAlgorytm()+"\t"+stats.getStartPoint() +"\t"+stats.getMoves());
 			}			
 		} catch (IOException e) {
 			e.printStackTrace();
