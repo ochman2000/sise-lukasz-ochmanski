@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import pl.lodz.p.sise.Heuristics;
 import pl.lodz.p.sise.Puzzle;
 
 /**
@@ -20,6 +21,7 @@ public class Fringe extends HashMap<Puzzle, Puzzle> {
 	private static final long serialVersionUID = -4814714233235085597L;
 	
 	public Fringe() {
+		
 	}
 
 	/**
@@ -30,13 +32,23 @@ public class Fringe extends HashMap<Puzzle, Puzzle> {
 	 * bo za chwile może wrzucę tu Fibbonacci Heap i mój wysiłek pójdzie na marne.
 	 * @return
 	 */
-	public Puzzle getLowestCostPath() {
+	public Puzzle getLowestCostPath(Heuristics heurystyka) {
 		Puzzle ret = null;
 		int shortestDistance = Integer.MAX_VALUE;
 		Iterator<Entry<Puzzle, Puzzle>> it = this.entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<Puzzle, Puzzle> e = it.next();
 			int vertexDistance = e.getValue().getMinDistance();
+			switch (heurystyka) {
+				case HammingDistance: vertexDistance+=e.getKey().getManhattanDistance(); 
+					break;
+				case ManhattanDistance: vertexDistance+=e.getKey().getHammingDistance();
+					break;
+				case SumOfManhattanDistances: vertexDistance+=e.getKey().getTotalManhattanDistances();
+					break;
+				default:
+					break;
+			}
 			if (vertexDistance<shortestDistance && !e.getKey().wasVisited()) {
 				shortestDistance=vertexDistance;
 				ret = e.getKey();

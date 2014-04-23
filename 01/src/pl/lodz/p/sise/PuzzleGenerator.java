@@ -29,6 +29,13 @@ public class PuzzleGenerator {
 		generator.generateABatchOfPuzzles(120, 8, "sample/level08.txt");
 		generator.generateABatchOfPuzzles(120, 9, "sample/level09.txt");
 		generator.generateABatchOfPuzzles(120, 10, "sample/level10.txt");
+		generator.generateABatchOfPuzzles(10, 20, "sample/level20.txt");
+		generator.generateABatchOfPuzzles(10, 30, "sample/level30.txt");
+		generator.generateABatchOfPuzzles(10, 40, "sample/level40.txt");
+		generator.generateABatchOfPuzzles(10, 50, "sample/level50.txt");
+		generator.generateABatchOfPuzzles(10, 60, "sample/level60.txt");
+		generator.generateABatchOfPuzzles(10, 70, "sample/level70.txt");
+		generator.generateABatchOfPuzzles(10, 80, "sample/level80.txt");
 	}
 
 	public Puzzle generate(int level) {

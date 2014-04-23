@@ -3,6 +3,7 @@ package pl.lodz.p.sise.algorithm;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.lodz.p.sise.Heuristics;
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
@@ -52,6 +53,7 @@ public class AGwiazdka2 {
 		Statistics stats = new Statistics();
 		Fringe fringe = new Fringe();
 		long start = System.currentTimeMillis();
+		long nanostart = System.nanoTime();
 		
 		puzzle.setMinDistance(0);
 		fringe.put(puzzle); 	//WSKAŻ MIEJSCE STARTU
@@ -60,7 +62,7 @@ public class AGwiazdka2 {
 			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
 				throw new TimeoutException(TIMEOUT);
 			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
-			Puzzle currentNode = fringe.getLowestCostPath();
+			Puzzle currentNode = fringe.getLowestCostPath(Heuristics.HammingDistance);
 			if (currentNode==null)
 				throw new NoSolutionException();
 			if (currentNode.isSolved()) {
@@ -69,6 +71,7 @@ public class AGwiazdka2 {
 				stats.setHeurystyka("Odległość Hamminga");
 				stats.setIterations(iteracje);
 				stats.setTime((System.currentTimeMillis() - start));
+				stats.setNano(System.nanoTime() - nanostart);
 				stats.setMaxMemoryUsed(fringe.size());
 				stats.setStructureType("HashMap");
 				stats.setMemoryUnits("Węzeł");
@@ -85,7 +88,7 @@ public class AGwiazdka2 {
 				Puzzle p = fringe.get(węzeł);
 				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NIESKOŃCZONOŚĆ
 				int staraOdległość = p==null ? Integer.MAX_VALUE : węzeł.getMinDistance();
-				int nowaOdległość = węzeł.getHammingDistance() + pokonanyDystans;
+				int nowaOdległość = 1 + pokonanyDystans;
 				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
 				if (nowaOdległość < staraOdległość) {
 					węzeł.setPrevious(currentNode);

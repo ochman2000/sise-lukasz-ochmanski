@@ -34,6 +34,13 @@ public class PuzzleProcessor {
 		processor.processBatch(8);
 		processor.processBatch(9);
 		processor.processBatch(10);
+//		processor.processFile("a1", "level20.txt");
+//		processor.processFile("a1", "level30.txt");
+//		processor.processFile("a1", "level40.txt");
+//		processor.processFile("a1", "level50.txt");
+//		processor.processFile("a1", "level60.txt");
+//		processor.processFile("a1", "level70.txt");
+//		processor.processFile("a1", "level80.txt");
 	}
 	
 	public void processBatch(int level) {
@@ -142,6 +149,7 @@ public class PuzzleProcessor {
 						+stats.getMaxMemoryUsed()+"\t"
 						+stats.getMemoryUsageFromVM()+"\t"
 						+stats.getTime()+"\t"
+						+stats.getNanoTime()+"\t"
 						+stats.getNumberOfSteps()+"\t"
 						+stats.getFailMessage()+"\t"
 						+stats.getMoves()+"\t");
