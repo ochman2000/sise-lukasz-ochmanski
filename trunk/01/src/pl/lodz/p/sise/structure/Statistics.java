@@ -16,6 +16,7 @@ public class Statistics {
 	private List<Ruch> moves;
 	private int iterations;
 	private long time;
+	private long nanotime;
 	private int maxMemoryUsed;
 	private String memoryUnits;
 	private String structureType;
@@ -167,5 +168,11 @@ public class Statistics {
 			return getMoves().size();
 		}
 		return 0;
+	}
+	public void setNano(long l) {
+		this.nanotime = l;
+	}
+	public String getNanoTime() {
+		return ""+this.nanotime;
 	}
 }

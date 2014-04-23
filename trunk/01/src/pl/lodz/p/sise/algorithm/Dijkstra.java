@@ -3,6 +3,7 @@ package pl.lodz.p.sise.algorithm;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.lodz.p.sise.Heuristics;
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
@@ -55,13 +56,12 @@ public class Dijkstra {
 		
 		puzzle.setMinDistance(0);
 		fringe.put(puzzle); 	//WSKAŻ MIEJSCE STARTU
-		int waga=1; 			//TRZEBA TO SKASOWAĆ PRZY UŻYWANIU HEURYSTYKI
 		stats.setStartPoint(puzzle);
 		while (!fringe.isEmpty()) {
 			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
 				throw new TimeoutException(TIMEOUT);
 			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
-			Puzzle currentNode = fringe.getLowestCostPath();
+			Puzzle currentNode = fringe.getLowestCostPath(Heuristics.None);
 			if (currentNode==null)
 				throw new NoSolutionException();
 			if (currentNode.isSolved()) {
@@ -86,7 +86,7 @@ public class Dijkstra {
 				Puzzle p = fringe.get(węzeł);
 				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NIESKOŃCZONOŚĆ
 				int staraOdległość = p==null ? Integer.MAX_VALUE : węzeł.getMinDistance();
-				int nowaOdległość = waga + pokonanyDystans;
+				int nowaOdległość = 1 + pokonanyDystans;
 				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
 				if (nowaOdległość < staraOdległość) {
 					węzeł.setPrevious(currentNode);
