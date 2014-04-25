@@ -104,6 +104,15 @@ public class Statistics {
 		return steps;
 	}
 	
+	public void visualizeSolution() {
+		int i=0;
+		for (Puzzle step : this.getSteps()) {
+			System.out.println("========="+ ++i +"============");
+			System.out.println(step.getStringRepresentation());
+			System.out.println("======================");
+		}
+	}
+	
 	public String toString() {
 		String heurystyka = "";
 		String failMessage = "";
