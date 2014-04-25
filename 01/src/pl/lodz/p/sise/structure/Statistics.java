@@ -116,7 +116,7 @@ public class Statistics {
 				znalezionaSciezka = "Najkrótsza znaleziona ścieżka: \t"+getMoves().size()+"\n"+getMoves()+"\n";
 			else
 				znalezionaSciezka = "Znaleziona ścieżka jest za długa aby ją wyświetlić. "
-				+getMoves().size();
+				+getMoves().size()+" kroków.";
 		}
 		else {
 			failMessage =  getFailMessage()+"\n";
