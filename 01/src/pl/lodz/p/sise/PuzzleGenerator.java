@@ -90,9 +90,11 @@ public class PuzzleGenerator {
 				if (!created.contains(a)) {
 //					BFS solution = new BFS(a.getPlansza());
 					AGwiazdka1 solution = new AGwiazdka1(a.getPlansza());
-					if (solution.getStatistics().getSteps().size()==level) {
-						created.add(a);
-						out.println(a.toString());
+					if (solution.getStatistics().isSuccess()) {
+						if (solution.getStatistics().getMoves().size()==level) {
+							created.add(a);
+							out.println(a.toString());
+						}
 					}
 				}
 			}
