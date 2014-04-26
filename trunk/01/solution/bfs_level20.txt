@@ -1,0 +1,20 @@
+[0, 2, 6, 4, 3, 10, 11, 7, 1, 5, 15, 8, 9, 13, 14, 12]	Breadth First Search	null	2162893	2162894	0.370 MB (379,808 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[1, 3, 6, 4, 10, 9, 2, 11, 13, 5, 8, 7, 14, 0, 15, 12]	Breadth First Search	null	2022795	2022796	0.370 MB (379,704 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[2, 6, 3, 4, 1, 11, 10, 7, 5, 14, 15, 8, 9, 13, 12, 0]	Breadth First Search	null	180247	180248	0.371 MB (379,960 bytes)	2.054	0	16	null	[P, D, D, P, D, P, G, G, G, L, D, L, D, L, G, G]	
+[1, 2, 8, 3, 9, 5, 4, 12, 13, 10, 6, 15, 14, 11, 7, 0]	Breadth First Search	null	879290	879291	0.371 MB (380,008 bytes)	11.003	0	18	null	[D, D, P, G, G, P, P, D, D, L, L, D, L, G, P, G, G, L]	
+[5, 1, 2, 3, 9, 6, 7, 4, 13, 11, 0, 10, 14, 12, 15, 8]	Breadth First Search	null	2224417	2224418	0.370 MB (379,704 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[0, 1, 3, 4, 11, 2, 7, 8, 10, 5, 14, 12, 9, 6, 13, 15]	Breadth First Search	null	2071656	2071657	0.370 MB (379,704 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[0, 1, 2, 4, 5, 9, 3, 8, 10, 11, 7, 12, 13, 6, 14, 15]	Breadth First Search	null	2105730	2105731	0.371 MB (380,056 bytes)	28.449	0	20	null	[L, L, G, G, P, D, P, G, L, G, P, D, D, L, G, P, G, L, L, L]	
+[1, 7, 8, 2, 6, 3, 11, 4, 5, 9, 0, 12, 13, 10, 14, 15]	Breadth First Search	null	362191	362192	0.371 MB (379,960 bytes)	4.44	0	16	null	[D, D, L, G, P, P, D, L, G, P, P, G, L, G, L, L]	
+[2, 5, 6, 4, 9, 0, 1, 7, 10, 3, 11, 8, 13, 14, 15, 12]	Breadth First Search	null	1239443	1239444	0.371 MB (380,008 bytes)	17.108	0	18	null	[G, P, D, D, L, G, L, D, P, G, P, D, L, G, L, L, G, G]	
+[0, 1, 2, 6, 9, 5, 4, 3, 13, 10, 7, 8, 14, 11, 15, 12]	Breadth First Search	null	1836669	1836670	0.371 MB (380,056 bytes)	30.144	0	20	null	[L, L, L, G, P, D, L, G, G, G, P, P, P, D, D, L, L, G, G, L]	
+[6, 5, 3, 4, 2, 1, 7, 8, 0, 13, 10, 11, 14, 9, 15, 12]	Breadth First Search	null	2233851	2233852	0.372 MB (381,504 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[2, 7, 3, 4, 5, 1, 10, 8, 13, 15, 0, 11, 6, 9, 14, 12]	Breadth First Search	null	2080400	2080401	0.372 MB (381,504 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[1, 2, 12, 3, 5, 8, 10, 4, 14, 6, 7, 15, 9, 13, 11, 0]	Breadth First Search	null	2204984	2204985	0.372 MB (381,504 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[1, 2, 3, 4, 6, 10, 7, 8, 0, 9, 11, 15, 13, 5, 12, 14]	Breadth First Search	null	624333	624334	0.372 MB (381,808 bytes)	7.903	0	18	null	[L, L, G, L, D, P, P, G, P, D, L, D, P, G, G, L, L, L]	
+[0, 2, 4, 8, 1, 5, 7, 3, 9, 13, 11, 12, 10, 6, 14, 15]	Breadth First Search	null	874852	874853	0.372 MB (381,808 bytes)	11.247	0	18	null	[G, G, L, G, P, D, D, L, L, L, D, P, G, P, G, G, L, L]	
+[0, 2, 10, 3, 1, 9, 6, 4, 5, 14, 7, 8, 13, 15, 12, 11]	Breadth First Search	null	1882874	1882875	0.372 MB (381,856 bytes)	28.393	0	20	null	[L, L, L, G, G, G, P, P, D, D, D, P, G, G, L, D, L, G, L, G]	
+[2, 1, 3, 4, 9, 6, 5, 7, 10, 11, 0, 8, 13, 14, 15, 12]	Breadth First Search	null	2317227	2317228	0.372 MB (381,504 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[1, 6, 2, 8, 9, 5, 11, 0, 13, 3, 4, 7, 14, 10, 15, 12]	Breadth First Search	null	2126165	2126166	0.372 MB (381,504 bytes)	30.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 30 sekund	null	
+[0, 1, 2, 4, 5, 6, 3, 8, 9, 10, 7, 15, 13, 14, 12, 11]	Breadth First Search	null	2091	2092	0.372 MB (381,616 bytes)	0.023	0	10	null	[L, L, G, G, L, G, P, D, L, G]	
+[1, 2, 8, 3, 5, 6, 4, 15, 10, 12, 0, 7, 9, 13, 14, 11]	Breadth First Search	null	833873	833874	0.372 MB (381,808 bytes)	11.387	0	18	null	[L, D, P, D, L, G, P, G, P, P, G, L, L, L, D, P, G, L]	
