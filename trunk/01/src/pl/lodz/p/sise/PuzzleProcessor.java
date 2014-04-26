@@ -24,16 +24,33 @@ public class PuzzleProcessor {
 	
 	public static void main(String[] args) {
 		PuzzleProcessor processor = new PuzzleProcessor();
-		processor.processBatch(1);
-		processor.processBatch(2);
-		processor.processBatch(3);
-		processor.processBatch(4);
-		processor.processBatch(5);
-		processor.processBatch(6);
-		processor.processBatch(7);
-		processor.processBatch(8);
-		processor.processBatch(9);
-		processor.processBatch(10);
+//		processor.processBatch(1);
+//		processor.processBatch(2);
+//		processor.processBatch(3);
+//		processor.processBatch(4);
+//		processor.processBatch(5);
+//		processor.processBatch(6);
+//		processor.processBatch(7);
+//		processor.processBatch(8);
+//		processor.processBatch(9);
+//		processor.processBatch(10);
+//		processor.processFile("bfs", "level11.txt");
+//		processor.processFile("bfs", "level12.txt");
+//		processor.processFile("bfs", "level13.txt");
+//		processor.processFile("bfs", "level14.txt");
+//		processor.processFile("bfs", "level16.txt");
+//		processor.processFile("bfs", "level17.txt");
+//		processor.processFile("bfs", "level18.txt");
+		processor.processFile("bfs", "level19.txt");
+		processor.processFile("bfs", "level20.txt");
+		processor.processFile("bfs", "level21.txt");
+		processor.processFile("bfs", "level22.txt");
+		processor.processFile("bfs", "level23.txt");
+		processor.processFile("bfs", "level24.txt");
+		processor.processFile("bfs", "level25.txt");
+		
+		
+		
 //		processor.processFile("a1", "level20.txt");
 //		processor.processFile("a1", "level30.txt");
 //		processor.processFile("a1", "level40.txt");

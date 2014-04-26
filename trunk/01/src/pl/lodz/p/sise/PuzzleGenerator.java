@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import pl.lodz.p.sise.algorithm.AGwiazdka1;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
@@ -23,27 +24,27 @@ public class PuzzleGenerator {
 //		generator.generateABatchOfPuzzles(4, 2, "sample/level02.txt");
 //		generator.generateABatchOfPuzzles(10, 3, "sample/level03.txt");
 //		generator.generateABatchOfPuzzles(24, 4, "sample/level04.txt");
-//		generator.generateABatchOfPuzzles(54, 5, "sample/level05.txt");
-//		generator.generateABatchOfPuzzles(107, 6, "sample/level06.txt");
-//		generator.generateABatchOfPuzzles(120, 7, "sample/level07.txt");
-//		generator.generateABatchOfPuzzles(120, 8, "sample/level08.txt");
-//		generator.generateABatchOfPuzzles(120, 9, "sample/level09.txt");
-//		generator.generateABatchOfPuzzles(120, 10, "sample/level10.txt");
-		generator.generateABatchOfPuzzles(120, 11, "sample/level11.txt");
-		generator.generateABatchOfPuzzles(120, 12, "sample/level12.txt");
-		generator.generateABatchOfPuzzles(120, 13, "sample/level13.txt");
-		generator.generateABatchOfPuzzles(120, 14, "sample/level14.txt");
-		generator.generateABatchOfPuzzles(120, 15, "sample/level15.txt");
-		generator.generateABatchOfPuzzles(120, 16, "sample/level16.txt");
-		generator.generateABatchOfPuzzles(120, 17, "sample/level17.txt");
-		generator.generateABatchOfPuzzles(120, 18, "sample/level18.txt");
-		generator.generateABatchOfPuzzles(120, 19, "sample/level19.txt");
-		generator.generateABatchOfPuzzles(120, 20, "sample/level20.txt");
-		generator.generateABatchOfPuzzles(120, 21, "sample/level21.txt");
-		generator.generateABatchOfPuzzles(120, 22, "sample/level22.txt");
-		generator.generateABatchOfPuzzles(120, 23, "sample/level23.txt");
-		generator.generateABatchOfPuzzles(120, 24, "sample/level24.txt");
-		generator.generateABatchOfPuzzles(120, 25, "sample/level25.txt");
+		generator.generateABatchOfPuzzles(20, 5, "sample/level05.txt");
+		generator.generateABatchOfPuzzles(20, 6, "sample/level06.txt");
+		generator.generateABatchOfPuzzles(20, 7, "sample/level07.txt");
+		generator.generateABatchOfPuzzles(20, 8, "sample/level08.txt");
+		generator.generateABatchOfPuzzles(20, 9, "sample/level09.txt");
+		generator.generateABatchOfPuzzles(20, 10, "sample/level10.txt");
+		generator.generateABatchOfPuzzles(20, 11, "sample/level11.txt");
+		generator.generateABatchOfPuzzles(20, 12, "sample/level12.txt");
+		generator.generateABatchOfPuzzles(20, 13, "sample/level13.txt");
+		generator.generateABatchOfPuzzles(20, 14, "sample/level14.txt");
+		generator.generateABatchOfPuzzles(20, 15, "sample/level15.txt");
+		generator.generateABatchOfPuzzles(20, 16, "sample/level16.txt");
+		generator.generateABatchOfPuzzles(20, 17, "sample/level17.txt");
+		generator.generateABatchOfPuzzles(20, 18, "sample/level18.txt");
+		generator.generateABatchOfPuzzles(20, 19, "sample/level19.txt");
+		generator.generateABatchOfPuzzles(20, 20, "sample/level20.txt");
+		generator.generateABatchOfPuzzles(20, 21, "sample/level21.txt");
+		generator.generateABatchOfPuzzles(20, 22, "sample/level22.txt");
+		generator.generateABatchOfPuzzles(20, 23, "sample/level23.txt");
+		generator.generateABatchOfPuzzles(20, 24, "sample/level24.txt");
+		generator.generateABatchOfPuzzles(20, 25, "sample/level25.txt");
 		
 	}
 
@@ -76,7 +77,7 @@ public class PuzzleGenerator {
 	}
 
 	public void generateABatchOfPuzzles(int amount, int level, String filename) {
-		Set<Puzzle> visited = new HashSet<Puzzle>();
+		Set<Puzzle> created = new HashSet<Puzzle>();
 		PrintWriter out = null;
 		Path file = Paths.get(filename);
 		try {
@@ -84,11 +85,15 @@ public class PuzzleGenerator {
 			boolean append = true;
 			out = new PrintWriter(new BufferedWriter(new FileWriter(
 					filename, append)));
-			while (visited.size() < amount) {
+			while (created.size() < amount) {
 				Puzzle a = this.generate(level);
-				if (!visited.contains(a)) {
-					visited.add(a);
-					out.println(a.toString());
+				if (!created.contains(a)) {
+//					BFS solution = new BFS(a.getPlansza());
+					AGwiazdka1 solution = new AGwiazdka1(a.getPlansza());
+					if (solution.getStatistics().getSteps().size()==level) {
+						created.add(a);
+						out.println(a.toString());
+					}
 				}
 			}
 		} catch (IOException e) {
