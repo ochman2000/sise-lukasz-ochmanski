@@ -1,4 +1,0 @@
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15]	Shortest Path A*	Odległość taksówkowa	6	6	0.368 MB (377,520 bytes)	0.001	335100	2	null	[L, L]	
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 13, 14, 15, 12]	Shortest Path A*	Odległość taksówkowa	7	7	0.368 MB (377,384 bytes)	0.001	365919	2	null	[L, G]	
-[1, 2, 3, 4, 5, 6, 7, 0, 9, 10, 11, 8, 13, 14, 15, 12]	Shortest Path A*	Odległość taksówkowa	6	6	0.368 MB (377,384 bytes)	0.001	414839	2	null	[G, G]	
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 12, 13, 14, 11, 15]	Shortest Path A*	Odległość taksówkowa	7	7	0.368 MB (377,384 bytes)	0.001	405055	2	null	[G, L]	

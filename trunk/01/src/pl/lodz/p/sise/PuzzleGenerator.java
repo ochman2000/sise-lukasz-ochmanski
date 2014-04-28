@@ -20,10 +20,10 @@ public class PuzzleGenerator {
 
 	public static void main(String[] args) {
 		PuzzleGenerator generator = new PuzzleGenerator();
-//		generator.generateABatchOfPuzzles(2, 1, "sample/level01.txt");
-//		generator.generateABatchOfPuzzles(4, 2, "sample/level02.txt");
-//		generator.generateABatchOfPuzzles(10, 3, "sample/level03.txt");
-//		generator.generateABatchOfPuzzles(24, 4, "sample/level04.txt");
+		generator.generateABatchOfPuzzles(2, 1, "sample/level01.txt");
+		generator.generateABatchOfPuzzles(4, 2, "sample/level02.txt");
+		generator.generateABatchOfPuzzles(10, 3, "sample/level03.txt");
+		generator.generateABatchOfPuzzles(24, 4, "sample/level04.txt");
 		generator.generateABatchOfPuzzles(20, 5, "sample/level05.txt");
 		generator.generateABatchOfPuzzles(20, 6, "sample/level06.txt");
 		generator.generateABatchOfPuzzles(20, 7, "sample/level07.txt");
