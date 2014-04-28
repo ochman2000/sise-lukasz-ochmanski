@@ -40,7 +40,7 @@ public class PuzzleProcessor {
 		processor.processFile("a1", "level"+str+".txt", level);
 		processor.processFile("a2", "level"+str+".txt", level);
 		processor.processFile("a3", "level"+str+".txt", level);
-//		processor.processFile("dfs", "level"+str+".txt", level);
+		processor.processFile("dfs", "level"+str+".txt", level);
 		
 	}
 	

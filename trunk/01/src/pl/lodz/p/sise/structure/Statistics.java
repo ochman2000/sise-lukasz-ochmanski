@@ -99,6 +99,7 @@ public class Statistics {
 	    runtime.gc();
 	    // Calculate the used memory
 	    long memory = runtime.totalMemory() - runtime.freeMemory() - initialMemoryUsed;
+	    memory = (memory<0) ? 0 : memory;
 	    String decimal = customFormat("###,###,###,###", memory);
 	    return (""+memory/MEGABYTE+"."+memory/KILOBYTE+" MB ("
 	    		+decimal+" bytes)");

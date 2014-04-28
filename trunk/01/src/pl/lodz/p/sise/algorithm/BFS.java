@@ -31,10 +31,10 @@ public class BFS {
 			System.exit(1);
 		}
 		kolejka = new LinkedList<Puzzle>();
+		Statistics stats = new Statistics();
 		try {
 			this.setStatistics(search(puzzle));
 		} catch (TimeoutException | NoSolutionException e) {
-			Statistics stats = new Statistics();
 			stats.setSuccess(false);
 			stats.setFailMessage(e.getMessage());
 			stats.setStartPoint(puzzle);

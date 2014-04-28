@@ -30,10 +30,10 @@ public class AGwiazdka3 {
 			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
+		Statistics stats = new Statistics();
 		try {
 			this.setStatistics(this.search(puzzle));
 		} catch (NoSolutionException | TimeoutException e) {
-			Statistics stats = new Statistics();
 			stats.setSuccess(false);
 			stats.setFailMessage(e.getMessage());
 			stats.setStartPoint(puzzle);
