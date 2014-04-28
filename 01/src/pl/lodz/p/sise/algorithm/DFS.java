@@ -39,10 +39,10 @@ public class DFS {
 		stos.push(puzzle);
 		visited = new HashSet<Puzzle>();
 		visited.add(puzzle);
+		Statistics stats = new Statistics();
 		try {
 			this.setStatistics(this.search(puzzle));
 		} catch (TimeoutException | NoSolutionException e) {
-			Statistics stats = new Statistics();
 			stats.setSuccess(false);
 			stats.setFailMessage(e.getMessage());
 			stats.setStartPoint(puzzle);
