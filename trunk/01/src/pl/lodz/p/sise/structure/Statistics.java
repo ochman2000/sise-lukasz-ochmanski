@@ -8,7 +8,16 @@ import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 
 public class Statistics {
+	
+	public Statistics() {
+		Runtime runtime = Runtime.getRuntime();
+	    // Run the garbage collector
+	    runtime.gc();
+	    // Calculate the used memory
+	    initialMemoryUsed = runtime.totalMemory() - runtime.freeMemory();
+	}
 
+	private long initialMemoryUsed;
 	private boolean success = true;
 	private String failMessage;
 	private Puzzle startPoint;
@@ -47,6 +56,8 @@ public class Statistics {
 		this.iterations = iterations;
 	}
 	public String getTime() {
+		if (time==0.0)
+			return "0.000";
 		return ""+((double)time)/1000;
 //		return ""+time;
 	}
@@ -87,7 +98,7 @@ public class Statistics {
 	    // Run the garbage collector
 	    runtime.gc();
 	    // Calculate the used memory
-	    long memory = runtime.totalMemory() - runtime.freeMemory();
+	    long memory = runtime.totalMemory() - runtime.freeMemory() - initialMemoryUsed;
 	    String decimal = customFormat("###,###,###,###", memory);
 	    return (""+memory/MEGABYTE+"."+memory/KILOBYTE+" MB ("
 	    		+decimal+" bytes)");
@@ -183,5 +194,16 @@ public class Statistics {
 	}
 	public String getNanoTime() {
 		return ""+this.nanotime;
+	}
+	public String getZnalezionaSciezka() {
+		String znalezionaSciezka = "";
+		if (this.getNumberOfSteps()>100) {
+			znalezionaSciezka = "Znaleziona ścieżka jest za długa aby ją wyświetlić. "
+			+this.getMoves().size()+" kroków.";
+		}
+		else {
+			znalezionaSciezka = ""+this.getMoves();
+		}
+		return znalezionaSciezka;
 	}
 }

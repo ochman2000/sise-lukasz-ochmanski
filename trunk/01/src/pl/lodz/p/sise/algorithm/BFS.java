@@ -15,7 +15,7 @@ import pl.lodz.p.sise.exception.TimeoutException;
 import pl.lodz.p.sise.structure.Statistics;
 
 public class BFS {
-	private static final int TIMEOUT = 240;
+	private static final int TIMEOUT = 120;
 	public static boolean DEBUG = false;
 	int maxSize=0;
 	int iteracje = 0;
