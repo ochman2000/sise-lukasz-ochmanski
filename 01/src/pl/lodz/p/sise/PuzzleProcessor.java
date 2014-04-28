@@ -24,127 +24,27 @@ public class PuzzleProcessor {
 	
 	public static void main(String[] args) {
 		PuzzleProcessor processor = new PuzzleProcessor();
-//		processor.processBatch(1);
-//		processor.processBatch(2);
-//		processor.processBatch(3);
-//		processor.processBatch(4);
-//		processor.processBatch(5);
-//		processor.processBatch(6);
-//		processor.processBatch(7);
-//		processor.processBatch(8);
-//		processor.processBatch(9);
-//		processor.processBatch(10);
-//		processor.processFile("bfs", "level11.txt");
-//		processor.processFile("bfs", "level12.txt");
-//		processor.processFile("bfs", "level13.txt");
-//		processor.processFile("bfs", "level14.txt");
-//		processor.processFile("bfs", "level16.txt");
-//		processor.processFile("bfs", "level17.txt");
-//		processor.processFile("bfs", "level18.txt");
-		processor.processFile("bfs", "level19.txt");
-		processor.processFile("bfs", "level20.txt");
-		processor.processFile("bfs", "level21.txt");
-		processor.processFile("bfs", "level22.txt");
-		processor.processFile("bfs", "level23.txt");
-		processor.processFile("bfs", "level24.txt");
-		processor.processFile("bfs", "level25.txt");
 		
-		
-		
-//		processor.processFile("a1", "level20.txt");
-//		processor.processFile("a1", "level30.txt");
-//		processor.processFile("a1", "level40.txt");
-//		processor.processFile("a1", "level50.txt");
-//		processor.processFile("a1", "level60.txt");
-//		processor.processFile("a1", "level70.txt");
-//		processor.processFile("a1", "level80.txt");
+		for (int i=1; i<=25; i++) {
+			processor.processBatch(i);
+		}
 	}
 	
 	public void processBatch(int level) {
 		PuzzleProcessor processor = new PuzzleProcessor();
-		if (level == 1) {
-			processor.processFile("bfs", "level01.txt");
-			processor.processFile("dijkstra", "level01.txt");
-			processor.processFile("a1", "level01.txt");
-			processor.processFile("a2", "level01.txt");
-			processor.processFile("a3", "level01.txt");
-			processor.processFile("dfs", "level01.txt");
-		}
-		if (level == 2) {
-			processor.processFile("bfs", "level02.txt");
-			processor.processFile("dijkstra", "level02.txt");
-			processor.processFile("a1", "level02.txt");
-			processor.processFile("a2", "level02.txt");
-			processor.processFile("a3", "level02.txt");
-			processor.processFile("dfs", "level02.txt");
-		}
-		if (level == 3) {
-			processor.processFile("bfs", "level03.txt");
-			processor.processFile("dijkstra", "level03.txt");
-			processor.processFile("a1", "level03.txt");
-			processor.processFile("a2", "level03.txt");
-			processor.processFile("a3", "level03.txt");
-			processor.processFile("dfs", "level03.txt");
-		}
-		if (level == 4) {
-			processor.processFile("bfs", "level04.txt");
-			processor.processFile("dijkstra", "level04.txt");
-			processor.processFile("a1", "level04.txt");
-			processor.processFile("a2", "level04.txt");
-			processor.processFile("a3", "level04.txt");
-			processor.processFile("dfs", "level04.txt");
-		}
-		if (level == 5) {
-			processor.processFile("bfs", "level05.txt");
-			processor.processFile("dijkstra", "level05.txt");
-			processor.processFile("a1", "level05.txt");
-			processor.processFile("a2", "level05.txt");
-			processor.processFile("a3", "level05.txt");
-			processor.processFile("dfs", "level05.txt");
-		}
-		if (level == 6) {
-			processor.processFile("bfs", "level06.txt");
-			processor.processFile("dijkstra", "level06.txt");
-			processor.processFile("a1", "level06.txt");
-			processor.processFile("a2", "level06.txt");
-			processor.processFile("a3", "level06.txt");
-			processor.processFile("dfs", "level06.txt");
-		}
-		if (level == 7) {
-			processor.processFile("bfs", "level07.txt");
-			processor.processFile("dijkstra", "level07.txt");
-			processor.processFile("a1", "level07.txt");
-			processor.processFile("a2", "level07.txt");
-			processor.processFile("a3", "level07.txt");
-			processor.processFile("dfs", "level07.txt");
-		}
-		if (level == 8) {
-			processor.processFile("bfs", "level08.txt");
-			processor.processFile("dijkstra", "level08.txt");
-			processor.processFile("a1", "level08.txt");
-			processor.processFile("a2", "level08.txt");
-			processor.processFile("a3", "level08.txt");
-			processor.processFile("dfs", "level08.txt");
-		}
-		if (level == 9) {
-			processor.processFile("bfs", "level09.txt");
-			processor.processFile("dijkstra", "level09.txt");
-			processor.processFile("a1", "level09.txt");
-			processor.processFile("a2", "level09.txt");
-			processor.processFile("a3", "level09.txt");
-			processor.processFile("dfs", "level09.txt");
-		}
-		if (level == 10) {
-			processor.processFile("bfs", "level10.txt");
-			processor.processFile("dijkstra", "level10.txt");
-			processor.processFile("a1", "level10.txt");
-			processor.processFile("a2", "level10.txt");
-			processor.processFile("a3", "level10.txt");
-			processor.processFile("dfs", "level10.txt");
-		}
+		
+		String str = (level<10) ? "0"+level : ""+level;
+		
+		processor.processFile("bfs", "level"+str+".txt", level);
+		processor.processFile("dijkstra", "level"+str+".txt", level);
+		processor.processFile("a1", "level"+str+".txt", level);
+		processor.processFile("a2", "level"+str+".txt", level);
+		processor.processFile("a3", "level"+str+".txt", level);
+//		processor.processFile("dfs", "level"+str+".txt", level);
+		
 	}
 	
-	public void processFile(String algorytm, String sourceFile) {
+	public void processFile(String algorytm, String sourceFile, int level) {
 		List<String> lista	= null;
 		Path path = Paths.get("sample/"+sourceFile);
 		PrintWriter out = null;
@@ -159,7 +59,8 @@ public class PuzzleProcessor {
 			for (String puzzle : lista) {
 				int[]a = stringToArray(puzzle);
 				Statistics stats = process(a, algorytm);
-				out.println(stats.getStartPoint()+"\t"
+				out.println(level+"\t"
+						+stats.getStartPoint()+"\t"
 						+stats.getAlgorytm()+"\t"
 						+stats.getHeurystyka()+"\t"
 						+stats.getIterations()+"\t"
@@ -169,7 +70,7 @@ public class PuzzleProcessor {
 						+stats.getNanoTime()+"\t"
 						+stats.getNumberOfSteps()+"\t"
 						+stats.getFailMessage()+"\t"
-						+stats.getMoves()+"\t");
+						+stats.getZnalezionaSciezka()+"\t");
 				System.out.println(++iteracje+"\t"+stats.getAlgorytm()+"\t"+stats.getStartPoint() +"\t"+stats.getMoves());
 			}			
 		} catch (IOException e) {
