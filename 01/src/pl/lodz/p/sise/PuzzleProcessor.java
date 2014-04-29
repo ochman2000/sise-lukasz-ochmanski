@@ -36,11 +36,11 @@ public class PuzzleProcessor {
 		String str = (level<10) ? "0"+level : ""+level;
 		
 		processor.processFile("bfs", "level"+str+".txt", level);
-		processor.processFile("dijkstra", "level"+str+".txt", level);
+//		processor.processFile("dijkstra", "level"+str+".txt", level);
 		processor.processFile("a1", "level"+str+".txt", level);
 		processor.processFile("a2", "level"+str+".txt", level);
-		processor.processFile("a3", "level"+str+".txt", level);
-		processor.processFile("dfs", "level"+str+".txt", level);
+//		processor.processFile("a3", "level"+str+".txt", level);
+//		processor.processFile("dfs", "level"+str+".txt", level);
 		
 	}
 	

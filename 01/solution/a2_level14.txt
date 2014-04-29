@@ -1,0 +1,20 @@
+14	[2, 3, 4, 8, 1, 5, 7, 0, 14, 6, 10, 12, 9, 13, 11, 15]	Shortest Path A*	Odległość Hamminga	57459	36487	0.0 MB (376 bytes)	115.643	115643339665	14	null	[D, P, P, P, G, L, G, P, G, L, D, L, G, L]	
+14	[1, 2, 0, 3, 9, 5, 7, 4, 6, 14, 10, 8, 13, 15, 12, 11]	Shortest Path A*	Odległość Hamminga	58261	37051	0.0 MB (512 bytes)	119.729	119729671079	14	null	[L, G, G, G, P, P, D, P, D, L, G, L, L, G]	
+14	[1, 2, 4, 8, 9, 5, 6, 3, 0, 13, 7, 12, 14, 10, 11, 15]	Shortest Path A*	Odległość Hamminga	57179	36394	0.0 MB (512 bytes)	113.047	113047706917	14	null	[L, G, P, D, D, L, L, L, D, P, G, G, G, L]	
+14	[2, 6, 4, 8, 1, 0, 7, 3, 5, 9, 10, 11, 13, 14, 15, 12]	Shortest Path A*	Odległość Hamminga	59443	38062	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[1, 3, 4, 8, 5, 0, 2, 7, 9, 6, 10, 15, 13, 14, 12, 11]	Shortest Path A*	Odległość Hamminga	59460	38033	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[5, 1, 2, 3, 9, 6, 8, 4, 13, 7, 0, 11, 14, 10, 15, 12]	Shortest Path A*	Odległość Hamminga	59642	38051	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[1, 2, 3, 4, 9, 5, 6, 7, 13, 14, 10, 8, 11, 0, 15, 12]	Shortest Path A*	Odległość Hamminga	57203	36300	0.0 MB (512 bytes)	112.712	112712484144	14	null	[P, D, D, L, L, L, G, G, P, P, D, L, G, L]	
+14	[1, 2, 3, 4, 5, 6, 15, 7, 13, 9, 12, 8, 10, 0, 14, 11]	Shortest Path A*	Odległość Hamminga	58540	37131	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[2, 6, 3, 4, 5, 1, 7, 8, 0, 13, 11, 12, 10, 9, 14, 15]	Shortest Path A*	Odległość Hamminga	57881	36869	0.0 MB (512 bytes)	116.42	116419689859	14	null	[D, L, D, P, G, G, L, G, P, D, L, G, L, L]	
+14	[1, 2, 4, 8, 5, 6, 7, 3, 9, 14, 0, 10, 13, 11, 15, 12]	Shortest Path A*	Odległość Hamminga	59211	37742	0.0 MB (0 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[1, 3, 4, 8, 5, 2, 12, 0, 9, 6, 7, 15, 13, 14, 10, 11]	Shortest Path A*	Odległość Hamminga	57425	36448	0.0 MB (512 bytes)	115.264	115264893460	14	null	[P, G, G, L, D, D, D, P, P, G, G, L, G, L]	
+14	[1, 2, 6, 4, 5, 7, 3, 8, 0, 10, 11, 12, 9, 13, 14, 15]	Shortest Path A*	Odległość Hamminga	57365	36515	0.0 MB (512 bytes)	114.204	114203734622	14	null	[D, D, L, L, G, P, D, P, G, G, G, L, L, L]	
+14	[2, 9, 3, 4, 1, 5, 7, 8, 6, 10, 11, 12, 13, 0, 14, 15]	Shortest Path A*	Odległość Hamminga	56810	36095	0.0 MB (512 bytes)	111.565	111564643628	14	null	[D, D, D, P, G, G, L, D, P, G, L, G, L, L]	
+14	[0, 1, 2, 3, 5, 6, 15, 4, 9, 10, 8, 7, 13, 14, 12, 11]	Shortest Path A*	Odległość Hamminga	46618	29772	0.0 MB (512 bytes)	74.755	74755320133	14	null	[L, L, L, G, G, P, D, L, G, G, P, D, L, G]	
+14	[1, 2, 3, 4, 5, 7, 12, 8, 11, 6, 0, 15, 9, 13, 10, 14]	Shortest Path A*	Odległość Hamminga	59447	37890	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[1, 2, 0, 3, 5, 10, 11, 4, 9, 8, 6, 7, 13, 14, 15, 12]	Shortest Path A*	Odległość Hamminga	58981	37538	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[5, 1, 3, 4, 9, 2, 7, 8, 13, 6, 0, 11, 10, 14, 15, 12]	Shortest Path A*	Odległość Hamminga	59475	37922	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[5, 1, 2, 3, 9, 7, 8, 4, 0, 6, 15, 11, 13, 10, 14, 12]	Shortest Path A*	Odległość Hamminga	58766	37403	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[1, 6, 2, 3, 5, 0, 7, 4, 9, 10, 11, 12, 13, 14, 8, 15]	Shortest Path A*	Odległość Hamminga	59313	38001	0.0 MB (384 bytes)	120.0	0	0	Przekroczony dozwolony czas dokonywania obliczeń: 120 sekund	null	
+14	[0, 2, 8, 3, 1, 5, 6, 4, 9, 10, 7, 15, 13, 14, 12, 11]	Shortest Path A*	Odległość Hamminga	45467	29051	0.0 MB (512 bytes)	70.753	70752777779	14	null	[G, L, L, D, L, G, P, G, G, L, D, P, G, L]	
