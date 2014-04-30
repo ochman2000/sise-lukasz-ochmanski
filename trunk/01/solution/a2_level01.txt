@@ -1,2 +1,2 @@
-1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15]	Shortest Path A*	Odległość Hamminga	3	4	0.0 MB (280 bytes)	0.001	329230	1	null	[L]	
-1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12]	Shortest Path A*	Odległość Hamminga	3	4	0.0 MB (200 bytes)	0.000	208398	1	null	[G]	
+1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15]	Shortest Path A*	Odległość Hamminga	3	4	0.0 MB (8 bytes)	0.000	308682	1	null	[L]	
+1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12]	Shortest Path A*	Odległość Hamminga	3	4	0.0 MB (200 bytes)	0.000	311129	1	null	[G]	

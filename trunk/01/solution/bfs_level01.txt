@@ -1,2 +1,2 @@
-1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15]	Breadth First Search	null	3	4	0.2 MB (2,320 bytes)	0.002	0	1	null	[L]	
-1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12]	Breadth First Search	null	2	3	0.0 MB (32 bytes)	0.000	0	1	null	[G]	
+1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15]	Breadth First Search	null	2	3	0.2 MB (2,320 bytes)	0.001	0	1	null	[L]	
+1	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12]	Breadth First Search	null	1	2	0.0 MB (0 bytes)	0.000	0	1	null	[G]	
