@@ -314,9 +314,4 @@ public class Puzzle implements Comparable<Puzzle> {
 		else
 			return 0;
 	}
-		
-	public int[] getPlansza() {
-		return this.plansza;
-	}
-
 }
