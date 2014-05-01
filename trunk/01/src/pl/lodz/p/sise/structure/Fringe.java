@@ -2,6 +2,7 @@ package pl.lodz.p.sise.structure;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import pl.lodz.p.sise.Heuristics;
@@ -19,9 +20,10 @@ public class Fringe extends HashMap<Puzzle, Puzzle> {
 	 * 
 	 */
 	private static final long serialVersionUID = -4814714233235085597L;
+	private Map<Puzzle, Puzzle> settled;
 	
 	public Fringe() {
-		
+		settled = new HashMap<Puzzle, Puzzle>();
 	}
 
 	/**
@@ -40,9 +42,9 @@ public class Fringe extends HashMap<Puzzle, Puzzle> {
 			Entry<Puzzle, Puzzle> e = it.next();
 			int vertexDistance = e.getValue().getMinDistance();
 			switch (heurystyka) {
-				case HammingDistance: vertexDistance+=e.getKey().getManhattanDistance(); 
+				case ManhattanDistance: vertexDistance+=e.getKey().getManhattanDistance(); 
 					break;
-				case ManhattanDistance: vertexDistance+=e.getKey().getHammingDistance();
+				case HammingDistance: vertexDistance+=e.getKey().getHammingDistance();
 					break;
 				case SumOfManhattanDistances: vertexDistance+=e.getKey().getTotalManhattanDistances();
 					break;
@@ -56,6 +58,7 @@ public class Fringe extends HashMap<Puzzle, Puzzle> {
 		}
 		if (ret!=null)
 			ret.setVisited();
+			settled.put(ret, ret);
 		return ret;
 	}
 	
