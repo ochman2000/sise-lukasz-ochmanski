@@ -87,7 +87,7 @@ public class AGwiazdka3 {
 				Puzzle węzeł = currentNode.move(kierunek);
 				Puzzle p = fringe.get(węzeł);
 				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NIESKOŃCZONOŚĆ
-				int staraOdległość = p==null ? Integer.MAX_VALUE : węzeł.getMinDistance();
+				int staraOdległość = p==null ? Integer.MAX_VALUE : p.getMinDistance();
 				int nowaOdległość = 1 + pokonanyDystans;
 				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
 				if (nowaOdległość < staraOdległość) {
