@@ -78,29 +78,25 @@ public class Dijkstra {
 			}
 			//ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
 			int pokonanyDystans = currentNode.getMinDistance();
+			int nowaOdległość = 1 + pokonanyDystans;
 			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
 			List<Ruch> sąsiedzi = currentNode.getNeighboors();
 			//NASTEPNIE PRZELICZ ODLEGŁOŚCI DLA KAŻDEGO SĄSIADA I DODAJ DO FRINGE'A
 			for (Ruch kierunek : sąsiedzi) {
 				Puzzle węzeł = currentNode.move(kierunek);
-				Puzzle p = fringe.get(węzeł);
-				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NIESKOŃCZONOŚĆ
-				int staraOdległość = p==null ? Integer.MAX_VALUE : węzeł.getMinDistance();
-				int nowaOdległość = 1 + pokonanyDystans;
-				//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD TEJ POPRZEDNIEJ
-				if (nowaOdległość < staraOdległość) {
-					węzeł.setPrevious(currentNode);
+				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NOWĄ ODLEGŁOŚĆ
+				if (!fringe.containsKey(węzeł)) {
 					węzeł.setMinDistance(nowaOdległość);
-					węzeł.setKierunek(kierunek);
-					fringe.put(węzeł);
-					if (DEBUG) {
-						System.out.println("Iteracje: "+ iteracje + "\t Fringe: "+ fringe.size()
-						+ "\t Czas: "+ (System.currentTimeMillis() - start)/1000 + " sekund"
-						+ "\t\t Wartość heurystyczna: "+nowaOdległość
-						+ "\n=========================================================");
-						System.out.println(węzeł.getStringRepresentation()+"\n");
+				}
+				else {
+					//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD ISTNIEJĄCEJ
+					if (nowaOdległość < fringe.get(węzeł).getMinDistance()) {
+						węzeł.setMinDistance(nowaOdległość);
 					}
 				}
+				węzeł.setPrevious(currentNode);
+				węzeł.setKierunek(kierunek);
+				fringe.put(węzeł);
 				iteracje++;
 				maxSize=fringe.size();
 			}
