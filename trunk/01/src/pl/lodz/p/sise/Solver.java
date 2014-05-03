@@ -5,7 +5,6 @@ import pl.lodz.p.sise.algorithm.AGwiazdka2;
 import pl.lodz.p.sise.algorithm.AGwiazdka3;
 import pl.lodz.p.sise.algorithm.BFS;
 import pl.lodz.p.sise.algorithm.DFS;
-import pl.lodz.p.sise.algorithm.Dijkstra;
 
 public class Solver {
 
@@ -17,13 +16,15 @@ public class Solver {
 //		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12 };
 //		int[] t_a = { 0, 6, 3, 4, 2, 1, 7, 8, 5, 10, 11, 12, 9, 13, 14, 15 };
 //		int[] t_a = { 0, 2, 3, 4, 1, 6, 7, 8, 5, 13, 10, 11, 14, 9, 15, 12 };
-		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 12, 13, 14, 11, 15 };
+//		int[] t_a = { 1, 2, 4, 8, 5, 6, 3, 11, 9, 10, 7, 0, 13, 14, 15, 12 };
+		int[] t_a = { 5, 3, 0, 8, 2, 6, 4, 7, 9, 10, 1, 12, 13, 14, 11, 15 };
+//		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 12, 13, 14, 11, 15 };
 		
 		if (args.length>0) {
 			if (args.length!=17) {
 				System.out.println("Wymagany format: [algorytm] [indeksy odzielone spacjami]\n"
 						+ "np. bfs 0 2 3 4 1 6 7 8 5 13 10 11 14 9 15 12");
-				System.out.println("algorytmy do wyboru: bfs, dfs, dijkstra, a1, a2, a3, all");
+				System.out.println("algorytmy do wyboru: bfs, dfs, a1, a2, a3, all");
 				System.exit(-1);
 			}
 			int start = 1;
@@ -34,7 +35,7 @@ public class Solver {
 				} catch (NumberFormatException e) {
 					System.out.println("Wymagany format: [algorytm] [indeksy odzielone spacjami]\n"
 							+ "np. bfs 0 2 3 4 1 6 7 8 5 13 10 11 14 9 15 12");
-					System.out.println("algorytmy do wyboru: bfs, dfs, dijkstra, a1, a2, a3, all");
+					System.out.println("algorytmy do wyboru: bfs, dfs, a1, a2, a3, all");
 					System.exit(-1);
 				}
 			}
@@ -50,12 +51,6 @@ public class Solver {
 				System.out.println("BFS\t Trwa obliczanie...");
 				BFS bfs = new BFS(t_a);
 				System.out.println(bfs.getStatistics());
-			}
-				break;
-			case "dijkstra": {
-				System.out.println("Dijkstra\t Trwa obliczanie...");
-				Dijkstra dj = new Dijkstra(t_a);
-				System.out.println(dj.getStatistics());
 			}
 				break;
 			case "a1": {
@@ -84,7 +79,7 @@ public class Solver {
 				System.out.println("Nieznany algorytm");
 				System.out.println("Wymagany format: [algorytm] [indeksy odzielone spacjami]\n"
 						+ "np. bfs 0 2 3 4 1 6 7 8 5 13 10 11 14 9 15 12");
-				System.out.println("algorytmy do wyboru: bfs, dfs, dijkstra, a1, a2, a3, all");
+				System.out.println("algorytmy do wyboru: bfs, dfs, a1, a2, a3, all");
 				System.exit(-1);
 			}
 				break;
@@ -98,9 +93,9 @@ public class Solver {
 	
 	public static void wszystkie(int[] t_a) {
 
-		System.out.println("Dijkstra\t Trwa obliczanie...");
-		Dijkstra dj = new Dijkstra(t_a);
-		System.out.println(dj.getStatistics());
+//		System.out.println("Dijkstra\t Trwa obliczanie...");
+//		Dijkstra dj = new Dijkstra(t_a);
+//		System.out.println(dj.getStatistics());
 		
 		System.out.println("A* Odległość taksówkowa\t Trwa obliczanie...");
 		AGwiazdka1 ag1 = new AGwiazdka1(t_a);
