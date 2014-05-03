@@ -1,9 +1,9 @@
 package pl.lodz.p.sise.algorithm;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import pl.lodz.p.sise.Heuristics;
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
 import pl.lodz.p.sise.exception.NoSolutionException;
@@ -12,7 +12,7 @@ import pl.lodz.p.sise.structure.Statistics;
 
 public class Dijkstra {
 	@SuppressWarnings("unused")
-	private String STRUKTURA_DANYCH = "HashMap / FibonacciHeap";
+	private String STRUKTURA_DANYCH = "HashMap / PriorityQueue";
 	@SuppressWarnings("unused")
 	private String OPIS_HEURYSTYKI = "Każda krawędź ma wagę 1";
 	@SuppressWarnings("unused")
@@ -26,12 +26,14 @@ public class Dijkstra {
 	public Dijkstra() {
 	}
 	
-	public Statistics search(Puzzle puzzle, Heuristics heuristics) throws NoSolutionException {
-		Fringe fringe = new Fringe();
+	public Statistics search(Puzzle puzzle, Comparator<Puzzle> arg1)
+			throws NoSolutionException {
+		
+		Fringe fringe = new Fringe(arg1);
 		long start = System.currentTimeMillis();
 
 		puzzle.setMinDistance(0);
-		fringe.enqueue(puzzle, heuristics);
+		fringe.enqueue(puzzle);
 		// WSKAŻ MIEJSCE STARTU
 		getStatistics().setStartPoint(puzzle);
 		while (!fringe.isEmpty()) {
@@ -44,7 +46,7 @@ public class Dijkstra {
 				return getStatistics();
 			}
 			// ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
-			Puzzle currentNode = fringe.getLowestCostPath(heuristics);
+			Puzzle currentNode = fringe.getLowestCostPath();
 			if (currentNode == null)
 				throw new NoSolutionException();
 			// ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
@@ -57,38 +59,22 @@ public class Dijkstra {
 				Puzzle sąsiad = currentNode.move(kierunek);
 				sąsiad.setPrevious(currentNode);
 				sąsiad.setKierunek(kierunek);
-				if (currentNode.isSolved()) {
+				sąsiad.setMinDistance(nowaOdległość);
+				if (sąsiad.isSolved()) {
 					getStatistics().setSuccess(true);
 					getStatistics().setIterations(iteracje);
 					getStatistics().setTime((System.currentTimeMillis() - start));
 					getStatistics().setMaxMemoryUsed(fringe.size());
-					getStatistics().setMoves(backTrack(currentNode));
+					getStatistics().setMoves(backTrack(sąsiad));
 					return getStatistics();
-				}
-				if (fringe.wasSettled(sąsiad) && fringe.contains(sąsiad))
-				{
-					System.err.println("Data corrupted.");
 				}
 				if (!fringe.wasSettled(sąsiad)) {
 					// JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO
 					// WĘZŁA WSTAW/UAKTUALNIJ NOWĄ ODLEGŁOŚĆ
-					sąsiad.setMinDistance(nowaOdległość);
-					if (fringe.contains(sąsiad)) {
-						fringe.decreaseKey(sąsiad, heuristics);
-//						System.out.println("Key decreased to heurystyka plus: "+nowaOdległość);
-					} else {
-						fringe.enqueue(sąsiad, heuristics);
-					}
+					fringe.enqueue(sąsiad);
 				}
 				iteracje++;
 				maxSize = fringe.size();
-//				System.out.println(maxSize);
-//				System.out.println(fringe.odwiedzoneWezly());
-				if (fringe.isEmpty()){
-					System.out.println(fringe.size());
-					System.out.println(fringe.odwiedzoneWezly());
-					System.out.println("Fringe is empty: "+fringe.isEmpty());
-				}
 			}
 		}
 		getStatistics().setSuccess(false);

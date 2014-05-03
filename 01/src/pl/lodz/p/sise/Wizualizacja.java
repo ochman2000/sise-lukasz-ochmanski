@@ -14,7 +14,8 @@ public class Wizualizacja {
 //		int[] t_a = { 1, 2, 3, 4, 5, 6, 0, 8, 9, 10, 7, 11, 13, 14, 15, 12 };
 //		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 13, 14, 15, 12 };
 //		int[] t_a = { 0, 6, 3, 4, 2, 1, 7, 8, 5, 10, 11, 12, 9, 13, 14, 15 };
-		int[] t_a = { 0, 2, 3, 4, 1, 6, 7, 8, 5, 13, 10, 11, 14, 9, 15, 12 };
+//		int[] t_a = { 0, 2, 3, 4, 1, 6, 7, 8, 5, 13, 10, 11, 14, 9, 15, 12 };
+		int[] t_a = { 3, 7, 5, 10, 1, 4, 15, 8, 0, 9, 2, 11, 13, 6, 14, 12 };
 		
 		if (args.length>0) {
 			if (args.length!=17) {
@@ -24,7 +25,7 @@ public class Wizualizacja {
 				System.exit(-1);
 			}
 			int start = 1;
-			int end = start+15;
+			int end = start+16;
 			for (int i=start; i<end; i++) {
 				try {
 					t_a[i-start]=Integer.parseInt(args[i]);

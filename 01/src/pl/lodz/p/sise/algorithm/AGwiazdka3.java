@@ -1,30 +1,29 @@
 package pl.lodz.p.sise.algorithm;
 
-import pl.lodz.p.sise.Heuristics;
+import java.util.Comparator;
+
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.NoSolutionException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
-import pl.lodz.p.sise.exception.TimeoutException;
 import pl.lodz.p.sise.structure.Statistics;
 
 public class AGwiazdka3 {
 	private static final String STRUKTURA_DANYCH = "HashMap / FibonacciHeap";
 	private static final String OPIS_HEURYSTYKI = "Suma odległości taksówkowych";
 	private static final String NAZWA_ALGORYTMU = "Shortest Path A*";
-	private static final int TIMEOUT = 120;
 	public static boolean DEBUG = false;
-	private int iteracje = 0;
-	private int maxSize=0;
 	private Statistics stats;
 
 	public AGwiazdka3(int[] a) {
 		Puzzle puzzle = null;
 		try {
 			puzzle = new Puzzle(a);
-		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
-			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
+		} catch (IllegalPuzzleException | DuplicatelPuzzleException
+				| PuzzleFormatException e) {
+			System.err.println(e.getMessage()
+					+ "\nDziałanie programu przerwane.");
 			System.exit(1);
 		}
 		Dijkstra dijkstra = new Dijkstra();
@@ -36,13 +35,28 @@ public class AGwiazdka3 {
 		stats.setMemoryUnits("Węzeł");
 		dijkstra.setStatistics(stats);
 		try {
-			stats = dijkstra.search(puzzle, Heuristics.SumOfManhattanDistances);
+			stats = dijkstra.search(puzzle, new PuzzleComparator3());
 		} catch (NoSolutionException e) {
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
 	public Statistics getStatistics() {
 		return this.stats;
+	}
+
+	private class PuzzleComparator3 implements Comparator<Puzzle> {
+
+		@Override
+		public int compare(Puzzle o1, Puzzle o2) {
+			if (o1.getMinDistance() + o1.getTotalManhattanDistances() < o2
+					.getMinDistance() + o2.getTotalManhattanDistances()) {
+				return -1;
+			} else if (o1.getMinDistance() + o1.getTotalManhattanDistances() > o2
+					.getMinDistance() + o2.getTotalManhattanDistances()) {
+				return 1;
+			} else
+				return 0;
+		}
 	}
 }

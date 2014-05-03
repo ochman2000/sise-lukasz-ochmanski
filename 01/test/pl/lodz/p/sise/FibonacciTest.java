@@ -26,14 +26,14 @@ public class FibonacciTest {
 			e.printStackTrace();
 		}
 		
-		Fringe p	 = new Fringe();
-		start.setMinDistance(0);
-		p.enqueue(start, Heuristics.None);
-		
-		if (!p.contains(second))
-			p.enqueue(second, 1.0);
-		else
-			System.out.println("Już tam jest.");
+//		Fringe p	 = new Fringe();
+//		start.setMinDistance(0);
+//		p.enqueue(start, Heuristics.None);
+//		
+//		if (!p.contains(second))
+//			p.enqueue(second, 1.0);
+//		else
+//			System.out.println("Już tam jest.");
 
 	}
 
