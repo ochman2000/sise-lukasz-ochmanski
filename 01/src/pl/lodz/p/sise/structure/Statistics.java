@@ -18,7 +18,7 @@ public class Statistics {
 	}
 
 	private long initialMemoryUsed;
-	private boolean success = true;
+	private boolean success = false;
 	private String failMessage;
 	private Puzzle startPoint;
 	private int difficultyLevel;

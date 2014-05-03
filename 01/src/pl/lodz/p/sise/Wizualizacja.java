@@ -5,7 +5,6 @@ import pl.lodz.p.sise.algorithm.AGwiazdka2;
 import pl.lodz.p.sise.algorithm.AGwiazdka3;
 import pl.lodz.p.sise.algorithm.BFS;
 import pl.lodz.p.sise.algorithm.DFS;
-import pl.lodz.p.sise.algorithm.Dijkstra;
 
 public class Wizualizacja {
 
@@ -21,7 +20,7 @@ public class Wizualizacja {
 			if (args.length!=17) {
 				System.out.println("Wymagany format: [algorytm] [indeksy odzielone spacjami]\n"
 						+ "np. bfs 0 2 3 4 1 6 7 8 5 13 10 11 14 9 15 12");
-				System.out.println("algorytmy do wyboru: bfs, dfs, dijkstra, a1, a2, a3, all");
+				System.out.println("algorytmy do wyboru: bfs, dfs, a1, a2, a3, all");
 				System.exit(-1);
 			}
 			int start = 1;
@@ -32,7 +31,7 @@ public class Wizualizacja {
 				} catch (NumberFormatException e) {
 					System.out.println("Wymagany format: [algorytm] [indeksy odzielone spacjami]\n"
 							+ "np. bfs 0 2 3 4 1 6 7 8 5 13 10 11 14 9 15 12");
-					System.out.println("algorytmy do wyboru: bfs, dfs, dijkstra, a1, a2, a3, all");
+					System.out.println("algorytmy do wyboru: bfs, dfs, a1, a2, a3, all");
 					System.exit(-1);
 				}
 			}
@@ -49,12 +48,12 @@ public class Wizualizacja {
 					bfs.getStatistics().visualizeSolution();
 					break;
 				}
-				case "dijkstra": {
-					System.out.println("Dijkstra\t Trwa obliczanie...");
-					Dijkstra dj = new Dijkstra(t_a);
-					dj.getStatistics().visualizeSolution();
-					break;
-				}
+//				case "dijkstra": {
+//					System.out.println("Dijkstra\t Trwa obliczanie...");
+//					Dijkstra dj = new Dijkstra(t_a);
+//					dj.getStatistics().visualizeSolution();
+//					break;
+//				}
 				case "a1": {
 					System.out.println("A* Odległość taksówkowa\t Trwa obliczanie...");
 					AGwiazdka1 ag1 = new AGwiazdka1(t_a);
@@ -81,7 +80,7 @@ public class Wizualizacja {
 					System.out.println("Nieznany algorytm");
 					System.out.println("Wymagany format: [algorytm] [indeksy odzielone spacjami]\n"
 							+ "np. bfs 0 2 3 4 1 6 7 8 5 13 10 11 14 9 15 12");
-					System.out.println("algorytmy do wyboru: bfs, dfs, dijkstra, a1, a2, a3, all");
+					System.out.println("algorytmy do wyboru: bfs, dfs, a1, a2, a3, all");
 					System.exit(-1);
 					break;
 				}
@@ -95,9 +94,9 @@ public class Wizualizacja {
 	
 	public static void wszystkie(int[] t_a) {
 
-		System.out.println("Dijkstra\t Trwa obliczanie...");
-		Dijkstra dj = new Dijkstra(t_a);
-		dj.getStatistics().visualizeSolution();
+//		System.out.println("Dijkstra\t Trwa obliczanie...");
+//		Dijkstra dj = new Dijkstra(t_a);
+//		dj.getStatistics().visualizeSolution();
 		
 		System.out.println("A* Odległość taksówkowa\t Trwa obliczanie...");
 		AGwiazdka1 ag1 = new AGwiazdka1(t_a);

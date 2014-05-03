@@ -15,7 +15,6 @@ import pl.lodz.p.sise.algorithm.AGwiazdka2;
 import pl.lodz.p.sise.algorithm.AGwiazdka3;
 import pl.lodz.p.sise.algorithm.BFS;
 import pl.lodz.p.sise.algorithm.DFS;
-import pl.lodz.p.sise.algorithm.Dijkstra;
 import pl.lodz.p.sise.structure.Statistics;
 
 public class PuzzleProcessor {
@@ -35,11 +34,11 @@ public class PuzzleProcessor {
 		
 		String str = (level<10) ? "0"+level : ""+level;
 		
-		processor.processFile("bfs", "level"+str+".txt", level);
+//		processor.processFile("bfs", "level"+str+".txt", level);
 //		processor.processFile("dijkstra", "level"+str+".txt", level);
-		processor.processFile("a1", "level"+str+".txt", level);
+//		processor.processFile("a1", "level"+str+".txt", level);
 		processor.processFile("a2", "level"+str+".txt", level);
-//		processor.processFile("a3", "level"+str+".txt", level);
+		processor.processFile("a3", "level"+str+".txt", level);
 //		processor.processFile("dfs", "level"+str+".txt", level);
 		
 	}
@@ -81,9 +80,9 @@ public class PuzzleProcessor {
 	
 	public Statistics process(int[] t_a, String algorytm) {
 		switch (algorytm.toLowerCase()) {
-		case "dijkstra":			
-			Dijkstra dj = new Dijkstra(t_a);
-			return dj.getStatistics();
+//		case "dijkstra":			
+//			Dijkstra dj = new Dijkstra(t_a);
+//			return dj.getStatistics();
 		case "bfs":
 			BFS bfs = new BFS(t_a);
 			return bfs.getStatistics();

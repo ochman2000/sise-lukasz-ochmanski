@@ -262,23 +262,6 @@ public class Puzzle implements Comparable<Puzzle> {
 		return sąsiedzi;
 	}
 	
-	/**
-	 * Zaznacza, że dany węzeł był już odwiedzony.
-	 * @param node
-	 */
-	public void setVisited() {
-		visited = true;
-	}
-	
-	/**
-	 * Sprawdza, czy podany węzeł był już odwiedzony.
-	 * @param node
-	 * @return
-	 */
-	public boolean wasVisited() {
-		return visited;
-	}
-	
 	public void setPrevious(Puzzle node) {
 		this.previous = node;
 	}

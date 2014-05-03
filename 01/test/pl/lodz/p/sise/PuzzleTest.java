@@ -1,6 +1,6 @@
 package pl.lodz.p.sise;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
@@ -9,7 +9,6 @@ import org.junit.Test;
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
-import pl.lodz.p.sise.structure.Fringe;
 
 public class PuzzleTest {
 
@@ -640,26 +639,5 @@ public class PuzzleTest {
 		int h = p.getTotalManhattanDistances();
 		assertTrue(""+h, 4==h);
 	}
-	
-	@Test
-	public void test41() {
-		int[] a = {1,2,3,4,5,6,7,8,9,10,11,12,13,0,14,15};
-		int[] b = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0};
-		Puzzle p = null;
-		Puzzle q = null;
-		try {
-			p = new Puzzle(a);
-			q = new Puzzle(b);
-		} catch (IllegalPuzzleException | DuplicatelPuzzleException
-				| PuzzleFormatException e) {
-			System.err.println(e.getMessage()+"\nDziałanie programu przerwane.");
-			System.exit(1);
-		}
-		Fringe fringe = new Fringe();
-		fringe.put(p);
-		Puzzle z = fringe.get(q);
-		assertTrue(z==null);
-	}
-	
 	
 }

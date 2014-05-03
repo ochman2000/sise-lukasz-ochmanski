@@ -6,113 +6,106 @@ import java.util.List;
 import pl.lodz.p.sise.Heuristics;
 import pl.lodz.p.sise.Puzzle;
 import pl.lodz.p.sise.Ruch;
-import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
-import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.NoSolutionException;
-import pl.lodz.p.sise.exception.PuzzleFormatException;
-import pl.lodz.p.sise.exception.TimeoutException;
 import pl.lodz.p.sise.structure.Fringe;
 import pl.lodz.p.sise.structure.Statistics;
 
 public class Dijkstra {
+	@SuppressWarnings("unused")
+	private String STRUKTURA_DANYCH = "HashMap / FibonacciHeap";
+	@SuppressWarnings("unused")
+	private String OPIS_HEURYSTYKI = "Każda krawędź ma wagę 1";
+	@SuppressWarnings("unused")
+	private String NAZWA_ALGORYTMU = "Shortest Path Dijkstra";
 	private static final int TIMEOUT = 120;
 	public static boolean DEBUG = false;
-	int iteracje = 0;
+	private int iteracje = 0;
 	private int maxSize=0;
-	Puzzle a,b,c,d,e;
-	private Puzzle puzzle;
 	private Statistics statistics;
 
-	public Dijkstra(int[] a) {
-		try {
-			this.puzzle = new Puzzle(a);
-		} catch (IllegalPuzzleException | DuplicatelPuzzleException	| PuzzleFormatException e) {
-			System.err.println(e.getMessage() + "\nDziałanie programu przerwane.");
-			System.exit(1);
-		}
-		try {
-			this.setStatistics(this.search(puzzle));
-		} catch (NoSolutionException | TimeoutException e) {
-			Statistics stats = new Statistics();
-			stats.setSuccess(false);
-			stats.setFailMessage(e.getMessage());
-			stats.setStartPoint(puzzle);
-			stats.setAlgorytm("Breadth First Search");
-			stats.setHeurystyka("Każda krawędź ma wagę 1");
-			stats.setIterations(iteracje);
-			stats.setTime(TIMEOUT*1000);
-			stats.setMaxMemoryUsed(maxSize);
-			stats.setStructureType("LinkedList");
-			stats.setMemoryUnits("Węzeł");
-			this.setStatistics(stats);
-			System.err.println(e.getMessage());
-		}
+	public Dijkstra() {
 	}
 	
-	public Statistics search(Puzzle puzzle) throws NoSolutionException, TimeoutException {
-		Statistics stats = new Statistics();
+	public Statistics search(Puzzle puzzle, Heuristics heuristics) throws NoSolutionException {
 		Fringe fringe = new Fringe();
 		long start = System.currentTimeMillis();
-		
+
 		puzzle.setMinDistance(0);
-		fringe.put(puzzle); 	//WSKAŻ MIEJSCE STARTU
-		stats.setStartPoint(puzzle);
+		fringe.enqueue(puzzle, heuristics);
+		// WSKAŻ MIEJSCE STARTU
+		getStatistics().setStartPoint(puzzle);
 		while (!fringe.isEmpty()) {
-			if (((System.currentTimeMillis() - start)/1000) > TIMEOUT)
-				throw new TimeoutException(TIMEOUT);
-			//ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
-			Puzzle currentNode = fringe.getLowestCostPath(Heuristics.None);
-			if (currentNode==null)
-				throw new NoSolutionException();
-			if (currentNode.isSolved()) {
-				stats.setSuccess(true);
-				stats.setAlgorytm("Shortest Path Dijkstra");
-				stats.setHeurystyka("Każda krawędź ma wagę 1");
-				stats.setIterations(iteracje);
-				stats.setTime((System.currentTimeMillis() - start));
-				stats.setMaxMemoryUsed(fringe.size());
-				stats.setStructureType("HashMap");
-				stats.setMemoryUnits("Węzeł");
-				stats.setMoves(backTrack(fringe, currentNode));
-				return stats;
+			if (((System.currentTimeMillis() - start) / 1000) > TIMEOUT) {
+				getStatistics().setSuccess(false);
+				getStatistics().setFailMessage("Przekroczony dozwolony czas dokonywania obliczeń: "+TIMEOUT+" sekund");
+				getStatistics().setIterations(iteracje);
+				getStatistics().setTime(TIMEOUT*1000);
+				getStatistics().setMaxMemoryUsed(maxSize);
+				return getStatistics();
 			}
-			//ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
+			// ZNAJDŹ NAJLEPSZY ZNANY NAM WĘZEŁ (ZNAJDUJĄCY SIĘ NAJBLIŻEJ STARTU)
+			Puzzle currentNode = fringe.getLowestCostPath(heuristics);
+			if (currentNode == null)
+				throw new NoSolutionException();
+			// ZNAJDŹ ODLEGŁOŚĆ OD PUNKTU POCZĄTKOWEGO DO TEGO WĘZŁA
 			int pokonanyDystans = currentNode.getMinDistance();
 			int nowaOdległość = 1 + pokonanyDystans;
-			//TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
+			// TERAZ ZNAJDŹ WSZYSTKICH SĄSIADÓW TEGO WĘZŁA
 			List<Ruch> sąsiedzi = currentNode.getNeighboors();
-			//NASTEPNIE PRZELICZ ODLEGŁOŚCI DLA KAŻDEGO SĄSIADA I DODAJ DO FRINGE'A
+			// NASTEPNIE PRZELICZ ODLEGŁOŚCI DLA KAŻDEGO SĄSIADA I DODAJ DO FRINGE'A
 			for (Ruch kierunek : sąsiedzi) {
-				Puzzle węzeł = currentNode.move(kierunek);
-				//JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO WĘZŁA WSTAW NOWĄ ODLEGŁOŚĆ
-				if (!fringe.containsKey(węzeł)) {
-					węzeł.setMinDistance(nowaOdległość);
+				Puzzle sąsiad = currentNode.move(kierunek);
+				sąsiad.setPrevious(currentNode);
+				sąsiad.setKierunek(kierunek);
+				if (currentNode.isSolved()) {
+					getStatistics().setSuccess(true);
+					getStatistics().setIterations(iteracje);
+					getStatistics().setTime((System.currentTimeMillis() - start));
+					getStatistics().setMaxMemoryUsed(fringe.size());
+					getStatistics().setMoves(backTrack(currentNode));
+					return getStatistics();
 				}
-				else {
-					//SPRAWDŹ CZY NOWO OBLICZONA ODLEGŁOŚĆ NIE JEST LEPSZA OD ISTNIEJĄCEJ
-					if (nowaOdległość < fringe.get(węzeł).getMinDistance()) {
-						węzeł.setMinDistance(nowaOdległość);
+				if (fringe.wasSettled(sąsiad) && fringe.contains(sąsiad))
+				{
+					System.err.println("Data corrupted.");
+				}
+				if (!fringe.wasSettled(sąsiad)) {
+					// JEŚLI JESZCZE NIGDY NIE LICZYLIŚMY ODLEGŁOŚCI DLA TEGO
+					// WĘZŁA WSTAW/UAKTUALNIJ NOWĄ ODLEGŁOŚĆ
+					sąsiad.setMinDistance(nowaOdległość);
+					if (fringe.contains(sąsiad)) {
+						fringe.decreaseKey(sąsiad, heuristics);
+//						System.out.println("Key decreased to heurystyka plus: "+nowaOdległość);
+					} else {
+						fringe.enqueue(sąsiad, heuristics);
 					}
 				}
-				węzeł.setPrevious(currentNode);
-				węzeł.setKierunek(kierunek);
-				fringe.put(węzeł);
 				iteracje++;
-				maxSize=fringe.size();
+				maxSize = fringe.size();
+//				System.out.println(maxSize);
+//				System.out.println(fringe.odwiedzoneWezly());
+				if (fringe.isEmpty()){
+					System.out.println(fringe.size());
+					System.out.println(fringe.odwiedzoneWezly());
+					System.out.println("Fringe is empty: "+fringe.isEmpty());
+				}
 			}
 		}
-		return stats;
+		getStatistics().setSuccess(false);
+		getStatistics().setIterations(iteracje);
+		getStatistics().setTime((System.currentTimeMillis() - start));
+		getStatistics().setMaxMemoryUsed(fringe.size());
+		getStatistics().setFailMessage("Przeprocesowano wszystkie węzły.");
+		return getStatistics();
 	}
 
-	private List<Ruch> backTrack(Fringe fringe, Puzzle currentNode) {
+	private List<Ruch> backTrack(Puzzle currentNode) {
 		LinkedList<Ruch> ruchy = new LinkedList<Ruch>();
-//		LinkedList<Puzzle> path = new LinkedList<Puzzle>();
-		Puzzle last = fringe.get(currentNode);
+		Puzzle last = currentNode;
 		while (last!=null) {
 			Ruch kierunek = last.getKierunek();
 			if (kierunek!=null) {
 				ruchy.addFirst(kierunek);
-//				path.addFirst(last);
 			}
 			last = last.getPrevious();
 		}
