@@ -28,7 +28,7 @@ public class Solver {
 				System.exit(-1);
 			}
 			int start = 1;
-			int end = start+15;
+			int end = start+16;
 			for (int i=start; i<end; i++) {
 				try {
 					t_a[i-start]=Integer.parseInt(args[i]);

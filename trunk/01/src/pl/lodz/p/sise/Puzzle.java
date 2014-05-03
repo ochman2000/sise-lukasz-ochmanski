@@ -2,6 +2,7 @@ package pl.lodz.p.sise;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,28 +11,37 @@ import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
 
-public class Puzzle implements Comparable<Puzzle> {
+public class Puzzle {
 	/**
 	 * Jak liczba klocków jest inna niż 4,8,16,25 to będzie problem!
 	 */
 	private final int LICZBA_KLOCKOW = 16;
 	private int[] plansza = new int[LICZBA_KLOCKOW];
-	private boolean visited;
 	private Puzzle previous;
 	private Ruch kierunek;
 	private int minDistance;
 	
 	public Puzzle(int[] a) throws IllegalPuzzleException,
 			DuplicatelPuzzleException, PuzzleFormatException {
-		
+
+		if (a.length != LICZBA_KLOCKOW)
+			throw new PuzzleFormatException(a.length, LICZBA_KLOCKOW);
 		Set<Integer> s = new HashSet<Integer>();
 		for (int klocek : a) {
 			if (klocek < 0 || klocek >= LICZBA_KLOCKOW)
 				throw new IllegalPuzzleException(klocek);
 			s.add(klocek);
 		}
-		if (s.size() < a.length)
-			throw new DuplicatelPuzzleException(a.length - s.size());
+		if (s.size() < a.length) {
+			List<Integer> param = new ArrayList<Integer>(17);
+			for (int i=0; i<a.length; i++) {
+				param.add(a[i]);
+			}
+			for (Integer integer : s) {
+				param.remove(integer);
+			}
+			throw new DuplicatelPuzzleException(param);
+		}
 		if (s.size() != LICZBA_KLOCKOW)
 			throw new PuzzleFormatException(s.size(), LICZBA_KLOCKOW);
 		this.plansza = a;
@@ -286,7 +296,7 @@ public class Puzzle implements Comparable<Puzzle> {
 		this.minDistance = minDistance;
 	}
 
-	@Override
+
 	public int compareTo(Puzzle o) {
 		if (o.getMinDistance()<this.getMinDistance()) {
 			return -1;
