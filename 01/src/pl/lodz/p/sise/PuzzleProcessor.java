@@ -24,7 +24,7 @@ public class PuzzleProcessor {
 	public static void main(String[] args) {
 		PuzzleProcessor processor = new PuzzleProcessor();
 		
-		for (int i=1; i<=25; i++) {
+		for (int i=1; i<=10; i++) {
 			processor.processBatch(i);
 		}
 	}
@@ -37,9 +37,9 @@ public class PuzzleProcessor {
 //		processor.processFile("bfs", "level"+str+".txt", level);
 //		processor.processFile("dijkstra", "level"+str+".txt", level);
 //		processor.processFile("a1", "level"+str+".txt", level);
-		processor.processFile("a2", "level"+str+".txt", level);
-		processor.processFile("a3", "level"+str+".txt", level);
-//		processor.processFile("dfs", "level"+str+".txt", level);
+//		processor.processFile("a2", "level"+str+".txt", level);
+//		processor.processFile("a3", "level"+str+".txt", level);
+		processor.processFile("dfs", "level"+str+".txt", level);
 		
 	}
 	
@@ -51,10 +51,10 @@ public class PuzzleProcessor {
 		try {
 			lista = Files.readAllLines(path, Charset.forName(CHARSET));
 			path = Paths.get("solution/"+algorytm+"_"+sourceFile);
-			Files.deleteIfExists(path);
+//			Files.deleteIfExists(path);
 			boolean append = true;
 			out = new PrintWriter(new BufferedWriter(new FileWriter(
-					"solution/"+algorytm+"_"+sourceFile, append)));
+					"solution/"+algorytm+"_DGPL.txt", append)));
 			for (String puzzle : lista) {
 				int[]a = stringToArray(puzzle);
 				Statistics stats = process(a, algorytm);
