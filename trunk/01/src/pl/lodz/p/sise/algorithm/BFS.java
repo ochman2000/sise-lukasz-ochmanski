@@ -78,6 +78,7 @@ public class BFS {
 						maxSize=result.size();
 					if (przesunięcie0.isSolved()) {
 						stats.setAlgorytm("Breadth First Search");
+						stats.setSuccess(true);
 						stats.setIterations(iteracje);
 						stats.setTime((System.currentTimeMillis() - start));
 						stats.setMaxMemoryUsed(maxSize);
