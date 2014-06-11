@@ -1,5 +1,7 @@
 package pl.lodz.p.sise.structure;
 
+import java.util.Random;
+
 import javafx.event.ActionEvent;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -32,6 +34,8 @@ public class Plansza extends Application {
 	private Menu fileMenu;
 	private MenuItem stopButton;
 	private MenuItem pauseButton;
+	private MenuItem restartButton;
+	private MenuItem exitButton;
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -70,15 +74,17 @@ public class Plansza extends Application {
 		playButton = new MenuItem("Play");
 		pauseButton = new MenuItem("Pause");
 		stopButton = new MenuItem("Stop");
+		restartButton = new MenuItem("Restart");
+		exitButton = new MenuItem("Exit");
 
 		fileMenu = new Menu("File");
 		fileMenu.getItems().add(playButton);
 		fileMenu.getItems().add(pauseButton);
 		fileMenu.getItems().add(stopButton);
 		fileMenu.getItems().add(new SeparatorMenuItem());
-		fileMenu.getItems().add(new MenuItem("Restart"));
+		fileMenu.getItems().add(restartButton);
 		fileMenu.getItems().add(new SeparatorMenuItem());
-		fileMenu.getItems().add(new MenuItem("Exit"));
+		fileMenu.getItems().add(exitButton);
 		
 		mainMenu = new MenuBar();
 		mainMenu.getMenus().add(fileMenu);
@@ -112,6 +118,8 @@ public class Plansza extends Application {
 		playButton.setOnAction(new PlayButtonHandler());
 		pauseButton.setOnAction(new PauseButtonHandler());
 		stopButton.setOnAction(new StopButtonHandler());
+		restartButton.setOnAction(new RestartButtonHandler());
+		exitButton.setOnAction(new ExitButtonHandler());
 	}
 	
 	public static void main(String[] args) {
@@ -140,8 +148,34 @@ public class Plansza extends Application {
 		
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.translate.stop();;
-			Plansza.this.rotate.stop();			
+			Plansza.this.translate.stop();
+			Plansza.this.rotate.stop();	
+			Plansza.this.rect01.setX(0);
+			Plansza.this.rect01.setY(225);
+			Plansza.this.rect01.setRotate(0);
+		}
+	}
+	
+	class RestartButtonHandler implements EventHandler<ActionEvent> {
+		
+		@Override
+		public void handle(ActionEvent arg0) {
+			Plansza.this.translate.stop();
+			Plansza.this.rotate.stop();
+			Random rnd = new Random();
+			int x = rnd.nextInt(500);
+			int y = rnd.nextInt(400);
+			Plansza.this.rect01.setX(x);
+			Plansza.this.rect01.setY(y);
+//			System.out.println(x+","+y);
+		}
+	}
+	
+	class ExitButtonHandler implements EventHandler<ActionEvent> {
+		
+		@Override
+		public void handle(ActionEvent arg0) {
+			System.exit(0);
 		}
 	}
 }
