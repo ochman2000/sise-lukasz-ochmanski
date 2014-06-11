@@ -69,7 +69,7 @@ public class TheTranslateTransition extends Application {
 		rotate.play();
 	}
 
-	public static void main(String[] args) {
-		Application.launch("blog.TheTranslateTransition");
-	}
+//	public static void main(String[] args) {
+//		Application.launch("blog.TheTranslateTransition");
+//	}
 }

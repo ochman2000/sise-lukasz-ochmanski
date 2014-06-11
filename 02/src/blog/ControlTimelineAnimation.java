@@ -168,7 +168,7 @@ public class ControlTimelineAnimation extends Application{
         stage.sizeToScene();
         stage.show();
     }
-    public static void main(String[] args) {
-        Application.launch("blog.ControlTimelineAnimation");
-    }
+//    public static void main(String[] args) {
+//        Application.launch("blog.ControlTimelineAnimation");
+//    }
 }
