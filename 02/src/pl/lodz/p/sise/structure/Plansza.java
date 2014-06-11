@@ -7,7 +7,6 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -29,29 +28,30 @@ public class Plansza extends Application {
 		pane.setId("pane");
 
 		scene = new Scene(pane, 900, 500);
-		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+		scene.getStylesheets().addAll(
+				this.getClass().getResource("style.css").toExternalForm());
 
 		rect01 = new Rectangle(100, 50);
 		rect01.setId("autko");
-		
+
 		rect02 = new Rectangle(120, 70);
 		rect02.setId("miejsce");
 		rect02.getStyleClass().add("gruba");
 		rect02.setX(700);
 		rect02.setY(215);
-		
+
 		line01 = new Rectangle(136, 1);
 		line01.setId("linia01");
 		line01.getStyleClass().add("cienka");
 		line01.setX(700 - 8);
-		line01.setY(500/2 - (50+20)/2 + 34);
+		line01.setY(500 / 2 - (50 + 20) / 2 + 34);
 		line01.setRotate(30.0);
-		
+
 		line02 = new Rectangle(136, 1);
 		line02.setId("linia02");
 		line02.getStyleClass().add("cienka");
 		line02.setX(700 - 7);
-		line02.setY(500/2 + (50-20)/2 - 16);
+		line02.setY(500 / 2 + (50 - 20) / 2 - 16);
 		line02.setRotate(60 + 90.0);
 
 		translate = new TranslateTransition();
