@@ -1,11 +1,8 @@
 package pl.lodz.p.sise;
 
-import org.hamcrest.core.IsSame;
-
 import pl.lodz.p.sise.exception.DuplicatelPuzzleException;
 import pl.lodz.p.sise.exception.IllegalPuzzleException;
 import pl.lodz.p.sise.exception.PuzzleFormatException;
-import pl.lodz.p.sise.structure.Fringe;
 import pl.lodz.p.sise.structure.Statistics;
 
 public class FibonacciTest {
@@ -15,11 +12,9 @@ public class FibonacciTest {
 		System.out.println(s.isSuccess());
 		int[] t_a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 12, 13, 14, 11, 15 };
 		
-		Puzzle start = null;
-		Puzzle second = null;
 		try {
-			start = new Puzzle(t_a);
-			second = new Puzzle(t_a);
+			new Puzzle(t_a);
+			new Puzzle(t_a);
 		} catch (IllegalPuzzleException | DuplicatelPuzzleException
 				| PuzzleFormatException e) {
 			// TODO Auto-generated catch block
