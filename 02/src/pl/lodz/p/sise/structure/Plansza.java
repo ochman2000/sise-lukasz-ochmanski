@@ -47,9 +47,7 @@ public class Plansza extends Application {
 		scene.getStylesheets().addAll(
 				this.getClass().getResource("style.css").toExternalForm());
 
-		rect01 = new Rectangle(100, 50);
-		rect01.setId("autko");
-		rect01.setY(225);
+		rect01 = new Car();
 
 		rect02 = new Rectangle(120, 70);
 		rect02.setId("miejsce");
@@ -92,6 +90,8 @@ public class Plansza extends Application {
 		translate = new TranslateTransition();
 		translate.setDuration(new Duration(5 * 1000));
 		translate.setNode(rect01);
+		translate.setFromX(0);
+		translate.setFromY(0);
 		translate.setToX(400);
 		translate.setToY(200);
 		translate.setAutoReverse(true);
@@ -101,7 +101,9 @@ public class Plansza extends Application {
 		rotate = new RotateTransition();
 		rotate.setDuration(new Duration(3 * 1000));
 		rotate.setNode(rect01);
-		rotate.setByAngle(180);
+		rotate.setFromAngle(0);
+		rotate.setToAngle(180);
+//		rotate.setByAngle(180);
 		rotate.setAutoReverse(true);
 		rotate.setCycleCount(Timeline.INDEFINITE);
 		rotate.setInterpolator(Interpolator.EASE_BOTH);
@@ -121,6 +123,7 @@ public class Plansza extends Application {
 		restartButton.setOnAction(new RestartButtonHandler());
 		exitButton.setOnAction(new ExitButtonHandler());
 	}
+	
 	
 	public static void main(String[] args) {
 		Application.launch();
@@ -148,11 +151,24 @@ public class Plansza extends Application {
 		
 		@Override
 		public void handle(ActionEvent arg0) {
+
 			Plansza.this.translate.stop();
-			Plansza.this.rotate.stop();	
-			Plansza.this.rect01.setX(0);
-			Plansza.this.rect01.setY(225);
-			Plansza.this.rect01.setRotate(0);
+			Plansza.this.rotate.stop();
+			
+			Plansza.this.translate = new TranslateTransition();
+			translate.setDuration(new Duration(5 * 1000));
+			translate.setNode(rect01);
+			translate.setFromX(0);
+			translate.setFromY(0);
+			translate.setToX(400);
+			translate.setToY(200);
+			translate.setAutoReverse(true);
+			translate.setCycleCount(Timeline.INDEFINITE);
+			translate.setInterpolator(Interpolator.EASE_BOTH);
+//			Plansza.this.rotate.jumpTo(Duration.ZERO);
+//			Plansza.this.translate.jumpTo(Duration.ZERO);
+			Plansza.this.translate.stop();
+			Plansza.this.rotate.stop();
 		}
 	}
 	
@@ -160,14 +176,24 @@ public class Plansza extends Application {
 		
 		@Override
 		public void handle(ActionEvent arg0) {
+			Plansza.this.translate.pause();
+			Plansza.this.rotate.pause();
+			
+			Plansza.this.translate.jumpTo(Duration.ZERO);
+			Plansza.this.rotate.jumpTo(Duration.ZERO);
+			
 			Plansza.this.translate.stop();
 			Plansza.this.rotate.stop();
+			
 			Random rnd = new Random();
 			int x = rnd.nextInt(500);
-			int y = rnd.nextInt(400);
-			Plansza.this.rect01.setX(x);
-			Plansza.this.rect01.setY(y);
-//			System.out.println(x+","+y);
+			int y = rnd.nextInt(400)-200;
+			
+			Plansza.this.translate.setFromX(x);
+			Plansza.this.translate.setFromY(y);
+			Plansza.this.rect01.setRotate(rnd.nextInt(90)-45);
+			translate.playFromStart();
+			rotate.playFromStart();
 		}
 	}
 	
