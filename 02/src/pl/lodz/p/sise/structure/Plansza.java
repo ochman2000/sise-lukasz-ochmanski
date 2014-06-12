@@ -2,12 +2,8 @@ package pl.lodz.p.sise.structure;
 
 import java.util.Random;
 
-import javafx.event.ActionEvent;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -23,9 +19,7 @@ public class Plansza extends Application {
 
 	private Pane pane;
 	private Scene scene;
-	private Rectangle rect01;
-	private TranslateTransition translate;
-	private RotateTransition rotate;
+	private Car pojazd01;
 	private Rectangle line01;
 	private Rectangle line02;
 	private Rectangle rect02;
@@ -47,7 +41,7 @@ public class Plansza extends Application {
 		scene.getStylesheets().addAll(
 				this.getClass().getResource("style.css").toExternalForm());
 
-		rect01 = new Car();
+		pojazd01 = new Car();
 
 		rect02 = new Rectangle(120, 70);
 		rect02.setId("miejsce");
@@ -68,12 +62,16 @@ public class Plansza extends Application {
 		line02.setX(700 - 7);
 		line02.setY(500 / 2 + (50 - 20) / 2 - 16);
 		line02.setRotate(60 + 90.0);
-		
+
 		playButton = new MenuItem("Play");
 		pauseButton = new MenuItem("Pause");
 		stopButton = new MenuItem("Stop");
 		restartButton = new MenuItem("Restart");
 		exitButton = new MenuItem("Exit");
+		
+		Plansza.this.pauseButton.setDisable(true);
+		Plansza.this.playButton.setDisable(false);
+		Plansza.this.stopButton.setDisable(true);
 
 		fileMenu = new Menu("File");
 		fileMenu.getItems().add(playButton);
@@ -83,122 +81,95 @@ public class Plansza extends Application {
 		fileMenu.getItems().add(restartButton);
 		fileMenu.getItems().add(new SeparatorMenuItem());
 		fileMenu.getItems().add(exitButton);
-		
+
 		mainMenu = new MenuBar();
 		mainMenu.getMenus().add(fileMenu);
-		
-		translate = new TranslateTransition();
-		translate.setDuration(new Duration(5 * 1000));
-		translate.setNode(rect01);
-		translate.setFromX(0);
-		translate.setFromY(0);
-		translate.setToX(400);
-		translate.setToY(200);
-		translate.setAutoReverse(true);
-		translate.setCycleCount(Timeline.INDEFINITE);
-		translate.setInterpolator(Interpolator.EASE_BOTH);
 
-		rotate = new RotateTransition();
-		rotate.setDuration(new Duration(3 * 1000));
-		rotate.setNode(rect01);
-		rotate.setFromAngle(0);
-		rotate.setToAngle(180);
-//		rotate.setByAngle(180);
-		rotate.setAutoReverse(true);
-		rotate.setCycleCount(Timeline.INDEFINITE);
-		rotate.setInterpolator(Interpolator.EASE_BOTH);
+		pane.getChildren().addAll(pojazd01, rect02, line01, line02, mainMenu);
 
-		
-		pane.getChildren().addAll(rect01, rect02, line01, line02, mainMenu);
-		
 		stage.setTitle("Sztuczna Inteligencja i Systemy Ekspertowe by Łukasz Ochmański "
 				+ "& Przemysław Szwajkowski");
 		stage.setScene(scene);
 		stage.sizeToScene();
 		stage.show();
-		
+
 		playButton.setOnAction(new PlayButtonHandler());
 		pauseButton.setOnAction(new PauseButtonHandler());
 		stopButton.setOnAction(new StopButtonHandler());
 		restartButton.setOnAction(new RestartButtonHandler());
 		exitButton.setOnAction(new ExitButtonHandler());
 	}
-	
-	
+
 	public static void main(String[] args) {
 		Application.launch();
 	}
 
 	class PlayButtonHandler implements EventHandler<ActionEvent> {
-
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.translate.play();
-			Plansza.this.rotate.play();			
+			Plansza.this.pojazd01.getTranslateTransition().play();
+			Plansza.this.pojazd01.getRotateTransition().play();
+			Plansza.this.pauseButton.setDisable(false);
+			Plansza.this.playButton.setDisable(true);
+			Plansza.this.stopButton.setDisable(false);
 		}
 	}
-	
+
 	class PauseButtonHandler implements EventHandler<ActionEvent> {
-		
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.translate.pause();
-			Plansza.this.rotate.pause();			
+			Plansza.this.pojazd01.getTranslateTransition().pause();
+			Plansza.this.pojazd01.getRotateTransition().pause();
+			Plansza.this.pauseButton.setDisable(true);
+			Plansza.this.playButton.setDisable(false);
+			Plansza.this.stopButton.setDisable(false);
 		}
 	}
-	
-	class StopButtonHandler implements EventHandler<ActionEvent> {
-		
-		@Override
-		public void handle(ActionEvent arg0) {
 
-			Plansza.this.translate.stop();
-			Plansza.this.rotate.stop();
-			
-			Plansza.this.translate = new TranslateTransition();
-			translate.setDuration(new Duration(5 * 1000));
-			translate.setNode(rect01);
-			translate.setFromX(0);
-			translate.setFromY(0);
-			translate.setToX(400);
-			translate.setToY(200);
-			translate.setAutoReverse(true);
-			translate.setCycleCount(Timeline.INDEFINITE);
-			translate.setInterpolator(Interpolator.EASE_BOTH);
-//			Plansza.this.rotate.jumpTo(Duration.ZERO);
-//			Plansza.this.translate.jumpTo(Duration.ZERO);
-			Plansza.this.translate.stop();
-			Plansza.this.rotate.stop();
-		}
-	}
-	
-	class RestartButtonHandler implements EventHandler<ActionEvent> {
-		
+	class StopButtonHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.translate.pause();
-			Plansza.this.rotate.pause();
-			
-			Plansza.this.translate.jumpTo(Duration.ZERO);
-			Plansza.this.rotate.jumpTo(Duration.ZERO);
-			
-			Plansza.this.translate.stop();
-			Plansza.this.rotate.stop();
-			
+			Plansza.this.pojazd01.getTranslateTransition().stop();
+			Plansza.this.pojazd01.getRotateTransition().stop();
+			Plansza.this.pane.getChildren().remove(Plansza.this.pojazd01);
+
+			Plansza.this.pojazd01 = new Car();
+			Plansza.this.pane.getChildren().add(Plansza.this.pojazd01);
+			Plansza.this.pauseButton.setDisable(true);
+			Plansza.this.playButton.setDisable(false);
+			Plansza.this.stopButton.setDisable(true);
+		}
+	}
+
+	class RestartButtonHandler implements EventHandler<ActionEvent> {
+		@Override
+		public void handle(ActionEvent arg0) {
+			Plansza.this.pojazd01.getTranslateTransition().pause();
+			Plansza.this.pojazd01.getRotateTransition().pause();
+
+			Plansza.this.pojazd01.getTranslateTransition().jumpTo(Duration.ZERO);
+			Plansza.this.pojazd01.getRotateTransition().jumpTo(Duration.ZERO);
+
+			Plansza.this.pojazd01.getTranslateTransition().stop();
+			Plansza.this.pojazd01.getRotateTransition().stop();
+
 			Random rnd = new Random();
 			int x = rnd.nextInt(500);
-			int y = rnd.nextInt(400)-200;
+			int y = rnd.nextInt(400) - 200;
+
+			Plansza.this.pojazd01.getTranslateTransition().setFromX(x);
+			Plansza.this.pojazd01.getTranslateTransition().setFromY(y);
+			Plansza.this.pojazd01.setRotate(rnd.nextInt(90) - 45);
+			Plansza.this.pojazd01.getTranslateTransition().playFromStart();
+			Plansza.this.pojazd01.getRotateTransition().playFromStart();
 			
-			Plansza.this.translate.setFromX(x);
-			Plansza.this.translate.setFromY(y);
-			Plansza.this.rect01.setRotate(rnd.nextInt(90)-45);
-			translate.playFromStart();
-			rotate.playFromStart();
+			Plansza.this.pauseButton.setDisable(true);
+			Plansza.this.playButton.setDisable(false);
+			Plansza.this.stopButton.setDisable(true);
 		}
 	}
-	
+
 	class ExitButtonHandler implements EventHandler<ActionEvent> {
-		
 		@Override
 		public void handle(ActionEvent arg0) {
 			System.exit(0);
