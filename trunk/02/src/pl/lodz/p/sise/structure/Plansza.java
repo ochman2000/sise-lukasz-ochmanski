@@ -13,7 +13,6 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Plansza extends Application {
 
@@ -144,24 +143,25 @@ public class Plansza extends Application {
 	class RestartButtonHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.pojazd01.getTranslateTransition().pause();
-			Plansza.this.pojazd01.getRotateTransition().pause();
-
-			Plansza.this.pojazd01.getTranslateTransition().jumpTo(Duration.ZERO);
-			Plansza.this.pojazd01.getRotateTransition().jumpTo(Duration.ZERO);
-
 			Plansza.this.pojazd01.getTranslateTransition().stop();
 			Plansza.this.pojazd01.getRotateTransition().stop();
+			Plansza.this.pane.getChildren().remove(Plansza.this.pojazd01);
+
+			Plansza.this.pojazd01 = new Car();
+			Plansza.this.pane.getChildren().add(Plansza.this.pojazd01);
 
 			Random rnd = new Random();
-			int x = rnd.nextInt(500);
-			int y = rnd.nextInt(400) - 200;
+			int x = rnd.nextInt(500)+100;
+			int y = rnd.nextInt(300)+100;
+			int rot = rnd.nextInt(90) - 45;
+			
+			Plansza.this.pojazd01.setX(x);
+			Plansza.this.pojazd01.setY(y);
+			Plansza.this.pojazd01.setRotate(rot);
 
-			Plansza.this.pojazd01.getTranslateTransition().setFromX(x);
-			Plansza.this.pojazd01.getTranslateTransition().setFromY(y);
-			Plansza.this.pojazd01.setRotate(rnd.nextInt(90) - 45);
-			Plansza.this.pojazd01.getTranslateTransition().playFromStart();
-			Plansza.this.pojazd01.getRotateTransition().playFromStart();
+			Plansza.this.pojazd01.getTranslateTransition().setFromX(0);
+			Plansza.this.pojazd01.getTranslateTransition().setFromY(0);
+			Plansza.this.pojazd01.getRotateTransition().setFromAngle(rot);
 			
 			Plansza.this.pauseButton.setDisable(true);
 			Plansza.this.playButton.setDisable(false);

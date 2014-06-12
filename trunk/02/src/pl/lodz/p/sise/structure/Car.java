@@ -47,7 +47,6 @@ public class Car extends Rectangle {
 	}
 	
 	public boolean equals(Object obj) {
-//		System.out.println("equals");
 		if (obj == null)
 			return false;
 		if (!(obj instanceof Car))
