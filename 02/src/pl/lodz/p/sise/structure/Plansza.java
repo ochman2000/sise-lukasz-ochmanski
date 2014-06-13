@@ -107,11 +107,12 @@ public class Plansza extends Application {
 	class PlayButtonHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
+			Plansza.this.pojazd01.move(10, 10);
 			Plansza.this.pojazd01.getTranslateTransition().play();
 			Plansza.this.pojazd01.getRotateTransition().play();
-			Plansza.this.pauseButton.setDisable(false);
-			Plansza.this.playButton.setDisable(true);
-			Plansza.this.stopButton.setDisable(false);
+//			Plansza.this.pauseButton.setDisable(false);
+//			Plansza.this.playButton.setDisable(true);
+//			Plansza.this.stopButton.setDisable(false);
 		}
 	}
 
@@ -169,12 +170,6 @@ public class Plansza extends Application {
 			Plansza.this.pauseButton.setDisable(true);
 			Plansza.this.playButton.setDisable(false);
 			Plansza.this.stopButton.setDisable(false);
-			
-			final Point2D windowCoord = new Point2D(scene.getWindow().getX(), scene.getWindow().getY());
-			final Point2D sceneCoord = new Point2D(scene.getX(), scene.getY());
-			
-			System.out.println(windowCoord);
-			System.out.println(sceneCoord);
 		}
 	}
 
