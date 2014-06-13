@@ -19,24 +19,24 @@ public class Car extends Rectangle {
 		this.setY(225);
 		
 		translate = new TranslateTransition();
-		translate.setDuration(new Duration(5 * 1000));
+//		translate.setDuration(new Duration(5 * 1000));
 		translate.setNode(this);
-		translate.setFromX(0);
-		translate.setFromY(0);
-		translate.setToX(710);
-		translate.setToY(0);
-		translate.setAutoReverse(true);
-		translate.setCycleCount(Timeline.INDEFINITE);
-		translate.setInterpolator(Interpolator.EASE_BOTH);
+//		translate.setFromX(0);
+//		translate.setFromY(0);
+//		translate.setToX(710);
+//		translate.setToY(0);
+//		translate.setAutoReverse(true);
+//		translate.setCycleCount(Timeline.INDEFINITE);
+//		translate.setInterpolator(Interpolator.EASE_BOTH);
 		
 		rotate = new RotateTransition();
-		rotate.setDuration(new Duration(5 * 1000));
+//		rotate.setDuration(new Duration(5 * 1000));
 		rotate.setNode(this);
-		rotate.setFromAngle(0);
-		rotate.setToAngle(0);
-		rotate.setAutoReverse(true);
-		rotate.setCycleCount(Timeline.INDEFINITE);
-		rotate.setInterpolator(Interpolator.EASE_BOTH);
+//		rotate.setFromAngle(0);
+//		rotate.setToAngle(30);
+//		rotate.setAutoReverse(true);
+//		rotate.setCycleCount(Timeline.INDEFINITE);
+//		rotate.setInterpolator(Interpolator.EASE_BOTH);
 	}
 	
 	public TranslateTransition getTranslateTransition() {
@@ -61,31 +61,41 @@ public class Car extends Rectangle {
 	}
 	
 	public Point2D getOffset(double x, double y) {
-//		final Point2D windowCoord = new Point2D(scene.getWindow().getX(), scene.getWindow().getY());
-//		final Point2D sceneCoord = new Point2D(scene.getX(), scene.getY());
-//		final Point2D paneCoord = new Point2D(pane.getLayoutX(), pane.getLayoutY());
-//		System.out.println("Do celu:\tx: "+clickX+"\ty: "+clickY);
-		
-		//double celX = scene.getWidth()-(rect02.getWidth()-10);
-		//double celY = scene.getHeight()/2-(rect02.getHeight()-10);
-		
 		Point2D nodeCoord = this.localToParent(this.getX(), this.getY());
-//		Point2D nodeCoord = new Point2D(Plansza.this.pojazd01.getX(), Plansza.this.pojazd01.getY());
-		
-//		Point2D parkingCoord = new Point2D(Plansza.this.rect02.getX(), Plansza.this.rect02.getY());
 		double offsetX = nodeCoord.getX() - x;
 		double offsetY = nodeCoord.getY() - y;
 		Point2D offset = new Point2D(offsetX, offsetY);
-		
-//		System.out.println("Parking:\tx: "+clickX+"\ty: "+clickY);
-//		System.out.println("Pause");
-//		System.out.println("Window " + windowCoord);
-//		System.out.println("Scene " + sceneCoord);
-//		System.out.println("Scene dimensions: " +scene.getWidth() +" "+ scene.getHeight());
-//		System.out.println("Pane " + paneCoord);
-//		System.out.println("Car " + nodeCoord);
-//		System.out.println("Parking " + parkingCoord);
-//		System.out.println("Missing " + offset);
 		return offset;
+	}
+	
+	public void move(double distance, double angle) {
+		this.getTranslateTransition().stop();
+		this.getRotateTransition().stop();
+
+		Point2D nodeCoord = this.localToParent(this.getX(), this.getY());
+		double x = nodeCoord.getX();
+		double y = nodeCoord.getY();
+//		System.out.println(nodeCoord);
+//		System.out.println(this.getX()+" "+this.getY());
+//		System.out.println(this.getOffset(0, 0));
+//		System.out.println("Rotation: " + this.getRotate());
+
+		this.setX(x);
+		this.setY(y);
+		
+		this.getTranslateTransition().setFromX(0);
+		this.getTranslateTransition().setFromY(0);
+		this.getTranslateTransition().setToX(distance);
+		this.getTranslateTransition().setToY(distance);
+		this.getTranslateTransition().setDuration(new Duration(500));
+		this.getTranslateTransition().setCycleCount(1);
+		this.getTranslateTransition().setInterpolator(Interpolator.LINEAR);
+
+		double rot = this.getRotate();
+		this.getRotateTransition().setFromAngle(rot);
+		this.getRotateTransition().setToAngle(rot+angle);
+		this.getRotateTransition().setDuration(new Duration(500));
+		this.getRotateTransition().setCycleCount(1);
+		this.getTranslateTransition().setInterpolator(Interpolator.LINEAR);	
 	}
 }
