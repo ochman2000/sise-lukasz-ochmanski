@@ -5,6 +5,7 @@ import java.util.Random;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -84,7 +85,7 @@ public class Plansza extends Application {
 		mainMenu = new MenuBar();
 		mainMenu.getMenus().add(fileMenu);
 
-		pane.getChildren().addAll(pojazd01, rect02, line01, line02, mainMenu);
+		pane.getChildren().addAll(rect02, line01, line02, pojazd01, mainMenu);
 
 		stage.setTitle("Sztuczna Inteligencja i Systemy Ekspertowe by Łukasz Ochmański "
 				+ "& Przemysław Szwajkowski");
@@ -122,6 +123,8 @@ public class Plansza extends Application {
 			Plansza.this.pauseButton.setDisable(true);
 			Plansza.this.playButton.setDisable(false);
 			Plansza.this.stopButton.setDisable(false);
+			System.out.println(Plansza.this.pojazd01.getOffset(
+					Plansza.this.rect02.getX()+10, Plansza.this.rect02.getY()+10));
 		}
 	}
 
@@ -165,7 +168,13 @@ public class Plansza extends Application {
 			
 			Plansza.this.pauseButton.setDisable(true);
 			Plansza.this.playButton.setDisable(false);
-			Plansza.this.stopButton.setDisable(true);
+			Plansza.this.stopButton.setDisable(false);
+			
+			final Point2D windowCoord = new Point2D(scene.getWindow().getX(), scene.getWindow().getY());
+			final Point2D sceneCoord = new Point2D(scene.getX(), scene.getY());
+			
+			System.out.println(windowCoord);
+			System.out.println(sceneCoord);
 		}
 	}
 
