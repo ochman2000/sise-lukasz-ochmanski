@@ -2,7 +2,6 @@ package pl.lodz.p.sise.structure;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
@@ -19,8 +18,8 @@ public class Car extends Rectangle {
 		this.setY(225);
 		
 		translate = new TranslateTransition();
-//		translate.setDuration(new Duration(5 * 1000));
 		translate.setNode(this);
+//		translate.setDuration(new Duration(5 * 1000));
 //		translate.setFromX(0);
 //		translate.setFromY(0);
 //		translate.setToX(710);
@@ -30,8 +29,8 @@ public class Car extends Rectangle {
 //		translate.setInterpolator(Interpolator.EASE_BOTH);
 		
 		rotate = new RotateTransition();
-//		rotate.setDuration(new Duration(5 * 1000));
 		rotate.setNode(this);
+//		rotate.setDuration(new Duration(5 * 1000));
 //		rotate.setFromAngle(0);
 //		rotate.setToAngle(30);
 //		rotate.setAutoReverse(true);
@@ -68,34 +67,46 @@ public class Car extends Rectangle {
 		return offset;
 	}
 	
-	public void move(double distance, double angle) {
+	public void goForward(double distance) {
+		System.out.println(this.getRotate());
+		double x = distance * Math.cos(Math.toRadians(this.getRotate()));
+		double y = distance * Math.sin(Math.toRadians(this.getRotate()));
+		move(x, y);
+	}
+	
+	public void rotateCar(double angle) {
+		this.getRotateTransition().stop();
+		double rot = this.getRotate();
+		this.getRotateTransition().setFromAngle(rot);
+		this.getRotateTransition().setToAngle(rot+angle);
+		this.getRotateTransition().setDuration(new Duration(500));
+		this.getRotateTransition().setCycleCount(1);
+		this.getRotateTransition().setInterpolator(Interpolator.LINEAR);	
+	}
+	
+	public void move(double x1, double y1) {
 		this.getTranslateTransition().stop();
 		this.getRotateTransition().stop();
 
 		Point2D nodeCoord = this.localToParent(this.getX(), this.getY());
 		double x = nodeCoord.getX();
 		double y = nodeCoord.getY();
-//		System.out.println(nodeCoord);
+		
+//		System.out.println("Local: "+nodeCoord);
 //		System.out.println(this.getX()+" "+this.getY());
 //		System.out.println(this.getOffset(0, 0));
 //		System.out.println("Rotation: " + this.getRotate());
 
+//		double rot = this.getRotate();
 		this.setX(x);
 		this.setY(y);
 		
 		this.getTranslateTransition().setFromX(0);
 		this.getTranslateTransition().setFromY(0);
-		this.getTranslateTransition().setToX(distance);
-		this.getTranslateTransition().setToY(distance);
+		this.getTranslateTransition().setToX(x1);
+		this.getTranslateTransition().setToY(y1);
 		this.getTranslateTransition().setDuration(new Duration(500));
 		this.getTranslateTransition().setCycleCount(1);
 		this.getTranslateTransition().setInterpolator(Interpolator.LINEAR);
-
-		double rot = this.getRotate();
-		this.getRotateTransition().setFromAngle(rot);
-		this.getRotateTransition().setToAngle(rot+angle);
-		this.getRotateTransition().setDuration(new Duration(500));
-		this.getRotateTransition().setCycleCount(1);
-		this.getTranslateTransition().setInterpolator(Interpolator.LINEAR);	
 	}
 }

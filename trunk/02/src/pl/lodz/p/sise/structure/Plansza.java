@@ -107,9 +107,11 @@ public class Plansza extends Application {
 	class PlayButtonHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.pojazd01.move(10, 10);
+//			Plansza.this.pojazd01.rotateCar(10);
+//			Plansza.this.pojazd01.goForward(50);
+			Plansza.this.pojazd01.move(50, 50);
 			Plansza.this.pojazd01.getTranslateTransition().play();
-			Plansza.this.pojazd01.getRotateTransition().play();
+//			Plansza.this.pojazd01.getRotateTransition().play();
 //			Plansza.this.pauseButton.setDisable(false);
 //			Plansza.this.playButton.setDisable(true);
 //			Plansza.this.stopButton.setDisable(false);
@@ -157,15 +159,15 @@ public class Plansza extends Application {
 			Random rnd = new Random();
 			int x = rnd.nextInt(500)+100;
 			int y = rnd.nextInt(300)+100;
-			int rot = rnd.nextInt(90) - 45;
+//			int rot = rnd.nextInt(90) - 45;
 			
 			Plansza.this.pojazd01.setX(x);
 			Plansza.this.pojazd01.setY(y);
-			Plansza.this.pojazd01.setRotate(rot);
+//			Plansza.this.pojazd01.setRotate(rot);
 
 			Plansza.this.pojazd01.getTranslateTransition().setFromX(0);
 			Plansza.this.pojazd01.getTranslateTransition().setFromY(0);
-			Plansza.this.pojazd01.getRotateTransition().setFromAngle(rot);
+//			Plansza.this.pojazd01.getRotateTransition().setFromAngle(rot);
 			
 			Plansza.this.pauseButton.setDisable(true);
 			Plansza.this.playButton.setDisable(false);
