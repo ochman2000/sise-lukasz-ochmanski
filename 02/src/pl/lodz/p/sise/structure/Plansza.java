@@ -109,7 +109,8 @@ public class Plansza extends Application {
 		public void handle(ActionEvent arg0) {
 //			Plansza.this.pojazd01.rotateCar(10);
 //			Plansza.this.pojazd01.goForward(50);
-			Plansza.this.pojazd01.move(50, 50);
+//			Plansza.this.pojazd01.move(50, 50);
+			Plansza.this.pojazd01.parkuj();
 			Plansza.this.pojazd01.getTranslateTransition().play();
 //			Plansza.this.pojazd01.getRotateTransition().play();
 //			Plansza.this.pauseButton.setDisable(false);

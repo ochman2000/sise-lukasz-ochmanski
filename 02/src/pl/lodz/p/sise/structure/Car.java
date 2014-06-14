@@ -1,5 +1,7 @@
 package pl.lodz.p.sise.structure;
 
+import net.sourceforge.jFuzzyLogic.FIS;
+import net.sourceforge.jFuzzyLogic.FunctionBlock;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -108,5 +110,62 @@ public class Car extends Rectangle {
 		this.getTranslateTransition().setDuration(new Duration(500));
 		this.getTranslateTransition().setCycleCount(1);
 		this.getTranslateTransition().setInterpolator(Interpolator.LINEAR);
+	}
+	
+	public void parkuj() {
+		String filename = "fcl/driver.fcl";
+		FIS fis = FIS.load(filename, true);
+
+		if (fis == null) {
+			System.err.println("Can't load file: '" + filename + "'");
+			System.exit(1);
+		}
+
+		// Get default function block
+		FunctionBlock fb = fis.getFunctionBlock(null);
+
+		// Set inputs
+		Point2D nodeCoord = this.localToParent(this.getX(), this.getY());
+		double x = nodeCoord.getX();
+		double y = nodeCoord.getY();
+		
+		fb.setVariable("odlegloscXodSciany", x);
+		fb.setVariable("odlegloscYodSciany", y);
+		fb.setVariable("odlegloscXodKoperty", 700-x);
+		fb.setVariable("odlegloscYodKoperty", 225-y);
+
+		// Evaluate
+		fb.evaluate();
+
+		// Show output variable's chart
+		fb.getVariable("kierunekX").defuzzify();
+		fb.getVariable("kierunekY").defuzzify();
+
+		// Print ruleSet
+//		System.out.println(fb);
+		double kierunekX = fb.getVariable("kierunekX").getValue();
+		double kierunekY = fb.getVariable("kierunekY").getValue();
+		
+//		System.out.println("Kierunek w poziomie: " + fb.getVariable("kierunekX"));
+		System.out.println(fb.getVariable("kierunekX").getValue());
+//		System.out.println("Kierunek w pionie: " + fb.getVariable("kierunekY"));
+		System.out.println(fb.getVariable("kierunekY").getValue());
+		
+		if (kierunekX>10 && kierunekX<14)
+			kierunekX = 10* 3;
+		else if (kierunekX>14)
+			kierunekX = 20 *3;
+		else
+			kierunekX = 5 *3;
+		
+		if (kierunekY>10 && kierunekY<20)
+			kierunekY = 10 *3;
+		else if (kierunekY>20)
+			kierunekY = 20 *3;
+		else
+			kierunekY = -30;
+		System.out.println(kierunekX+", "+kierunekY);
+		
+			this.move(kierunekX, kierunekY);
 	}
 }

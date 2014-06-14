@@ -24,12 +24,12 @@ public class DrivingClass {
 		fb.evaluate();
 
 		// Show output variable's chart
-		fb.getVariable("tip").defuzzify();
+		fb.getVariable("zaparkowany").defuzzify();
 
 		// Print ruleSet
 //		System.out.println(fb);
-		System.out.println("Tip: " + fb.getVariable("tip").getValue());
-		System.out.println(fb.getVariable("tip"));
+		System.out.println("Samochód zaparkowany: " + fb.getVariable("zaparkowany").getName());
+		System.out.println(fb.getVariable("zaparkowany").getValue());
 
 	}
 }

@@ -6,11 +6,14 @@ VAR_INPUT
 	odlegloscYodSciany : REAL;				
 	odlegloscXodKoperty : REAL;
 	odlegloscYodKoperty : REAL;
+	katSkretuKol		: REAL;
 END_VAR
 
 // Define output variable
 VAR_OUTPUT				
-	zaparkowany : REAL;
+	kierunekX : REAL;
+	kierunekY : REAL;
+	katPojazdu: REAL;
 END_VAR
 
 FUZZIFY odlegloscXodSciany			
@@ -25,23 +28,41 @@ END_FUZZIFY
 
 FUZZIFY odlegloscXodKoperty			
 	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjnie := (-700, 0) (1, 1) (120,0);
+	TERM rewelacyjna := (-700, 0) (1, 1) (120,0);
 END_FUZZIFY
 
 FUZZIFY odlegloscYodKoperty			
 	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjnie := (-215, 0) (1, 1) (285,0);
+	TERM rewelacyjna := (-215, 0) (1, 1) (285,0);
 END_FUZZIFY
 
-
+FUZZIFY katSkretuKol			
+	TERM maly := (0, 0) (15, 1) (30, 0); 
+	TERM sredni := (15, 0) (30,1) (45, 0);
+	TERM duzy := (30,0) (45,0);
+END_FUZZIFY
 
 // Defzzzify output variable 'tip' : {'cheap', 'average', 'generous' }
-DEFUZZIFY zaparkowany			
-	TERM kiepsko := (0,0) (5,1) (10,0);
-	TERM dobrze := (10,0) (15,1) (20,0);
-	TERM rewelacyjnie := (20,0) (25,1) (30,0);
+DEFUZZIFY kierunekX			
+	TERM kiepski := (0,0) (5,1) (10,0);
+	TERM dobry := (10,0) (15,1) (20,0);
+	TERM rewelacyjny := (20,0) (25,1) (30,0);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 5;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+DEFUZZIFY kierunekY			
+	TERM kiepski := (0,0) (5,1) (10,0);
+	TERM dobry := (10,0) (15,1) (20,0);
+	TERM rewelacyjny := (20,0) (25,1) (30,0);
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+DEFUZZIFY katPojazdu	
+	TERM maly := (0, 0) (15, 1) (30, 0); 
+	TERM sredni := (15, 0) (30,1) (45, 0);
+	TERM duzy := (30,0) (45,0);
 END_DEFUZZIFY
 
 // Inference rules
@@ -50,11 +71,16 @@ RULEBLOCK No1
 	ACT : MIN;	// Use 'min' activation method
 	ACCU : MAX;	// Use 'max' accumulation method
 
-	RULE 1 : IF odlegloscXodSciany IS niebezpieczna OR odlegloscYodSciany IS niebezpieczna THEN zaparkowany IS kiepsko;
-	RULE 2 : IF odlegloscXodKoperty IS zaDaleko OR odlegloscYodKoperty IS zaDaleko THEN zaparkowany IS kiepsko; 
-	RULE 1 : IF odlegloscXodSciany IS bezpieczna OR odlegloscYodSciany IS bezpieczna THEN zaparkowany IS dobrze;
-	RULE 2 : IF odlegloscXodKoperty IS rewelacyjnie OR odlegloscYodKoperty IS rewelacyjnie THEN zaparkowany IS dobrze;
-	RULE 5 : IF odlegloscXodKoperty IS rewelacyjnie AND odlegloscYodKoperty IS rewelacyjnie THEN zaparkowany IS rewelacyjnie;
+	RULE 1 : IF odlegloscXodSciany IS niebezpieczna AND odlegloscXodKoperty IS zaDaleko THEN kierunekX IS kiepski;
+	RULE 2 : IF odlegloscYodSciany IS niebezpieczna AND odlegloscYodKoperty IS zaDaleko THEN kierunekY IS kiepski;
+	
+	RULE 3 : IF odlegloscXodSciany IS bezpieczna OR odlegloscXodKoperty IS rewelacyjna THEN kierunekX IS dobry;
+	RULE 4 : IF odlegloscYodSciany IS bezpieczna OR odlegloscYodKoperty IS rewelacyjna THEN kierunekY IS dobry;
+	
+	RULE 5 : IF odlegloscXodSciany IS bezpieczna AND odlegloscXodKoperty IS rewelacyjna THEN kierunekX IS rewelacyjny;
+	RULE 6 : IF odlegloscYodSciany IS bezpieczna AND odlegloscYodKoperty IS rewelacyjna THEN kierunekY IS rewelacyjny;
+	
+	
 	
 END_RULEBLOCK
 
