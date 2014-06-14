@@ -1,0 +1,61 @@
+FUNCTION_BLOCK driver	// Block definition (there may be more than one block per file)
+
+// Define input variables
+VAR_INPUT
+	odlegloscXodSciany : REAL;
+	odlegloscYodSciany : REAL;				
+	odlegloscXodKoperty : REAL;
+	odlegloscYodKoperty : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT				
+	zaparkowany : REAL;
+END_VAR
+
+FUZZIFY odlegloscXodSciany			
+	TERM bezpieczna := (0, 0) (700, 1) (820, 0); 
+	TERM niebezpieczna := (700, 0) (820,1);
+END_FUZZIFY
+
+FUZZIFY odlegloscYodSciany			
+	TERM bezpieczna := (0, 0) (215, 1) (285, 0) ; 
+	TERM niebezpieczna := (215, 0) (285, 1);
+END_FUZZIFY
+
+FUZZIFY odlegloscXodKoperty			
+	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
+	TERM rewelacyjnie := (-700, 0) (1, 1) (120,0);
+END_FUZZIFY
+
+FUZZIFY odlegloscYodKoperty			
+	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
+	TERM rewelacyjnie := (-215, 0) (1, 1) (285,0);
+END_FUZZIFY
+
+
+
+// Defzzzify output variable 'tip' : {'cheap', 'average', 'generous' }
+DEFUZZIFY zaparkowany			
+	TERM kiepsko := (0,0) (5,1) (10,0);
+	TERM dobrze := (10,0) (15,1) (20,0);
+	TERM rewelacyjnie := (20,0) (25,1) (30,0);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+// Inference rules
+RULEBLOCK No1
+	AND : MIN;	// Use 'min' for 'and'
+	ACT : MIN;	// Use 'min' activation method
+	ACCU : MAX;	// Use 'max' accumulation method
+
+	RULE 1 : IF odlegloscXodSciany IS niebezpieczna OR odlegloscYodSciany IS niebezpieczna THEN zaparkowany IS kiepsko;
+	RULE 2 : IF odlegloscXodKoperty IS zaDaleko OR odlegloscYodKoperty IS zaDaleko THEN zaparkowany IS kiepsko; 
+	RULE 1 : IF odlegloscXodSciany IS bezpieczna OR odlegloscYodSciany IS bezpieczna THEN zaparkowany IS dobrze;
+	RULE 2 : IF odlegloscXodKoperty IS rewelacyjnie OR odlegloscYodKoperty IS rewelacyjnie THEN zaparkowany IS dobrze;
+	RULE 5 : IF odlegloscXodKoperty IS rewelacyjnie AND odlegloscYodKoperty IS rewelacyjnie THEN zaparkowany IS rewelacyjnie;
+	
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
