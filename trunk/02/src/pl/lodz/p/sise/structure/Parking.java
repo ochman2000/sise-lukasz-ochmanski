@@ -1,6 +1,7 @@
 package pl.lodz.p.sise.structure;
 
 import pl.lodz.p.sise.handlers.*;
+import pl.lodz.p.sise.Animation;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -38,7 +39,11 @@ public class Parking extends Pane {
 	private Menu fileMenu;
 	private MenuBar mainMenu;
 	
-	public Parking() {
+	private Animation animation;
+	
+	private static Parking instance;
+	
+	private Parking() {
 		super();
 		this.setId("pane");
 
@@ -127,5 +132,19 @@ public class Parking extends Pane {
 		
 		this.getChildren().addAll(line00, line01, line02, line03, line04, line05,
 				pojazd00, pojazd01, pojazd03, pojazd04, mainMenu);
+	}
+	
+	public static Parking getInstance() {
+		if (instance==null) 
+			instance = new Parking();
+		return instance;
+	}
+
+	public Animation getAnimation() {
+		return animation;
+	}
+
+	public void setAnimation(Animation animation2) {
+		this.animation = animation2;
 	}
 }
