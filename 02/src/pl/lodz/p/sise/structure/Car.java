@@ -1,17 +1,21 @@
 package pl.lodz.p.sise.structure;
 
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
 
-public class Car extends Rectangle {
+public class Car extends ImageView {
 
 	private Duration elapsed;
 	
 	public Car() {
-		super(100, 50);
+		super();
+		Image image = new Image(this.getClass().getResource("car02.png").toExternalForm());
+		this.setImage(image);
 		this.setId("autko");
 		this.setY(225);
 	}

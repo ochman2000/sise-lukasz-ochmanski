@@ -16,7 +16,7 @@
     -fx-stroke-line-cap: butt;
 }
 
-#linia01, #linia02, #miejsce{
+.biala {
 	-fx-fill: grey;
 	-fx-stroke: white;
 	-fx-stroke-line-cap: butt;
