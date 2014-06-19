@@ -13,7 +13,6 @@ import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,10 +34,10 @@ public class Parking extends Application {
 	private Rectangle line04;
 	private Rectangle line05;
 	private Rectangle line00;
+	private ImageView pojazd00;
 	private ImageView pojazd01;
 	private ImageView pojazd03;
 	private ImageView pojazd04;
-	private ImageView pojazd00;
 
 	/**
 	 * Generate Path upon which animation will occur.
@@ -106,11 +105,11 @@ public class Parking extends Application {
 	 *            Group to which animation is applied.
 	 */
 	private void applyAnimation(final Pane group) {
-		ImageView pojazd01 = new Car();
+		pojazd02 = new Car();
 		final Path path = generateCurvyPath(determinePathOpacity());
 		group.getChildren().add(path);
-		group.getChildren().add(pojazd01);
-		final PathTransition transition = generatePathTransition(pojazd01, path);
+		group.getChildren().add(pojazd02);
+		final PathTransition transition = generatePathTransition(pojazd02, path);
 		transition.play();
 	}
 
@@ -132,7 +131,6 @@ public class Parking extends Application {
 				this.getClass().getResource("style.css").toExternalForm());
 
 		Image image = new Image(this.getClass().getResource("car01.png").toExternalForm());
-		pojazd02 = new Car();
 		
 		line00 = new Rectangle(120, 1);
 		line00.setId("linia00");
@@ -191,7 +189,7 @@ public class Parking extends Application {
 		line05.setY(215+3*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
 		pane.getChildren().addAll(line00, line01, line02, line03, line04, line05,
-				pojazd00, pojazd01, pojazd02, pojazd03, pojazd04);
+				pojazd00, pojazd01, pojazd03, pojazd04);
 
 		stage.setTitle("Sztuczna Inteligencja i Systemy Ekspertowe by Łukasz Ochmański "
 				+ "& Przemysław Szwajkowski");
