@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
@@ -47,7 +48,7 @@ public class JavaFxAnimations extends Application
     * @param path Path to be traveled upon.
     * @return PathTransition.
     */
-   private PathTransition generatePathTransition(final Shape shape, final Path path)
+   private PathTransition generatePathTransition(final ImageView shape, final Path path)
    {
       final PathTransition pathTransition = new PathTransition();
       pathTransition.setDuration(Duration.seconds(8.0));
@@ -93,7 +94,7 @@ public class JavaFxAnimations extends Application
    private void applyAnimation(final Group group)
    {
       final Circle circle = new Circle(20, 20, 15);
-      Rectangle pojazd01 = new Car();
+      ImageView pojazd01 = new Car();
       final Path path = generateCurvyPath(determinePathOpacity());
       group.getChildren().add(path);
       group.getChildren().add(pojazd01);
