@@ -5,6 +5,7 @@ import java.util.Random;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -19,7 +20,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Plansza extends Application {
+public class Parking extends Application {
 
     //main timeline
     private Timeline timeline;
@@ -110,30 +111,6 @@ public class Plansza extends Application {
 		restartButton.setOnAction(new RestartButtonHandler());
 		exitButton.setOnAction(new ExitButtonHandler());
 		
-        //create a timeline for moving the circle
-        timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.setAutoReverse(true);
- 
-        //You can add a specific action when each frame is started.
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-//                text.setText(i.toString());
-                i++;
-            }
- 
-        };
- 
-//        KeyValue keyValueX = new KeyValue(pojazd01.scaleXProperty(), 2);
-//        KeyValue keyValueY = new KeyValue(pojazd01.scaleYProperty(), 2);
- 
-        Duration duration = Duration.millis(500);
-        OnFinishedHandler onFinished = new OnFinishedHandler();
-        KeyFrame keyFrame = new KeyFrame(duration, onFinished);
-        timeline.getKeyFrames().add(keyFrame); 
-        timeline.play();
-//        timer.start();
 	}
 
 	public static void main(String[] args) {
@@ -146,69 +123,71 @@ public class Plansza extends Application {
 //			Plansza.this.pojazd01.rotateCar(10);
 //			Plansza.this.pojazd01.goForward(50);
 //			Plansza.this.pojazd01.move(50, 50);
-			Plansza.this.pojazd01.parkuj();
-			Plansza.this.pojazd01.getTranslateTransition().play();
-			Plansza.this.pojazd01.getRotateTransition().play();
+			Parking.this.pojazd01.parkuj();
+//			Parking.this.pojazd01.getTranslateTransition().play();
+//			Parking.this.pojazd01.getRotateTransition().play();
 //			Plansza.this.pauseButton.setDisable(false);
 //			Plansza.this.playButton.setDisable(true);
 //			Plansza.this.stopButton.setDisable(false);
+			
+	        
 		}
 	}
 
 	class PauseButtonHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.pojazd01.getTranslateTransition().pause();
-			Plansza.this.pojazd01.getRotateTransition().pause();
-			Plansza.this.pauseButton.setDisable(true);
-			Plansza.this.playButton.setDisable(false);
-			Plansza.this.stopButton.setDisable(false);
-			System.out.println(Plansza.this.pojazd01.getOffset(
-					Plansza.this.rect02.getX()+10, Plansza.this.rect02.getY()+10));
+//			Parking.this.pojazd01.getTranslateTransition().pause();
+//			Parking.this.pojazd01.getRotateTransition().pause();
+			Parking.this.pauseButton.setDisable(true);
+			Parking.this.playButton.setDisable(false);
+			Parking.this.stopButton.setDisable(false);
+			System.out.println(Parking.this.pojazd01.getOffset(
+					Parking.this.rect02.getX()+10, Parking.this.rect02.getY()+10));
 		}
 	}
 
 	class StopButtonHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.pojazd01.getTranslateTransition().stop();
-			Plansza.this.pojazd01.getRotateTransition().stop();
-			Plansza.this.pane.getChildren().remove(Plansza.this.pojazd01);
+			Parking.this.pojazd01.getTranslateTransition().stop();
+			Parking.this.pojazd01.getRotateTransition().stop();
+			Parking.this.pane.getChildren().remove(Parking.this.pojazd01);
 
-			Plansza.this.pojazd01 = new Car();
-			Plansza.this.pane.getChildren().add(Plansza.this.pojazd01);
-			Plansza.this.pauseButton.setDisable(true);
-			Plansza.this.playButton.setDisable(false);
-			Plansza.this.stopButton.setDisable(true);
+			Parking.this.pojazd01 = new Car();
+			Parking.this.pane.getChildren().add(Parking.this.pojazd01);
+			Parking.this.pauseButton.setDisable(true);
+			Parking.this.playButton.setDisable(false);
+			Parking.this.stopButton.setDisable(true);
 		}
 	}
 
 	class RestartButtonHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			Plansza.this.pojazd01.getTranslateTransition().stop();
-			Plansza.this.pojazd01.getRotateTransition().stop();
-			Plansza.this.pane.getChildren().remove(Plansza.this.pojazd01);
+			Parking.this.pojazd01.getTranslateTransition().stop();
+			Parking.this.pojazd01.getRotateTransition().stop();
+			Parking.this.pane.getChildren().remove(Parking.this.pojazd01);
 
-			Plansza.this.pojazd01 = new Car();
-			Plansza.this.pane.getChildren().add(Plansza.this.pojazd01);
+			Parking.this.pojazd01 = new Car();
+			Parking.this.pane.getChildren().add(Parking.this.pojazd01);
 
 			Random rnd = new Random();
 			int x = rnd.nextInt(500)+100;
 			int y = rnd.nextInt(300)+100;
 			int rot = rnd.nextInt(90) - 45;
 			
-			Plansza.this.pojazd01.setX(x);
-			Plansza.this.pojazd01.setY(y);
-			Plansza.this.pojazd01.setRotate(rot);
+			Parking.this.pojazd01.setX(x);
+			Parking.this.pojazd01.setY(y);
+			Parking.this.pojazd01.setRotate(rot);
 
-			Plansza.this.pojazd01.getTranslateTransition().setFromX(0);
-			Plansza.this.pojazd01.getTranslateTransition().setFromY(0);
-			Plansza.this.pojazd01.getRotateTransition().setFromAngle(rot);
+			Parking.this.pojazd01.getTranslateTransition().setFromX(0);
+			Parking.this.pojazd01.getTranslateTransition().setFromY(0);
+			Parking.this.pojazd01.getRotateTransition().setFromAngle(rot);
 			
-			Plansza.this.pauseButton.setDisable(true);
-			Plansza.this.playButton.setDisable(false);
-			Plansza.this.stopButton.setDisable(false);
+			Parking.this.pauseButton.setDisable(true);
+			Parking.this.playButton.setDisable(false);
+			Parking.this.stopButton.setDisable(false);
 		}
 	}
 
@@ -221,8 +200,8 @@ public class Plansza extends Application {
 	
     class OnFinishedHandler implements EventHandler<ActionEvent> {
         public void handle(ActionEvent t) {
-//             Plansza.this.pojazd01.setTranslateX(java.lang.Math.random()*200-100);
-             Plansza.this.pojazd01.parkuj();
+//             Parking.this.pojazd01.setTranslateX(20);
+//             Parking.this.pojazd01.parkuj();
              //reset counter
              i = 0;
         }
