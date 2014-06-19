@@ -13,7 +13,7 @@ public class Car extends ImageView {
 	
 	public Car() {
 		super();
-		Image image = new Image(this.getClass().getResource("car02.png").toExternalForm());
+		Image image = new Image("file:resources/car02.png");
 		this.setImage(image);
 		this.setId("autko");
 		this.setY(225);

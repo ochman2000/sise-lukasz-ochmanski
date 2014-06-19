@@ -93,7 +93,6 @@ public class JavaFxAnimations extends Application
     */
    private void applyAnimation(final Group group)
    {
-      final Circle circle = new Circle(20, 20, 15);
       ImageView pojazd01 = new Car();
       final Path path = generateCurvyPath(determinePathOpacity());
       group.getChildren().add(path);
