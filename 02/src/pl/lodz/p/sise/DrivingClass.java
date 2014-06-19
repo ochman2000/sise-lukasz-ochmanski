@@ -2,7 +2,6 @@ package pl.lodz.p.sise;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pl.lodz.p.sise.structure.Parking;
 
@@ -15,7 +14,7 @@ import pl.lodz.p.sise.structure.Parking;
  */
 public class DrivingClass extends Application {
 	
-	private Pane pane;
+	private Parking pane;
 	private Scene scene;
 
 	
@@ -30,7 +29,12 @@ public class DrivingClass extends Application {
 	 */
 	@Override
 	public void start(final Stage stage) throws Exception {
-		pane = new Parking();
+		pane = Parking.getInstance();
+		
+		Animation animation = new Animation();
+		animation.setApplication(this);
+		animation.applyAnimation(pane);
+		pane.setAnimation(animation);
 
 		scene = new Scene(pane, 900, 500);
 		scene.getStylesheets().addAll("file:resources/style.css");
@@ -40,9 +44,6 @@ public class DrivingClass extends Application {
 		stage.setScene(scene);
 		stage.sizeToScene();
 		stage.show();
-		Animation animation = new Animation();
-		animation.setApplication(this);
-		animation.applyAnimation(pane);
 		
 	}
 

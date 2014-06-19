@@ -18,6 +18,11 @@ public class Animation {
 
 	Application application;
 	private Car pojazd;
+	private PathTransition transition;
+	
+	public Animation(){
+		pojazd = new Car();
+	}
 	
 	/**
 	 * Generate Path upon which animation will occur.
@@ -84,11 +89,12 @@ public class Animation {
 	 *            Group to which animation is applied.
 	 */
 	public void applyAnimation(final Pane group) {
-		pojazd = new Car();
 		final Path path = generateCurvyPath(determinePathOpacity());
+		group.getChildren().remove(path);
+		group.getChildren().remove(pojazd);
 		group.getChildren().add(path);
 		group.getChildren().add(pojazd);
-		final PathTransition transition = generatePathTransition(pojazd, path);
+		transition = generatePathTransition(pojazd, path);
 		transition.play();
 	}
 
@@ -100,11 +106,19 @@ public class Animation {
 		this.application = aplication;
 	}
 
-	public Car getPojazd02() {
+	public Car getCzerwonyPojazd() {
 		return pojazd;
 	}
 
-	public void setPojazd02(Car pojazd02) {
+	public void setCzerwonyPojazd(Car pojazd02) {
 		this.pojazd = pojazd02;
+	}
+
+	public PathTransition getTransition() {
+		return transition;
+	}
+
+	public void setTransition(PathTransition transition) {
+		this.transition = transition;
 	}
 }
