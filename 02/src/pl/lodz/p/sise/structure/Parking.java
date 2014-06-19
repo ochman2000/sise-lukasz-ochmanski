@@ -1,5 +1,10 @@
 package pl.lodz.p.sise.structure;
 
+import pl.lodz.p.sise.handlers.*;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -24,6 +29,14 @@ public class Parking extends Pane {
 	private ImageView pojazd01;
 	private ImageView pojazd03;
 	private ImageView pojazd04;
+	
+	private MenuItem playButton;
+	private MenuItem pauseButton;
+	private MenuItem stopButton;
+	private MenuItem restartButton;
+	private MenuItem exitButton;
+	private Menu fileMenu;
+	private MenuBar mainMenu;
 	
 	public Parking() {
 		super();
@@ -87,7 +100,32 @@ public class Parking extends Pane {
 		line05.setX(700);
 		line05.setY(215+3*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
+		playButton = new MenuItem("Play");
+        pauseButton = new MenuItem("Pause");
+        stopButton = new MenuItem("Stop");
+        restartButton = new MenuItem("Restart");
+        exitButton = new MenuItem("Exit");
+        
+        playButton.setOnAction(new PlayButtonHandler());
+        pauseButton.setOnAction(new PauseButtonHandler());
+        stopButton.setOnAction(new StopButtonHandler());
+        restartButton.setOnAction(new RestartButtonHandler());
+        exitButton.setOnAction(new ExitButtonHandler());
+
+        
+        fileMenu = new Menu("File");
+        fileMenu.getItems().add(playButton);
+        fileMenu.getItems().add(pauseButton);
+        fileMenu.getItems().add(stopButton);
+        fileMenu.getItems().add(new SeparatorMenuItem());
+        fileMenu.getItems().add(restartButton);
+        fileMenu.getItems().add(new SeparatorMenuItem());
+        fileMenu.getItems().add(exitButton);
+
+        mainMenu = new MenuBar();
+        mainMenu.getMenus().add(fileMenu);
+		
 		this.getChildren().addAll(line00, line01, line02, line03, line04, line05,
-				pojazd00, pojazd01, pojazd03, pojazd04);
+				pojazd00, pojazd01, pojazd03, pojazd04, mainMenu);
 	}
 }
