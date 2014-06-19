@@ -1,4 +1,4 @@
-FUNCTION_BLOCK driver	// Block definition (there may be more than one block per file)
+FUNCTION_BLOCK driver1_2	// Block definition (there may be more than one block per file)
 
 // Define input variables
 VAR_INPUT
@@ -12,9 +12,7 @@ END_VAR
 // Define output variable
 VAR_OUTPUT				
 	kierunekX : REAL;
-	kierunekY : REAL;
-	katSkretuKol : REAL;
-	
+	kierunekY : REAL;	
 END_VAR
 
 FUZZIFY odlegloscXodSciany			
@@ -27,14 +25,18 @@ FUZZIFY odlegloscYodSciany
 	TERM niebezpieczna := (215, 0) (285, 1);
 END_FUZZIFY
 
-FUZZIFY odlegloscXodKoperty			
-	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjna := (-700, 0) (1, 1) (120,0);
+FUZZIFY odlegloscXodKoperty		
+	TERM zaDalekoZlewej := (-50, 1) (0, 0); 
+	TERM bliskoZlewej := (-700, 0) (1, 1);
+	TERM zaDalekoZPrawej := (0,0) (50, 1);
+	TERM bliskoZPrawej := (1, 1) (120, 0);
 END_FUZZIFY
 
 FUZZIFY odlegloscYodKoperty			
-	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjna := (-215, 0) (1, 1) (285,0);
+	TERM zaDalekoZGory := (-50, 1) (0, 0) (50, 1);
+	TERM bliskoZGory := (-215, 0) (1, 1) (285,0);
+	TERM zaDalekoZDolu := (215, 0) () ()
+	TERM bliskoZGory := ()
 END_FUZZIFY
 
 FUZZIFY katPojazdu			
@@ -45,26 +47,32 @@ END_FUZZIFY
 
 // Defzzzify output variable 'tip' : {'cheap', 'average', 'generous' }
 DEFUZZIFY kierunekX			
-	TERM kiepski := (0,0) (5,1) (10,0);
-	TERM dobry := (10,0) (15,1) (20,0);
-	TERM rewelacyjny := (20,0) (25,1) (30,0);
+	TERM negative_max := (-30,1) (-15,0);
+	TERM negative_medium := (-30,0) (-15,1) (-5,0);
+	TERM negative_small := (-15,0) (-5,1) (0,0);
+	TERM zero := (-5,0) (0,1) (5,0);
+	TERM positive_small :=  (0,0) (5,1) (15,0);
+	TERM positive_medium := (5,0) (15,1) (30,0);
+	TERM positive_max := (15,0) (30,1);
+	
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 5;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
 DEFUZZIFY kierunekY			
-	TERM kiepski := (0,0) (5,1) (10,0);
-	TERM dobry := (10,0) (15,1) (20,0);
-	TERM rewelacyjny := (20,0) (25,1) (30,0);
+	TERM negative_small := (-15,0) (-5,1) (0,0);
+	TERM zero := (-5,0) (0,1) (5,0);
+	TERM positive_small :=  (0,0) (5,1) (15,0);
+	
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
-DEFUZZIFY katSkretuKol	
-	TERM maly := (0, 0) (15, 1) (30, 0); 
-	TERM sredni := (15, 0) (30,1) (45, 0);
-	TERM duzy := (30,0) (45,0);
-END_DEFUZZIFY
+//DEFUZZIFY katSkretuKol	
+//	TERM maly := (0, 0) (15, 1) (30, 0); 
+//	TERM sredni := (15, 0) (30,1) (45, 0);
+//	TERM duzy := (30,0) (45,0);
+//END_DEFUZZIFY
 
 // Inference rules
 RULEBLOCK sterowaniePionowe
@@ -72,7 +80,7 @@ RULEBLOCK sterowaniePionowe
 	ACT : MIN;	// Use 'min' activation method
 	ACCU : MAX;	// Use 'max' accumulation method
 
-	RULE 1 : IF odlegloscXodSciany IS niebezpieczna AND odlegloscXodKoperty IS zaDaleko THEN kierunekX IS kiepski;
+	RULE 1 : IF odlegloscXodSciany IS niebezpieczna AND odlegloscXodKoperty IS zaDaleko THEN kierunekX IS ;
 	RULE 2 : IF odlegloscXodSciany IS bezpieczna OR odlegloscXodKoperty IS rewelacyjna THEN kierunekX IS dobry;
 	RULE 3 : IF odlegloscXodSciany IS bezpieczna AND odlegloscXodKoperty IS rewelacyjna THEN kierunekX IS rewelacyjny;
 	
@@ -99,6 +107,10 @@ RULEBLOCK angle
 	RULE 3: IF odlegloscXodKoperty IS rewelacyjna THEN katSkretuKol IS maly;
 	RULE 4: IF odlegloscYodKoperty IS rewelacyjna THEN katSkretuKol IS maly;
 	
+END_RULEBLOCK
+
+RULEBLOCK blisko_rozwiazania
+
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
