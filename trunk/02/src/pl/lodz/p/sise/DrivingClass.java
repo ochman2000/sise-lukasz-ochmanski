@@ -1,22 +1,10 @@
 package pl.lodz.p.sise;
 
-import java.util.List;
-
-import pl.lodz.p.sise.structure.Car;
-import pl.lodz.p.sise.structure.Parking;
-import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import pl.lodz.p.sise.structure.Parking;
 
 /**
  * Simple example demonstrating JavaFX animations.
@@ -29,7 +17,6 @@ public class DrivingClass extends Application {
 	
 	private Pane pane;
 	private Scene scene;
-	private Car pojazd02;
 
 	
 

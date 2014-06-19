@@ -16,7 +16,8 @@ public class Car extends ImageView {
 		Image image = new Image("file:resources/car02.png");
 		this.setImage(image);
 		this.setId("autko");
-		this.setY(225);
+//		this.setY(225);
+		this.setX(-200);
 	}
 	
 	public boolean equals(Object obj) {
