@@ -26,10 +26,10 @@ public class Parking extends Pane {
 	private Rectangle line04;
 	private Rectangle line05;
 	private Rectangle line00;
-	private ImageView pojazd00;
-	private ImageView pojazd01;
-	private ImageView pojazd03;
-	private ImageView pojazd04;
+	private ImageView vehicle00;
+	private ImageView vehicle01;
+	private ImageView vehicle02;
+	private ImageView vehicle03;
 	
 	private MenuItem playButton;
 	private MenuItem pauseButton;
@@ -55,10 +55,10 @@ public class Parking extends Pane {
 		line00.setX(700);
 		line00.setY(215-2*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
-		pojazd00 = new ImageView();
-        pojazd00.setImage(image);
-        pojazd00.setX(700);
-        pojazd00.setY(215+10-2*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
+		vehicle00 = new ImageView();
+        vehicle00.setImage(image);
+        vehicle00.setX(700);
+        vehicle00.setY(215+10-2*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 
 		line01 = new Rectangle(120, 1);
 		line01.setId("linia01");
@@ -66,10 +66,10 @@ public class Parking extends Pane {
 		line01.setX(700);
 		line01.setY(215-1*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
-		pojazd01 = new ImageView();
-        pojazd01.setImage(image);
-        pojazd01.setX(700);
-        pojazd01.setY(215+10-1*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
+		vehicle01 = new ImageView();
+        vehicle01.setImage(image);
+        vehicle01.setX(700);
+        vehicle01.setY(215+10-1*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 
 		line02 = new Rectangle(120, 1);
 		line02.setId("linia02");
@@ -83,10 +83,10 @@ public class Parking extends Pane {
 		line03.setX(700);
 		line03.setY(215+1*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
-		pojazd03 = new ImageView();
-        pojazd03.setImage(image);
-        pojazd03.setX(700);
-        pojazd03.setY(215+10+1*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
+		vehicle02 = new ImageView();
+        vehicle02.setImage(image);
+        vehicle02.setX(700);
+        vehicle02.setY(215+10+1*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
 		line04 = new Rectangle(120, 1);
 		line04.setId("linia04");
@@ -94,10 +94,10 @@ public class Parking extends Pane {
 		line04.setX(700);
 		line04.setY(215+2*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
-		pojazd04 = new ImageView();
-        pojazd04.setImage(image);
-        pojazd04.setX(700);
-        pojazd04.setY(215+10+2*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
+		vehicle03 = new ImageView();
+        vehicle03.setImage(image);
+        vehicle03.setX(700);
+        vehicle03.setY(215+10+2*SZEROKOSC_MIEJSCA_PARKINGOWEGO);
 		
 		line05 = new Rectangle(120, 1);
 		line05.setId("linia05");
@@ -131,7 +131,7 @@ public class Parking extends Pane {
         mainMenu.getMenus().add(fileMenu);
 		
 		this.getChildren().addAll(line00, line01, line02, line03, line04, line05,
-				pojazd00, pojazd01, pojazd03, pojazd04, mainMenu);
+				vehicle00, vehicle01, vehicle02, vehicle03, mainMenu);
 	}
 	
 	public static Parking getInstance() {

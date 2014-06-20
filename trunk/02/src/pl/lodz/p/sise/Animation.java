@@ -17,11 +17,11 @@ import pl.lodz.p.sise.structure.Car;
 public class Animation {
 
 	Application application;
-	private Car pojazd;
+	private Car vehicle;
 	private PathTransition transition;
 	
 	public Animation(){
-		pojazd = new Car();
+		vehicle = new Car();
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class Animation {
 	 *            The opacity of the path representation.
 	 * @return Generated path.
 	 */
-	private Path generateCurvyPath(final double pathOpacity) {
+	public Path generateCurvyPath(final double pathOpacity) {
 		final Path path = new Path();
 		path.getElements().add(new MoveTo(60, 250));
 		path.getElements().add(new CubicCurveTo(60, 350, 160, 400, 310, 350));
@@ -91,10 +91,10 @@ public class Animation {
 	public void applyAnimation(final Pane group) {
 		final Path path = generateCurvyPath(determinePathOpacity());
 		group.getChildren().remove(path);
-		group.getChildren().remove(pojazd);
+		group.getChildren().remove(vehicle);
 		group.getChildren().add(path);
-		group.getChildren().add(pojazd);
-		transition = generatePathTransition(pojazd, path);
+		group.getChildren().add(vehicle);
+		transition = generatePathTransition(vehicle, path);
 		transition.play();
 	}
 
@@ -106,12 +106,12 @@ public class Animation {
 		this.application = aplication;
 	}
 
-	public Car getCzerwonyPojazd() {
-		return pojazd;
+	public Car getRedVehicle() {
+		return vehicle;
 	}
 
-	public void setCzerwonyPojazd(Car pojazd02) {
-		this.pojazd = pojazd02;
+	public void setRedVehicle(Car vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	public PathTransition getTransition() {
