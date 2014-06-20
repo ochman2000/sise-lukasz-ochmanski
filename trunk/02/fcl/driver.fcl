@@ -6,19 +6,16 @@ VAR_INPUT
 	odlegloscYodSciany : REAL;				
 	odlegloscXodKoperty : REAL;
 	odlegloscYodKoperty : REAL;
-	katPojazdu: REAL;
 END_VAR
 
 // Define output variable
 VAR_OUTPUT				
-	kierunekX : REAL;
-	kierunekY : REAL;
-	katSkretuKol : REAL;
-	
+	kierunek : REAL;
+	przod	: REAL;
 END_VAR
 
 FUZZIFY odlegloscXodSciany			
-	TERM bezpieczna := (0, 0) (700, 1) (820, 0); 
+	TERM bezpieczna := (0, 1) (700, 1) (820, 0); 
 	TERM niebezpieczna := (700, 0) (820,1);
 END_FUZZIFY
 
@@ -34,70 +31,38 @@ END_FUZZIFY
 
 FUZZIFY odlegloscYodKoperty			
 	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjna := (-215, 0) (1, 1) (285,0);
+	TERM rewelacyjna := (-225, 0) (1, 1) (225,0);
 END_FUZZIFY
 
-FUZZIFY katPojazdu			
-	TERM maly := (0, 0) (15, 1) (30, 0); 
-	TERM sredni := (15, 0) (30,1) (45, 0);
-	TERM duzy := (30,0) (45,0);
-END_FUZZIFY
 
 // Defzzzify output variable 'tip' : {'cheap', 'average', 'generous' }
-DEFUZZIFY kierunekX			
-	TERM kiepski := (0,0) (5,1) (10,0);
-	TERM dobry := (10,0) (15,1) (20,0);
-	TERM rewelacyjny := (20,0) (25,1) (30,0);
-	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
-	DEFAULT := 5;		// Default value is 0 (if no rule activates defuzzifier)
-END_DEFUZZIFY
-
-DEFUZZIFY kierunekY			
-	TERM kiepski := (0,0) (5,1) (10,0);
-	TERM dobry := (10,0) (15,1) (20,0);
-	TERM rewelacyjny := (20,0) (25,1) (30,0);
+DEFUZZIFY kierunek			
+	TERM lewo := (-5,1) (-1,0);
+	TERM prosto := (-1,0) (0,1) (1,0);
+	TERM prawo :=  (1,0) (5,1);
+	
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
-DEFUZZIFY katSkretuKol	
-	TERM maly := (0, 0) (15, 1) (30, 0); 
-	TERM sredni := (15, 0) (30,1) (45, 0);
-	TERM duzy := (30,0) (45,0);
+DEFUZZIFY przod			
+	TERM true := 1;
+	TERM false := 0;
+	
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 1;		// Default value is 1 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
+
 // Inference rules
-RULEBLOCK sterowaniePionowe
+RULEBLOCK sterowanie
 	AND : MIN;	// Use 'min' for 'and'
 	ACT : MIN;	// Use 'min' activation method
 	ACCU : MAX;	// Use 'max' accumulation method
 
-	RULE 1 : IF odlegloscXodSciany IS niebezpieczna AND odlegloscXodKoperty IS zaDaleko THEN kierunekX IS kiepski;
-	RULE 2 : IF odlegloscXodSciany IS bezpieczna OR odlegloscXodKoperty IS rewelacyjna THEN kierunekX IS dobry;
-	RULE 3 : IF odlegloscXodSciany IS bezpieczna AND odlegloscXodKoperty IS rewelacyjna THEN kierunekX IS rewelacyjny;
-	
-END_RULEBLOCK
-
-RULEBLOCK sterowaniePoziome
-	AND : MIN;	// Use 'min' for 'and'
-	ACT : MIN;	// Use 'min' activation method
-	ACCU : MAX;	// Use 'max' accumulation method
-	
-	RULE 1 : IF odlegloscYodSciany IS niebezpieczna AND odlegloscYodKoperty IS zaDaleko THEN kierunekY IS kiepski;
-	RULE 2 : IF odlegloscYodSciany IS bezpieczna OR odlegloscYodKoperty IS rewelacyjna THEN kierunekY IS dobry;
-	RULE 3 : IF odlegloscYodSciany IS bezpieczna AND odlegloscYodKoperty IS rewelacyjna THEN kierunekY IS rewelacyjny;
-	
-END_RULEBLOCK
-
-RULEBLOCK angle
-	AND : MIN;	// Use 'min' for 'and'
-	ACT : MIN;	// Use 'min' activation method
-	ACCU : MAX;	// Use 'max' accumulation method
-	
-	RULE 1: IF katPojazdu IS maly AND odlegloscXodKoperty IS rewelacyjna THEN katSkretuKol IS duzy;
-	RULE 2: IF katPojazdu IS maly AND odlegloscYodKoperty IS rewelacyjna THEN katSkretuKol IS duzy;
-	RULE 3: IF odlegloscXodKoperty IS rewelacyjna THEN katSkretuKol IS maly;
-	RULE 4: IF odlegloscYodKoperty IS rewelacyjna THEN katSkretuKol IS maly;
+//	RULE 1 : IF odlegloscXodSciany IS niebezpieczna AND odlegloscXodKoperty IS zaDaleko THEN kierunek IS kiepski;
+//	RULE 2 : IF odlegloscXodSciany IS bezpieczna OR odlegloscXodKoperty IS rewelacyjna THEN kierunek IS dobry;
+//	RULE 3 : IF odlegloscXodSciany IS bezpieczna AND odlegloscXodKoperty IS rewelacyjna THEN kierunek IS rewelacyjny;
 	
 END_RULEBLOCK
 

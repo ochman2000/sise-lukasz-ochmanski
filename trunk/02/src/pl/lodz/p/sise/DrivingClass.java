@@ -31,7 +31,7 @@ public class DrivingClass extends Application {
 	public void start(final Stage stage) throws Exception {
 		pane = Parking.getInstance();
 		
-		Animation animation = new Animation();
+		Animation animation = new FuzzyControler();
 		animation.setApplication(this);
 		animation.applyAnimation(pane);
 		pane.setAnimation(animation);
