@@ -15,8 +15,8 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY odlegloscXodSciany			
-	TERM bezpieczna := (0, 1) (700, 1) (820, 0); 
-	TERM niebezpieczna := (700, 0) (820,1);
+	TERM bezpieczna := (0, 1) (600, 1) (750, 0); 
+	TERM niebezpieczna := (600, 0) (750,1);
 END_FUZZIFY
 
 FUZZIFY odlegloscYodSciany			
@@ -26,12 +26,15 @@ END_FUZZIFY
 
 FUZZIFY odlegloscXodKoperty			
 	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjna := (-700, 0) (1, 1) (120,0);
+	TERM rewelacyjna := (-700, 0) (1, 1) (120, 0);
 END_FUZZIFY
 
-FUZZIFY odlegloscYodKoperty			
-	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjna := (-225, 0) (1, 1) (225,0);
+FUZZIFY odlegloscYodKoperty
+	TERM bardzoDalekoZLewej := (-200, 1) (-150, 0);
+	TERM dalekoZLewej := (-150, 0) (-100, 1) (-50, 0);
+	TERM idealna := (-50, 0) (0, 1) (50, 0);
+	TERM dalekoZPrawej := (50,0) (100,1) (150,0);
+	TERM bardzoDalekoZPrawej := (150,0) (200,1);
 END_FUZZIFY
 
 
@@ -46,10 +49,10 @@ DEFUZZIFY kierunek
 END_DEFUZZIFY
 
 DEFUZZIFY przod			
-	TERM true := 1;
-	TERM false := 0;
+	TERM true := (0.5,0) (1,1) (1.5,0);
+	TERM false := (-0.5,0) (0,1) (0.5,0);
 	
-	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	METHOD : MM;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 1;		// Default value is 1 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
@@ -59,10 +62,14 @@ RULEBLOCK sterowanie
 	AND : MIN;	// Use 'min' for 'and'
 	ACT : MIN;	// Use 'min' activation method
 	ACCU : MAX;	// Use 'max' accumulation method
-
-//	RULE 1 : IF odlegloscXodSciany IS niebezpieczna AND odlegloscXodKoperty IS zaDaleko THEN kierunek IS kiepski;
-//	RULE 2 : IF odlegloscXodSciany IS bezpieczna OR odlegloscXodKoperty IS rewelacyjna THEN kierunek IS dobry;
-//	RULE 3 : IF odlegloscXodSciany IS bezpieczna AND odlegloscXodKoperty IS rewelacyjna THEN kierunek IS rewelacyjny;
+	
+	RULE 1 : IF odlegloscYodKoperty IS bardzoDalekoZLewej THEN kierunek IS prawo;
+	RULE 2 : IF odlegloscYodKoperty IS dalekoZLewej THEN kierunek IS prawo;
+	RULE 3 : IF odlegloscYodKoperty IS idealna THEN kierunek IS prosto;
+	RULE 4 : IF odlegloscYodKoperty IS dalekoZPrawej THEN kierunek IS lewo;
+	RULE 5 : IF odlegloscYodKoperty IS bardzoDalekoZPrawej THEN kierunek IS lewo;
+	RULE 6 : IF odlegloscXodSciany IS niebezpieczna THEN przod IS false;
+	RULE 7 : IF odlegloscXodSciany IS bezpieczna THEN przod IS true;
 	
 END_RULEBLOCK
 
