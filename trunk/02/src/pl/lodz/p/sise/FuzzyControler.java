@@ -14,6 +14,8 @@ public class FuzzyControler extends Animation {
 
 	private static final int DESTINATION_X = 760;
 	private static final int DESTINATION_Y = 248;
+	private static int START_X;
+	private static int START_Y;
 	private double X;
 	private double Y;
 
@@ -24,8 +26,10 @@ public class FuzzyControler extends Animation {
 	public Path generateCurvyPath(final double pathOpacity) {
 		final Path path = new Path();
 		Random rnd = new Random();
-		this.setX(rnd.nextInt(500)+100);
-		this.setY(rnd.nextInt(400));
+		START_X = rnd.nextInt(500)+100;
+		START_Y = rnd.nextInt(400);
+		this.setX(START_X);
+		this.setY(START_Y);
 		
 		path.getElements().add(new MoveTo(getX(), getY()));
 //		path.getElements().add(new CubicCurveTo(60, 350, 160, 400, 310, 350));
@@ -58,8 +62,8 @@ public class FuzzyControler extends Animation {
 
 		fb.setVariable("odlegloscXodSciany", x);
 		fb.setVariable("odlegloscYodSciany", y);
-		fb.setVariable("odlegloscXodKoperty", x-DESTINATION_X);
-		fb.setVariable("odlegloscYodKoperty", y-DESTINATION_Y);
+		fb.setVariable("odlegloscXodKoperty", DESTINATION_X-x);
+		fb.setVariable("odlegloscYodKoperty", DESTINATION_Y-y);
 
 		// Evaluate
 		fb.evaluate();
@@ -76,29 +80,31 @@ public class FuzzyControler extends Animation {
 		
 		PathElement path=null;
 		if (kierunek<=-1 && przod==1.0) {
-			path = new LineTo(getX()+1, getY()-kierunek);
-			setX(getX()+1);
-			setY(getY()-kierunek);
-			System.out.print("Do przodu i ");
-			System.out.println("skręt w lewo");
+			path = new LineTo(getX()+10, getFunctionOf(getX()+10));
+			setX(getX()+10);
+			setY(getFunctionOf(getX()+10));
+			System.out.print("x,y "+getX()+", "+getY());
+			System.out.print(" Do przodu i ");
+			System.out.println("skręt w prawo");
 		}
 		else if (kierunek>1 && przod==1.0) {
-			path = new LineTo(getX()+1, getY()+kierunek);
-			setX(getX()+1);
-			setY(getY()+kierunek);
-			System.out.print("Do przodu i ");
-			System.out.println("skręt w prawo");
+			path = new LineTo(getX()+10, getFunctionOf(getX()+10));
+			setX(getX()+10);
+			setY(getFunctionOf(getX()+10));
+			System.out.print("x,y "+getX()+", "+getY());
+			System.out.print(" Do przodu i ");
+			System.out.println("skręt w lewo");
 		}
 		else if (przod!=1.0) {
 			if (getY()<250) {				
 //				path = new ArcTo(20, 20, 0.0, 100.0, 350.0, true, true);
 //				path = new QuadCurveTo(getX()-100, getY(), 600, 400, 200, 250);
-				path = new QuadCurveTo(400, 600, 200, 250);
+				path = new QuadCurveTo(400, 448, 200, 250);
 			}
 			else {
 //				path = new ArcTo(20, 20, 0.0, 100.0, 150.0, true, false);
 //				path = new CubicCurveTo(getX()-100, getY(), 200, 400, 200, 250);
-				path = new QuadCurveTo(400, 200, 200, 250);
+				path = new QuadCurveTo(400, 48, 200, 250);
 			}
 			setX(200);
 			setY(250);
@@ -118,7 +124,7 @@ public class FuzzyControler extends Animation {
 	}
 
 	public void setX(double x) {
-		X = x;
+		this.X = x;
 	}
 
 	public double getY() {
@@ -126,6 +132,15 @@ public class FuzzyControler extends Animation {
 	}
 
 	public void setY(double y) {
-		Y = y;
+		this.Y = y;
+	}
+	
+	private double getFunctionOf(double x) {
+		double translatedX = x-(DESTINATION_X-150);
+		
+		double a = (DESTINATION_Y-START_Y)/(Math.pow(START_X-(DESTINATION_X-150), 2));
+		System.out.println("a ="+a);
+		double y = a*Math.pow((translatedX), 2)-DESTINATION_Y;
+		return -y;
 	}
 }
