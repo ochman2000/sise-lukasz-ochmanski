@@ -2,13 +2,12 @@ package pl.lodz.p.sise;
 
 import java.util.Random;
 
-import javafx.geometry.Point2D;
 import javafx.scene.shape.ArcTo;
+import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.PathElement;
-import javafx.scene.shape.QuadCurveTo;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
 
@@ -28,24 +27,21 @@ public class FuzzyControler extends Animation {
 	public Path generateCurvyPath(final double pathOpacity) {
 		final Path path = new Path();
 		Random rnd = new Random();
-		START_X = rnd.nextInt(500)+200;
+		START_X = rnd.nextInt(500) + 200;
 		START_Y = rnd.nextInt(400);
 		this.setX(START_X);
 		this.setY(START_Y);
-		
+
 		path.getElements().add(new MoveTo(getX(), getY()));
-//		path.getElements().add(new CubicCurveTo(60, 350, 160, 400, 310, 350));
-//		path.getElements().add(new CubicCurveTo(310, 350, 460, 250, 
-//						DESTINATION_X-150, DESTINATION_Y));
-		while (!(getX()==DESTINATION_X-150 && getY()==DESTINATION_Y)) {
+		while (!(getX() == DESTINATION_X - 150 && getY() == DESTINATION_Y)) {
 			path.getElements().add(getDirection());
 		}
 		path.getElements().add(new LineTo(DESTINATION_X, DESTINATION_Y));
-		
-		path.setOpacity(1.0);
+
+		path.setOpacity(0.0);
 		return path;
 	}
-	
+
 	public PathElement getDirection() {
 		String filename = "fcl/driver.fcl";
 		FIS fis = FIS.load(filename, true);
@@ -64,8 +60,8 @@ public class FuzzyControler extends Animation {
 
 		fb.setVariable("odlegloscXodSciany", x);
 		fb.setVariable("odlegloscYodSciany", y);
-		fb.setVariable("odlegloscXodKoperty", DESTINATION_X-x);
-		fb.setVariable("odlegloscYodKoperty", DESTINATION_Y-y);
+		fb.setVariable("odlegloscXodKoperty", DESTINATION_X - x);
+		fb.setVariable("odlegloscYodKoperty", DESTINATION_Y - y);
 
 		// Evaluate
 		fb.evaluate();
@@ -75,62 +71,59 @@ public class FuzzyControler extends Animation {
 		fb.getVariable("przod").defuzzify();
 
 		// Print ruleSet
-		// System.out.println(fb);
 		double kierunek = fb.getVariable("kierunek").getValue();
-		System.out.println("Kierunek: "+kierunek);
+		System.out.println("Kierunek: " + kierunek);
 		double przod = fb.getVariable("przod").getValue();
-		
-		PathElement path=null;
-		if (kierunek<=-1 && przod==1.0) {
-			double radius = Math.abs(DESTINATION_Y-getY());
-			if (radius<30) radius=30;
-			double xEnd = getX()+radius;
-			double yEnd = getY()-radius;
-			if (xEnd>DESTINATION_X-150) {
-				xEnd=DESTINATION_X-150;
-				yEnd=getY()-(xEnd-getX());
+
+		PathElement path = null;
+		if (kierunek <= -1 && przod == 1.0) {
+			double radius = Math.abs(DESTINATION_Y - getY());
+			if (radius < 30)
+				radius = 30;
+			double xEnd = getX() + radius;
+			double yEnd = getY() - radius;
+			if (xEnd > DESTINATION_X - 150) {
+				xEnd = DESTINATION_X - 150;
+				yEnd = getY() - (xEnd - getX());
 			}
 			path = new ArcTo(radius, radius, 0.0, xEnd, yEnd, false, true);
 			setX(xEnd);
 			setY(yEnd);
-			System.out.print("x,y "+String.format("%.2f", getX())+", "+String.format("%.2f", getY()));
+			System.out.print("x,y " + String.format("%.2f", getX()) + ", "
+					+ String.format("%.2f", getY()));
 			System.out.print(" Do przodu i ");
 			System.out.println("skręt w prawo");
-		}
-		else if (kierunek>1 && przod==1.0) {
-			double radius = Math.abs(DESTINATION_Y-getY());
-			if (radius<30) radius=30;
-			double xEnd = getX()+radius;
-			double yEnd = getY()+radius;
-			if (xEnd>DESTINATION_X-150) {
-				xEnd=DESTINATION_X-150;
-				yEnd=getY()+(xEnd-getX());
+		} else if (kierunek > 1 && przod == 1.0) {
+			double radius = Math.abs(DESTINATION_Y - getY());
+			if (radius < 30)
+				radius = 30;
+			double xEnd = getX() + radius;
+			double yEnd = getY() + radius;
+			if (xEnd > DESTINATION_X - 150) {
+				xEnd = DESTINATION_X - 150;
+				yEnd = getY() + (xEnd - getX());
 			}
 			path = new ArcTo(radius, radius, 0.0, xEnd, yEnd, false, false);
 			setX(xEnd);
 			setY(yEnd);
-			System.out.print("x,y "+String.format("%.2f", getX())+", "+String.format("%.2f", getY()));
+			System.out.print("x,y " + String.format("%.2f", getX()) + ", "
+					+ String.format("%.2f", getY()));
 			System.out.print(" Do przodu i ");
 			System.out.println("skręt w lewo");
-		}
-		else if (przod!=1.0) {
-			if (getY()<250) {				
-//				path = new ArcTo(20, 20, 0.0, 100.0, 350.0, true, true);
-//				path = new QuadCurveTo(getX()-100, getY(), 600, 400, 200, 250);
-				path = new QuadCurveTo(400, DESTINATION_Y+200, 200, DESTINATION_Y);
-			}
-			else {
-//				path = new ArcTo(20, 20, 0.0, 100.0, 150.0, true, false);
-//				path = new CubicCurveTo(getX()-100, getY(), 200, 400, 200, 250);
-				path = new QuadCurveTo(400, DESTINATION_Y-200, 200, DESTINATION_Y);
+		} else if (przod != 1.0) {
+			if (getY() < 250) {
+				path = new CubicCurveTo(400, DESTINATION_Y + 400, 100,
+						DESTINATION_Y, 400, DESTINATION_Y);
+			} else {
+				path = new CubicCurveTo(400, DESTINATION_Y - 400, 100,
+						DESTINATION_Y, 400, DESTINATION_Y);
 			}
 			setX(200);
 			setY(250);
 			System.out.println("Cofnij się");
-		}
-		else {
-			path = new LineTo(DESTINATION_X-150, DESTINATION_Y);
-			setX(DESTINATION_X-150);
+		} else {
+			path = new LineTo(DESTINATION_X - 150, DESTINATION_Y);
+			setX(DESTINATION_X - 150);
 			setY(DESTINATION_Y);
 			System.out.println("Prosto");
 		}
@@ -151,12 +144,5 @@ public class FuzzyControler extends Animation {
 
 	public void setY(double y) {
 		this.Y = y;
-	}
-	
-	private double getFunctionOf(double x) {
-		double translatedX = x-(DESTINATION_X-150);
-		double a = (DESTINATION_Y-START_Y)/(Math.pow(START_X-(DESTINATION_X-150), 2));
-		double y = a*Math.pow((translatedX), 2)-DESTINATION_Y;
-		return -y;
 	}
 }
