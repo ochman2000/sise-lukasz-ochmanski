@@ -2,6 +2,8 @@ package pl.lodz.p.sise;
 
 import java.util.Random;
 
+import javafx.geometry.Point2D;
+import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -26,7 +28,7 @@ public class FuzzyControler extends Animation {
 	public Path generateCurvyPath(final double pathOpacity) {
 		final Path path = new Path();
 		Random rnd = new Random();
-		START_X = rnd.nextInt(500)+100;
+		START_X = rnd.nextInt(500)+200;
 		START_Y = rnd.nextInt(400);
 		this.setX(START_X);
 		this.setY(START_Y);
@@ -40,7 +42,7 @@ public class FuzzyControler extends Animation {
 		}
 		path.getElements().add(new LineTo(DESTINATION_X, DESTINATION_Y));
 		
-		path.setOpacity(0.0);
+		path.setOpacity(1.0);
 		return path;
 	}
 	
@@ -80,18 +82,34 @@ public class FuzzyControler extends Animation {
 		
 		PathElement path=null;
 		if (kierunek<=-1 && przod==1.0) {
-			path = new LineTo(getX()+10, getFunctionOf(getX()+10));
-			setX(getX()+10);
-			setY(getFunctionOf(getX()+10));
-			System.out.print("x,y "+getX()+", "+getY());
+			double radius = Math.abs(DESTINATION_Y-getY());
+			if (radius<30) radius=30;
+			double xEnd = getX()+radius;
+			double yEnd = getY()-radius;
+			if (xEnd>DESTINATION_X-150) {
+				xEnd=DESTINATION_X-150;
+				yEnd=getY()-(xEnd-getX());
+			}
+			path = new ArcTo(radius, radius, 0.0, xEnd, yEnd, false, true);
+			setX(xEnd);
+			setY(yEnd);
+			System.out.print("x,y "+String.format("%.2f", getX())+", "+String.format("%.2f", getY()));
 			System.out.print(" Do przodu i ");
 			System.out.println("skręt w prawo");
 		}
 		else if (kierunek>1 && przod==1.0) {
-			path = new LineTo(getX()+10, getFunctionOf(getX()+10));
-			setX(getX()+10);
-			setY(getFunctionOf(getX()+10));
-			System.out.print("x,y "+getX()+", "+getY());
+			double radius = Math.abs(DESTINATION_Y-getY());
+			if (radius<30) radius=30;
+			double xEnd = getX()+radius;
+			double yEnd = getY()+radius;
+			if (xEnd>DESTINATION_X-150) {
+				xEnd=DESTINATION_X-150;
+				yEnd=getY()+(xEnd-getX());
+			}
+			path = new ArcTo(radius, radius, 0.0, xEnd, yEnd, false, false);
+			setX(xEnd);
+			setY(yEnd);
+			System.out.print("x,y "+String.format("%.2f", getX())+", "+String.format("%.2f", getY()));
 			System.out.print(" Do przodu i ");
 			System.out.println("skręt w lewo");
 		}
@@ -99,12 +117,12 @@ public class FuzzyControler extends Animation {
 			if (getY()<250) {				
 //				path = new ArcTo(20, 20, 0.0, 100.0, 350.0, true, true);
 //				path = new QuadCurveTo(getX()-100, getY(), 600, 400, 200, 250);
-				path = new QuadCurveTo(400, 448, 200, 250);
+				path = new QuadCurveTo(400, DESTINATION_Y+200, 200, DESTINATION_Y);
 			}
 			else {
 //				path = new ArcTo(20, 20, 0.0, 100.0, 150.0, true, false);
 //				path = new CubicCurveTo(getX()-100, getY(), 200, 400, 200, 250);
-				path = new QuadCurveTo(400, 48, 200, 250);
+				path = new QuadCurveTo(400, DESTINATION_Y-200, 200, DESTINATION_Y);
 			}
 			setX(200);
 			setY(250);
@@ -137,9 +155,7 @@ public class FuzzyControler extends Animation {
 	
 	private double getFunctionOf(double x) {
 		double translatedX = x-(DESTINATION_X-150);
-		
 		double a = (DESTINATION_Y-START_Y)/(Math.pow(START_X-(DESTINATION_X-150), 2));
-		System.out.println("a ="+a);
 		double y = a*Math.pow((translatedX), 2)-DESTINATION_Y;
 		return -y;
 	}
