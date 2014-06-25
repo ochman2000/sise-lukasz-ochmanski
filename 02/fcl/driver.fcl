@@ -40,9 +40,9 @@ END_FUZZIFY
 
 // Defzzzify output variable 'tip' : {'cheap', 'average', 'generous' }
 DEFUZZIFY kierunek			
-	TERM lewo := (-5,1) (-1,0);
+	TERM prawo := (-5,1) (-1,0);
 	TERM prosto := (-1,0) (0,1) (1,0);
-	TERM prawo :=  (1,0) (5,1);
+	TERM lewo :=  (1,0) (5,1);
 	
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
