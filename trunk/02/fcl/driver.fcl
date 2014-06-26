@@ -15,18 +15,18 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY odlegloscXodSciany			
-	TERM bezpieczna := (0, 1) (600, 1) (750, 0); 
-	TERM niebezpieczna := (600, 0) (750,1);
+	TERM bezpieczna := (0, 0) (100, 1) (600, 1) (750, 0); 
+	TERM niebezpieczna := (0, 1) (100, 0) (600, 0) (750,1);
 END_FUZZIFY
 
 FUZZIFY odlegloscYodSciany			
-	TERM bezpieczna := (0, 0) (215, 1) (285, 0) ; 
-	TERM niebezpieczna := (215, 0) (285, 1);
+	TERM bezpieczna := (0, 0) (50, 1) (450, 1) (500, 0) ; 
+	TERM niebezpieczna := (0, 1) (50, 0) (450, 0) (500, 1);
 END_FUZZIFY
 
 FUZZIFY odlegloscXodKoperty			
 	TERM zaDaleko := (-50, 1) (0, 0) (50, 1); 
-	TERM rewelacyjna := (-700, 0) (1, 1) (120, 0);
+	TERM blisko := (-700, 0) (1, 1) (120, 0);
 END_FUZZIFY
 
 FUZZIFY odlegloscYodKoperty
@@ -70,6 +70,15 @@ RULEBLOCK sterowanie
 	RULE 5 : IF odlegloscYodKoperty IS bardzoDalekoZPrawej THEN kierunek IS lewo;
 	RULE 6 : IF odlegloscXodSciany IS niebezpieczna THEN przod IS false;
 	RULE 7 : IF odlegloscXodSciany IS bezpieczna THEN przod IS true;
+//	RULE 8 : IF odlegloscYodSciany IS niebezpieczna THEN przod IS false;
+//	RULE 9 : IF odlegloscYodSciany IS bezpieczna THEN przod IS true;
+	
+	RULE 10: IF odlegloscXodKoperty IS blisko AND odlegloscYodKoperty IS idealna THEN przod IS false;
+	RULE 11: IF odlegloscXodKoperty IS zaDaleko AND odlegloscYodKoperty IS bardzoDalekoZLewej THEN przod IS true;
+	RULE 12: IF odlegloscXodKoperty IS zaDaleko AND odlegloscYodKoperty IS dalekoZLewej THEN przod IS true;
+	RULE 13: IF odlegloscXodKoperty IS zaDaleko AND odlegloscYodKoperty IS idealna THEN przod IS true;
+	RULE 14: IF odlegloscXodKoperty IS zaDaleko AND odlegloscYodKoperty IS bardzoDalekoZPrawej THEN przod IS true;
+	RULE 15: IF odlegloscXodKoperty IS zaDaleko AND odlegloscYodKoperty IS dalekoZPrawej THEN przod IS true;
 	
 END_RULEBLOCK
 

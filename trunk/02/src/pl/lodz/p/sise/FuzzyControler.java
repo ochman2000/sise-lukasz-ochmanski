@@ -27,7 +27,7 @@ public class FuzzyControler extends Animation {
 	public Path generateCurvyPath(final double pathOpacity) {
 		final Path path = new Path();
 		Random rnd = new Random();
-		START_X = rnd.nextInt(500) + 200;
+		START_X = rnd.nextInt(500) + 150;
 		START_Y = rnd.nextInt(400);
 		this.setX(START_X);
 		this.setY(START_Y);
