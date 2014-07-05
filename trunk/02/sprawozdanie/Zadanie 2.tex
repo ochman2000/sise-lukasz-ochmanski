@@ -21,247 +21,153 @@
   \studentinfo{Przemysław Szwajkowski}{173524}
 }
 
-\title{Zadanie 1 - przeszukiwanie przestrzeni stanów}
-\svnurl{https://sise-lukasz-ochmanski.googlecode.com/svn/trunk/}
+\title{Zadanie 2 - FuzzyLogic}
+\svnurl{https://sise-lukasz-ochmanski.googlecode.com/svn/trunk/02}
 
 \begin{document}
 \maketitle
 
 
 \section{Wprowadzenie}
-Celem niniejszego zadania jest napisanie dwóch programów. Pierwszy z nich ma za zadanie odnaleźć rozwiązanie łamigłówki zwanej ``Piętnastką'', a drugi ma na celu wizualizację rozwiązywania łamigłówki.
+Celem niniejszego zadania jest napisanie aplikacji, który zasymuluje parkujący samochód. Program ma wykorzystawać logikę rozmytą i ma być napisany przy użyciu języka FCL (Fuzzy Control Language).
 
 \section{Uruchamianie programu}
-Program można uruchomić z lini poleceń w systemie z zainstalowaną wirtualną maszyną Java'y wersji 7 lub nowszej. Program przyjmuje jeden parametr:
+Program można uruchomić z lini poleceń w systemie z zainstalowaną wirtualną maszyną Java'y wersji 8 lub nowszej. Program wykorzystuje biblioteki JavaFX 2.2, które są wymagane do poprawnego działania programu.
 
-\begin{itemize}
-  \item \begin{verbatim}alogorytm\end{verbatim} a do wyboru: \emph{dfs, bfs, a1, a2, a3}
-\end{itemize}
-
-Przed uruchomieniem należy spakować projekt wraz z bibliotekami do formatu *.jar.
-Metoda main() znajduje się w pliku Solver.java
-\\*
-
-Następnie uruchomić polecenie:
-
-\begin{verbatim}
-java -jar Zadanie1.jar bfs 0 2 3 4 1 6 7 8 5 13 10 11 14 9 15 12
-\end{verbatim}
+Przed uruchomieniem należy spakować projekt wraz z bibliotekami do formatu *.jar. Należy pamiętać o zachowaniu folderu o nazwie: resources, który zawiera obrazy oraz style css niezbędne do otwarcia inferejsu graficznego aplikacji. Wszystkie zasoby powinny mieścić się w jednym folderze, aby aplikacja działała poprawnie.
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/BFS_operacje_exp.png}
-	\caption{Breadth-First Search}
-	\label{fig:Breadth-First Search}
+			\includegraphics[scale=0.60]{pictures/Obraz01.png}
+	\caption{Prototyp aplikacji}
+	\label{fig:Prototyp aplikacji}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/BFS_operacje_log.png}
-	\caption{Breadth-First Search}
-	\label{fig:Breadth-First Search}
+			\includegraphics[scale=0.60]{pictures/Obraz13.png}
+	\caption{Obszary determinujace kierunek jazdy}
+	\label{fig:Obszary determinujace kierunek jazdy}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/BFS_pamiec_exp.png}
-	\caption{Breadth-First Search}
-	\label{fig:Breadth-First Search}
+			\includegraphics[scale=0.60]{pictures/Obraz14.png}
+	\caption{Obszary determinujace stopien skretu}
+	\label{fig:Obszary determinujace stopien skretu}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/BFS_pamiec_log.png}
-	\caption{Breadth-First Search}
-	\label{fig:Breadth-First Search}
+			\includegraphics[scale=0.80]{pictures/Obraz02.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/BFS_czas_exp.png}
-	\caption{Breadth-First Search}
-	\label{fig:Breadth-First Search}
+			\includegraphics[scale=0.8]{pictures/Obraz03.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/BFS_czas_log.png}
-	\caption{Breadth-First Search}
-	\label{fig:Breadth-First Search}
+			\includegraphics[scale=0.8]{pictures/Obraz04.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A2_operacje_exp.png}
-	\caption{A* Odleglosc Hamminga}
-	\label{fig:A* Odleglosc Hamminga}
+			\includegraphics[scale=0.8]{pictures/Obraz05.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A2_operacje_log.png}
-	\caption{A* Odleglosc Hamminga}
-	\label{fig:A* Odleglosc Hamminga}
+			\includegraphics[scale=0.8]{pictures/Obraz06.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A2_pamiec_exp.png}
-	\caption{A* Odleglosc Hamminga}
-	\label{fig:A* Odleglosc Hammingav}
+			\includegraphics[scale=0.8]{pictures/Obraz07.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A2_pamiec_log.png}
-	\caption{A* Odleglosc Hamminga}
-	\label{fig:A* Odleglosc Hamminga}
+			\includegraphics[scale=0.8]{pictures/Obraz08.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A2_czas_exp.png}
-	\caption{A* Odleglosc Hamminga}
-	\label{fig:A* Odleglosc Hamminga}
+			\includegraphics[scale=0.8]{pictures/Obraz09.png}
+	\caption{Wykres przynaleznosci}
+	\label{fig:Wykres przynaleznosci}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A2_czas_log.png}
-	\caption{A* Odleglosc Hamminga}
-	\label{fig:A* Odleglosc Hamminga}
+			\includegraphics[scale=0.60]{pictures/Obraz10.png}
+	\caption{Dzialajacy model pojazdu}
+	\label{fig:Dzialajacy model pojazdu}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A3_operacje_exp.png}
-	\caption{A* Suma odleglosci taksowkowych}
-	\label{fig:A* Suma odleglosci taksowkowych}
+			\includegraphics[scale=0.60]{pictures/Obraz11.png}
+	\caption{Obraz przedstawiajacy pojazd zmierzajacy do celu}
+	\label{fig:Obraz przedstawiajacy pojazd zmierzajacy do celu}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-			\includegraphics[scale=0.65]{pictures/A3_operacje_log.png}
-	\caption{A* Suma odleglosci taksowkowych}
-	\label{fig:A* Suma odleglosci taksowkowych}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/A3_pamiec_exp.png}
-	\caption{A* Suma odleglosci taksowkowych}
-	\label{fig:A* Suma odleglosci taksowkowych}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/A3_pamiec_log.png}
-	\caption{A* Suma odleglosci taksowkowych}
-	\label{fig:A* Suma odleglosci taksowkowych}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/A3_czas_exp.png}
-	\caption{A* Suma odleglosci taksowkowych}
-	\label{fig:A* Suma odleglosci taksowkowych}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/A3_czas_log.png}
-	\caption{A* Suma odleglosci taksowkowych}
-	\label{fig:A* Suma odleglosci taksowkowych}
+			\includegraphics[scale=0.60]{pictures/Obraz12.png}
+	\caption{Przyklad zawracania}
+	\label{fig:Przyklad zawracania}
 \end{figure}
 
 \clearpage
+\section{Teoria}
+Sterownik składa sie z czterech elementów:
+\subsection{Baza reguł}
+Bazę reguł stanowi zbiór rozmytych reguł postaci:
+IF (x\textsubscript{1} jest A\textsubscript{1}) AND ... AND (x\textsubscript{n} jest A\textsubscript{n})
+THEN (y\textsubscript{1} jest B\textsubscript{1}) AND ... AND (y\textsubscript{m} jest B\textsubscript{m})
 
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/DFS_operacje_exp.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
+gdzie A\textsubscript{i}, B\textsubscript{j}, i = 1, ..., n, j = 1, ..., m – sa zbiorami rozmytymi, x\textsubscript{i} –
+zmiennymi wejściowymi, yj – zmiennymi wyjściowymi.
 
-Po wyciągnięciu średniej z każdego przedziału otrzymujemy:
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/old/dfs_operacje.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
-\clearpage
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/DFS_operacje_log.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/DFS_pamiec_exp.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/DFS_pamiec_log.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/old/dfs_space.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/DFS_czas_exp.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/DFS_czas_log.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-			\includegraphics[scale=0.65]{pictures/old/dfs_time.png}
-	\caption{Depth-First Search}
-	\label{fig:Depth-First Search}
-\end{figure}
-
+\subsection{Blok rozmywania}
+Ponieważ system sterowania z logika rozmytą operuje na zbiorach rozmytych,
+dlatego konkretne wartości sygnału wejściowego podlegają operacji
+rozmywania, w wyniku której zostają one odwzorowane w zbiór rozmyty.
+\subsection{Blok wnioskowania}
+Na podstawie zbioru reguł rozmytych w oparciu o uogólnione reguły
+wnioskowania znajdujemy odpowiedni zbiór rozmyty bedący wnioskiem
+powstałym w oparciu o podane przesłanki.
+\subsection{Blok wyostrzania}
+Wielkością wyjściowa bloku wnioskowania jest blok rozmyty. Zbiór ten
+należy odwzorować w jedną wartość, która będzie poszukiwanym stanem
+sterującym.
 
 \clearpage
 
 \section{Wnioski}
-  Najwydajniejszymi algorytmami okazały się, zgodnie z oczekiwaniami, algorytmy wykorzystujące heurystykę. Spowodowane jest to tym, że wybierane są tutaj drogi, które są najbliżej rozwiązania porzucając pozostałe. Funkcjonalności tej pozbawione są algorytmy nie wykorzystujące heurystyk, przez co rośnie czas poszukiwania. Najmniej wydajnym algorytmem okazał się DFS, ponieważ liczba iteracji jest tutaj największa.
+  Niestety nie udało nam się doprowadzić programu do stanu, w którym prawidłowo parkowałby na wstecznym biegu. Okazało się to dość skomplikowanym zadaniem. Samochód jest jednak wyposażony w pewną inteligencję, ponieważ potrafi rozpoznać niebezpieczną odległość od ściany, oraz zbyt bliską odległość od innych pojazdów. Nie powinien wjechać w otaczające go samochody. Wie, że gdy jest zbyt blisko, nie uda się wjechać w wolne miejsce parkingowe pod ostrym kątem. Należy wtedy cofnąć i wjechać z dużej odległości.
 
 
-	
-	
-	
+
 \begin{thebibliography}{0}
   \bibitem{l2short} T. Oetiker, H. Partl, I. Hyna, E. Schlegl.
     \textsl{Nie za krótkie wprowadzenie do systemu \LaTeX2e}, 2007, dostępny
     online.
-  \bibitem{klesk_grafy} Przemysław Klęsk.
-    \textsl{Algorytmy przeszukiwania grafów i drzew dla gier i łamigłówek}, \url{http://wikizmsi.zut.edu.pl/uploads/b/be/2_search.pdf}
-   \bibitem{wiki_bfs} Wikipedia, wolna encykolpedia
-    \textsl{Breadth-first search}, \url{http://en.wikipedia.org/wiki/Breadth-first_search}
-    \bibitem{wiki_astar} Wikipedia, wolna encyklopedia
-    \textsl{Algorytm A*}, \url{http://pl.wikipedia.org/wiki/Algorytm_A*}
 \end{thebibliography}
 \end{document}
