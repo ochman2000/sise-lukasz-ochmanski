@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,8 +20,6 @@ import pl.lodz.p.sise.structure.Statistics;
 
 public class PuzzleProcessor {
 
-	private static final String CHARSET = "UTF-8";
-	
 	public static void main(String[] args) {
 		PuzzleProcessor processor = new PuzzleProcessor();
 		
@@ -49,7 +48,7 @@ public class PuzzleProcessor {
 		PrintWriter out = null;
 		int iteracje=0;
 		try {
-			lista = Files.readAllLines(path, Charset.forName(CHARSET));
+			lista = Files.readAllLines(path, StandardCharsets.UTF_8);
 			path = Paths.get("solution/"+algorytm+"_"+sourceFile);
 //			Files.deleteIfExists(path);
 			boolean append = true;
