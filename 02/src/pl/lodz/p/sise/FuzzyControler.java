@@ -1,5 +1,6 @@
 package pl.lodz.p.sise;
 
+import java.net.URL;
 import java.util.Random;
 
 import javafx.scene.shape.ArcTo;
@@ -43,9 +44,15 @@ public class FuzzyControler extends Animation {
 	}
 
 	public PathElement getDirection() {
-		String filename = "fcl/driver.fcl";
-		FIS fis = FIS.load(filename, true);
-
+		String filename = "/driver.fcl";
+		URL url = this.getClass().getResource(filename);
+		if (url == null) {
+			System.err.println("Can't load resource: '" + filename + "'");
+			System.exit(1);
+		}
+		
+		FIS fis = FIS.load(url.getFile(), true);
+		
 		if (fis == null) {
 			System.err.println("Can't load file: '" + filename + "'");
 			System.exit(1);
