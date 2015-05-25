@@ -1,3 +1,5 @@
+@CHARSET "UTF-8";
+
 #pane {
 /* 	-fx-background-image: url("background_image.jpg"); */
 	-fx-background-color: grey;

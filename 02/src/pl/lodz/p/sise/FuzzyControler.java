@@ -1,5 +1,7 @@
 package pl.lodz.p.sise;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Random;
 
@@ -45,13 +47,20 @@ public class FuzzyControler extends Animation {
 
 	public PathElement getDirection() {
 		String filename = "/driver.fcl";
+		java.nio.file.Path filePath = null;
 		URL url = this.getClass().getResource(filename);
 		if (url == null) {
 			System.err.println("Can't load resource: '" + filename + "'");
 			System.exit(1);
 		}
+		try {
+			filePath = ResourceUtils.resourceToPath(url);
+		} catch (IOException | URISyntaxException e) {
+			System.err.println("Can't load resource: '" + filename + "'");
+			System.exit(1);
+		}
 		
-		FIS fis = FIS.load(url.getFile(), true);
+		FIS fis = FIS.load(filePath.toString(), true);
 		
 		if (fis == null) {
 			System.err.println("Can't load file: '" + filename + "'");
