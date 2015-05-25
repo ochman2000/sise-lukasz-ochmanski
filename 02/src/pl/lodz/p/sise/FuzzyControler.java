@@ -47,20 +47,21 @@ public class FuzzyControler extends Animation {
 
 	public PathElement getDirection() {
 		String filename = "/driver.fcl";
-		java.nio.file.Path filePath = null;
+//		java.nio.file.Path filePath = null;
 		URL url = this.getClass().getResource(filename);
 		if (url == null) {
 			System.err.println("Can't load resource: '" + filename + "'");
 			System.exit(1);
 		}
-		try {
-			filePath = ResourceUtils.resourceToPath(url);
-		} catch (IOException | URISyntaxException e) {
-			System.err.println("Can't load resource: '" + filename + "'");
-			System.exit(1);
-		}
+//		try {
+//			URL url = new URL("file:resources/driver.fcl");
+//			filePath = ResourceUtils.resourceToPath(url);
+//		} catch (IOException | URISyntaxException e) {
+//			System.err.println("Can't load resource: '" + filename + "'");
+//			System.exit(1);
+//		}
 		
-		FIS fis = FIS.load(filePath.toString(), true);
+		FIS fis = FIS.load(url.getFile(), true);
 		
 		if (fis == null) {
 			System.err.println("Can't load file: '" + filename + "'");
