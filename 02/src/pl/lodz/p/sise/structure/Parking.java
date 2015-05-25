@@ -1,7 +1,7 @@
 package pl.lodz.p.sise.structure;
 
-import pl.lodz.p.sise.handlers.*;
-import pl.lodz.p.sise.Animation;
+import java.io.InputStream;
+
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -10,6 +10,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import pl.lodz.p.sise.Animation;
+import pl.lodz.p.sise.handlers.ExitButtonHandler;
+import pl.lodz.p.sise.handlers.PauseButtonHandler;
+import pl.lodz.p.sise.handlers.PlayButtonHandler;
+import pl.lodz.p.sise.handlers.RestartButtonHandler;
+import pl.lodz.p.sise.handlers.StopButtonHandler;
 
 /**
  * Simple example demonstrating JavaFX animations.
@@ -46,8 +52,11 @@ public class Parking extends Pane {
 	private Parking() {
 		super();
 		this.setId("pane");
-
-		Image image = new Image("file:resources/car01.png");
+		
+		String filename = "/pl/lodz/p/sise/resources/car01.png";
+		InputStream in = this.getClass().getResourceAsStream(filename);
+		
+		Image image = new Image(in);
 		
 		line00 = new Rectangle(120, 1);
 		line00.setId("linia00");

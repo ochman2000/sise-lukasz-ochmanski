@@ -1,0 +1,29 @@
+#pane {
+/* 	-fx-background-image: url("background_image.jpg"); */
+	-fx-background-color: grey;
+/* 	-fx-background-repeat: stretch; */
+/* 	-fx-background-size: 900 506; */
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+#autko {
+	-fx-fill: red;
+    -fx-stroke: pink;
+    -fx-stroke-width: 5;
+    -fx-stroke-line-cap: butt;
+}
+
+.biala {
+	-fx-fill: grey;
+	-fx-stroke: white;
+	-fx-stroke-line-cap: butt;
+}
+
+.gruba {
+		-fx-stroke-width: 3;
+}
+
+.cienka {
+		-fx-stroke-width: 2;
+}

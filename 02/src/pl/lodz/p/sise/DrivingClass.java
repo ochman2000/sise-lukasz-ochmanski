@@ -37,7 +37,10 @@ public class DrivingClass extends Application {
 		pane.setAnimation(animation);
 
 		scene = new Scene(pane, 900, 500);
-		scene.getStylesheets().addAll("file:resources/style.css");
+		String fileName = "/pl/lodz/p/sise/resources/style.css";
+		String css = DrivingClass.class.getResource(fileName).toExternalForm();
+		scene.getStylesheets().clear();
+		scene.getStylesheets().add(css);
 
 		stage.setTitle("Sztuczna Inteligencja i Systemy Ekspertowe by Łukasz Ochmański "
 				+ "& Przemysław Szwajkowski");

@@ -1,5 +1,7 @@
 package pl.lodz.p.sise.structure;
 
+import java.io.InputStream;
+
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +13,9 @@ public class Car extends ImageView {
 	
 	public Car() {
 		super();
-		Image image = new Image("file:resources/car02.png");
+		String filename = "/pl/lodz/p/sise/resources/car02.png";
+		InputStream in = this.getClass().getResourceAsStream(filename);
+		Image image = new Image(in);
 		this.setImage(image);
 		this.setId("autko");
 //		this.setY(225);

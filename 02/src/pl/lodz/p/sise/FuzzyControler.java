@@ -44,24 +44,14 @@ public class FuzzyControler extends Animation {
 	}
 
 	public PathElement getDirection() {
-		String filename = "/pl/lodz/p/sise/driver.fcl";
-//		java.nio.file.Path filePath = null;
+		String filename = "/pl/lodz/p/sise/resources/driver.fcl";
 		InputStream in = this.getClass().getResourceAsStream(filename);
 		if (in == null) {
 			System.err.println("Can't load resource: '" + filename + "'");
 			System.exit(1);
 		}
-//		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//		try {
-//			URL url = new URL("file:resources/driver.fcl");
-//			filePath = ResourceUtils.resourceToPath(url);
-//		} catch (IOException | URISyntaxException e) {
-//			System.err.println("Can't load resource: '" + filename + "'");
-//			System.exit(1);
-//		}
 		
 		FIS fis = FIS.load(in, true);
-//		FIS fis = null;
 		
 		if (fis == null) {
 			System.err.println("Can't load file: '" + filename + "'");
